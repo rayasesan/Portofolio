@@ -226,7 +226,7 @@ button:focus-visible {
 .experience-timeline::after {
   content: "";
   position: absolute;
-  top: 22px;
+  top: 8px;
   left: 4px;
   width: 2px;
   height: var(--timeline-fill-height);
@@ -276,7 +276,7 @@ button:focus-visible {
 }
 
 html:not(.js-enabled) .experience-timeline::after {
-  height: calc(100% - 27px);
+  height: calc(100% - 13px);
   opacity: 1;
 }
 html:not(.js-enabled) .tl-dot {

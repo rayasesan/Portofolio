@@ -76,14 +76,15 @@ export default function Experience() {
       }
 
       const rect = timeline.getBoundingClientRect();
-      const sectionRect = section.getBoundingClientRect();
-      const visualStartOffset = 22;
-      const drawableHeight = Math.max(rect.height - visualStartOffset - 5, 0);
-      const scrollDistance = Math.max(sectionRect.height - window.innerHeight, rect.height * 0.72);
-      const progress = scrollDistance > 0 ? clamp(-sectionRect.top / scrollDistance) : 0;
+      const isMobile = window.innerWidth < 768;
+      const visualStartOffset = 8;
+      const visualEndOffset = 5;
+      const drawableHeight = Math.max(rect.height - visualStartOffset - visualEndOffset, 0);
+      const viewportGuide = window.innerHeight * (isMobile ? 0.82 : 0.72);
+      const fillHeight = Math.min(Math.max(viewportGuide - rect.top - visualStartOffset, 0), drawableHeight);
+      const progress = drawableHeight > 0 ? clamp(fillHeight / drawableHeight) : 0;
       const opacity = clamp(progress / 0.1);
-      const fillHeight = drawableHeight * progress;
-      const hasStarted = progress > 0.02;
+      const hasStarted = fillHeight > 2;
 
       timeline.style.setProperty('--timeline-fill-height', `${fillHeight}px`);
       timeline.style.setProperty('--timeline-opacity', opacity.toFixed(4));
