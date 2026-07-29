@@ -19,9 +19,13 @@ const projects = [
     image: '/nutrify-preview.jpg',
     imageTone: 'natural',
     imageObjectPosition: 'center top',
+    showcaseImages: {
+      landing: '/nutrify-landing.jpg',
+      scanner: '/nutrify-preview.jpg',
+    },
     fallbackTitle: 'Nutrify Scanner Preview',
     fallbackText: 'Food scanner result with nutrition breakdown, health score, and AI recommendation.',
-    alt: 'Screenshot preview of Nutrify AI-powered nutrition platform',
+    alt: 'Landing page and food scanner preview of Nutrify AI-powered nutrition platform',
     tags: ['Python', 'TensorFlow', 'Keras', 'Computer Vision', 'Transfer Learning', 'FastAPI', 'Gemini API', 'REST API', 'TensorBoard'],
     stats: [
       { value: '92.44%', label: 'Model Accuracy' },
@@ -252,8 +256,14 @@ function FeaturedProject({ project, index }) {
       style={{ '--project-index': index }}
     >
       <div className="project-featured-media aspect-[16/9] min-h-[250px] max-h-[470px] overflow-hidden relative bg-r-dark">
-        <ProjectImage project={project} />
-        <div className="project-media-shade" aria-hidden="true"></div>
+        {project.showcaseImages ? (
+          <NutrifyShowcase project={project} />
+        ) : (
+          <>
+            <ProjectImage project={project} />
+            <div className="project-media-shade" aria-hidden="true"></div>
+          </>
+        )}
         <span className="absolute top-3 right-3 bg-r-red text-black text-[10px] font-black tracking-[0.15em] uppercase px-2.5 py-1 rounded">
           Featured
         </span>
@@ -275,6 +285,39 @@ function FeaturedProject({ project, index }) {
         </div>
       </div>
     </article>
+  );
+}
+
+function NutrifyShowcase({ project }) {
+  const [hasError, setHasError] = useState(false);
+
+  if (hasError) {
+    return <ProjectImage project={project} />;
+  }
+
+  return (
+    <div className="nutrify-showcase" aria-label={project.alt}>
+      <img
+        src={project.showcaseImages.landing}
+        alt="Nutrify landing page preview"
+        className="nutrify-showcase-main"
+        loading="eager"
+        onError={() => setHasError(true)}
+      />
+      <div className="nutrify-showcase-vignette" aria-hidden="true"></div>
+      <div className="nutrify-showcase-labels" aria-hidden="true">
+        <span>Landing Page</span>
+        <span>Food Scanner</span>
+      </div>
+      <div className="nutrify-scanner-preview">
+        <img
+          src={project.showcaseImages.scanner}
+          alt="Nutrify food scanner result preview"
+          loading="eager"
+          onError={() => setHasError(true)}
+        />
+      </div>
+    </div>
   );
 }
 

@@ -369,6 +369,84 @@ html:not(.js-enabled) .tl-dot {
 .project-featured-media {
   border-bottom: 1px solid #262626;
 }
+.nutrify-showcase {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #08110d;
+}
+.nutrify-showcase-main {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(1.04) contrast(1.02) brightness(0.9);
+  transform: scale(1.01);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), filter 0.9s ease;
+}
+.nutrify-showcase-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.16), transparent 42%, rgba(0, 0, 0, 0.32)),
+    linear-gradient(to bottom, transparent 52%, rgba(0, 0, 0, 0.72));
+}
+.nutrify-showcase-labels {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.nutrify-showcase-labels span {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.42);
+  color: #f7f7f7;
+  backdrop-filter: blur(10px);
+  border-radius: 999px;
+  padding: 7px 10px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.nutrify-scanner-preview {
+  position: absolute;
+  right: 4.2%;
+  bottom: 7.5%;
+  width: min(44%, 520px);
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.62);
+  border-radius: 6px;
+  background: #ffffff;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(239, 68, 68, 0.35);
+  transform: translateY(10px) rotate(-1deg);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.7s ease;
+}
+.nutrify-scanner-preview::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent 68%, rgba(0, 0, 0, 0.1));
+}
+.nutrify-scanner-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.project-featured-card:hover .nutrify-showcase-main {
+  filter: saturate(1.08) contrast(1.04) brightness(0.96);
+  transform: scale(1.045);
+}
+.project-featured-card:hover .nutrify-scanner-preview {
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.52), 0 0 0 1px rgba(239, 68, 68, 0.5);
+  transform: translateY(0) rotate(0deg) scale(1.02);
+}
 .project-media-shade {
   position: absolute;
   inset: 0;
@@ -463,6 +541,29 @@ html:not(.js-enabled) .tl-dot {
 
   .project-card-shell:hover::before {
     opacity: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .nutrify-showcase-main {
+    object-position: 47% center;
+  }
+
+  .nutrify-scanner-preview {
+    right: 4%;
+    bottom: 12%;
+    width: 58%;
+  }
+
+  .nutrify-showcase-labels {
+    left: 12px;
+    bottom: 12px;
+    max-width: 40%;
+  }
+
+  .nutrify-showcase-labels span {
+    padding: 6px 8px;
+    font-size: 8px;
   }
 }
 
