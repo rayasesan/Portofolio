@@ -4,14 +4,14 @@ const experiences = [
   {
     date: 'Feb 2026 - Jul 2026',
     title: 'AI Engineer Graduate with Distinction',
-    subtitle: 'Coding Camp 2026 - DBS Foundation x Dicoding',
+    subtitle: 'Coding Camp 2026 powered by DBS Foundation x Dicoding',
     desc: 'Completed 934 hours of structured learning in Python, machine learning, deep learning, Generative AI, Git, professional development, and an end-to-end capstone project. Contributed as an AI Engineer to Nutrify, an AI-powered nutrition platform combining computer vision, FastAPI model serving, and a Generative AI nutrition coach.',
     tags: ['AI Engineering', 'TensorFlow', 'Computer Vision', 'Generative AI', 'FastAPI', 'Distinction'],
   },
   {
     date: 'Sep 2025 - Jan 2026',
     title: 'Machine Learning Cohort',
-    subtitle: 'Asah - Led by Dicoding',
+    subtitle: 'Asah - Dicoding x Accenture',
     desc: 'Developed end-to-end machine learning projects covering data cleaning, exploratory data analysis, feature engineering, model training, model evaluation, and business-oriented interpretation.',
     tags: ['Python', 'Scikit-learn', 'EDA', 'Feature Engineering', 'Model Evaluation'],
   },
@@ -25,19 +25,51 @@ const experiences = [
   },
 ];
 
-const certifications = [
+const credentials = [
   {
-    name: 'Coding Camp 2026 - AI Engineer Learning Path',
+    name: 'Coding Camp 2026 - AI Engineer',
     issuer: 'DBS Foundation x Dicoding',
     year: '2026',
-    badge: 'Distinction',
-    icon: 'lucide:brain',
+    badge: 'Distinction Graduate',
+    note: 'Completed Feb 9 - Jul 20, 2026',
+    href: '/credentials/coding-camp-2026-ai-engineer-distinction.pdf',
+    icon: 'lucide:award',
+    featured: true,
   },
   {
-    name: 'Asah 2025 - Machine Learning Learning Path',
-    issuer: 'Dicoding',
-    year: '2025',
+    name: '3rd Best Team - Machine Learning Path',
+    issuer: 'GDG on Campus Gunadarma',
+    year: '2026',
+    badge: 'Team Award',
+    note: 'Compete Mate Bootcamp',
+    href: '/credentials/competemate-best-team-ml.pdf',
+    icon: 'lucide:trophy',
+    featured: true,
+  },
+  {
+    name: 'Asah - Machine Learning',
+    issuer: 'Dicoding x Accenture',
+    year: '2026',
+    note: 'Graduated Jan 14, 2026',
+    href: '/credentials/asah-2025-machine-learning.pdf',
     icon: 'lucide:cpu',
+  },
+  {
+    name: 'Productivity with AI Bootcamp',
+    issuer: 'Badan Ekraf Digital Talent x Dicoding',
+    year: '2026',
+    note: 'Completed May 31, 2026',
+    href: '/credentials/bdt-productivity-ai-bootcamp.jpg',
+    icon: 'lucide:sparkles',
+  },
+  {
+    name: 'English Proficiency Test',
+    issuer: 'Brighten English',
+    year: '2025',
+    badge: 'TOEFL 580',
+    note: 'Valid until Nov 3, 2027',
+    href: '/credentials/toefl-brighten-english-580.pdf',
+    icon: 'lucide:languages',
   },
 ];
 
@@ -156,21 +188,37 @@ export default function Experience() {
             </div>
 
             <div className="reveal bg-r-gray border border-r-steel rounded p-5" data-delay="120">
-              <p className="text-r-red text-[10px] font-bold tracking-[0.2em] uppercase mb-3">Certifications</p>
-              <div className="space-y-3">
-                {certifications.map((certification) => (
-                  <div key={certification.name} className="flex gap-3 items-start">
+              <div className="flex items-center justify-between gap-3 mb-3">
+                <p className="text-r-red text-[10px] font-bold tracking-[0.2em] uppercase">Credentials & Awards</p>
+                <p className="text-r-silver text-[10px] font-bold tracking-wider uppercase">{credentials.length} verified</p>
+              </div>
+              <div className="space-y-2.5">
+                {credentials.map((credential) => (
+                  <a
+                    key={credential.name}
+                    href={credential.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`group flex gap-3 items-start rounded border p-3 transition-all hover:border-r-red/60 hover:bg-r-red/5 ${
+                      credential.featured ? 'border-r-red/25 bg-r-red/5' : 'border-r-steel bg-r-dark'
+                    }`}
+                    aria-label={`View credential: ${credential.name}`}
+                  >
                     <div className="w-8 h-8 rounded bg-r-red/10 flex items-center justify-center flex-shrink-0">
-                      <span className="iconify text-r-red" data-icon={certification.icon} data-width="13"></span>
+                      <span className="iconify text-r-red" data-icon={credential.icon} data-width="13"></span>
                     </div>
-                    <div>
-                      <p className="text-white text-xs font-semibold">{certification.name}</p>
-                      <p className="text-r-silver text-[10px]">{certification.issuer} - {certification.year}</p>
-                      {certification.badge && (
-                        <p className="text-r-red text-[10px] font-bold uppercase tracking-wider mt-1">{certification.badge}</p>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-start justify-between gap-2">
+                        <p className="text-white text-xs font-semibold leading-snug">{credential.name}</p>
+                        <span className="iconify text-r-silver group-hover:text-r-red transition-colors flex-shrink-0 mt-0.5" data-icon="lucide:external-link" data-width="12"></span>
+                      </div>
+                      <p className="text-r-silver text-[10px] leading-relaxed">{credential.issuer} - {credential.year}</p>
+                      <p className="text-r-light text-[10px] leading-relaxed mt-1">{credential.note}</p>
+                      {credential.badge && (
+                        <p className="text-r-red text-[10px] font-bold uppercase tracking-wider mt-1">{credential.badge}</p>
                       )}
                     </div>
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>
