@@ -43,7 +43,7 @@ export default function Hero() {
                 href="#projects"
                 className="border border-r-steel hover:border-r-red text-white text-[10px] font-black tracking-[0.18em] uppercase px-7 py-3 transition-all hover:scale-105"
               >
-                See Work
+                See Projects
               </a>
             </div>
             <div className="fade-up flex items-center gap-5" style={{ animationDelay: '0.75s' }}>

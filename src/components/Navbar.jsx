@@ -3,8 +3,13 @@ import { useEffect, useRef, useState } from 'react';
 const navLinks = [
   { href: '#skills', label: 'Skills' },
   { href: '#experience', label: 'Experience' },
-  { href: '#projects', label: 'Work' },
+  { href: '#projects', label: 'Projects' },
   { href: '#contact', label: 'Contact' },
+];
+
+const mobileLinks = [
+  { href: '#top', label: 'Home' },
+  ...navLinks,
 ];
 
 export default function Navbar() {
@@ -54,8 +59,12 @@ export default function Navbar() {
         } backdrop-blur-[20px]`}
       >
         <div className="max-w-[1100px] mx-auto px-5 h-14 flex items-center justify-between">
-          <a href="#top" className="text-white font-black text-sm tracking-[0.25em] uppercase">
-            portfolio<span className="text-r-red">.</span>
+          <a
+            href="#top"
+            className="group text-white font-black text-sm tracking-[0.25em] uppercase transition-colors hover:text-r-red"
+            aria-label="Back to home"
+          >
+            Raya Sesan<span className="text-r-red transition-colors group-hover:text-r-red-light">.</span>
           </a>
           <div className="hidden md:flex items-center gap-7">
             {navLinks.slice(0, 3).map((link) => (
@@ -90,9 +99,14 @@ export default function Navbar() {
         }`}
       >
         <div className="flex items-center justify-between px-5 h-14">
-          <span className="text-white font-black text-sm tracking-[0.25em] uppercase">
-            portfolio<span className="text-r-red">.</span>
-          </span>
+          <a
+            href="#top"
+            tabIndex={isOpen ? 0 : -1}
+            className="text-white font-black text-sm tracking-[0.25em] uppercase"
+            onClick={closeMenu}
+          >
+            Raya Sesan<span className="text-r-red">.</span>
+          </a>
           <button
             type="button"
             className="text-white min-w-11 min-h-11 inline-flex items-center justify-center"
@@ -104,7 +118,7 @@ export default function Navbar() {
           </button>
         </div>
         <div className="flex-1 flex flex-col justify-center px-8 gap-7">
-          {navLinks.map((link) => (
+          {mobileLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
