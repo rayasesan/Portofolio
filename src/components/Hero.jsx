@@ -32,7 +32,7 @@ export default function Hero() {
                 Open to Machine Learning, Data Science, and AI Engineering internship opportunities.
               </p>
             </div>
-            <div className="fade-up flex flex-wrap gap-3 mb-8" style={{ animationDelay: '0.6s' }}>
+            <div className="fade-up flex flex-wrap gap-3 mt-5 mb-8" style={{ animationDelay: '0.6s' }}>
               <a
                 href="#contact"
                 className="bg-r-red hover:bg-r-red-light text-black text-[10px] font-black tracking-[0.18em] uppercase px-7 py-3 transition-all hover:scale-105 hover:shadow-lg hover:shadow-red-500/20"
