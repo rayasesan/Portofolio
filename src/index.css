@@ -367,6 +367,9 @@ html:not(.js-enabled) .tl-dot {
   z-index: 2;
 }
 .project-featured-media {
+  width: 100%;
+  height: clamp(250px, 48vw, 470px);
+  aspect-ratio: auto;
   border-bottom: 1px solid #262626;
 }
 .project-media-button {
@@ -707,6 +710,10 @@ html:not(.js-enabled) .tl-dot {
 }
 
 @media (max-width: 640px) {
+  .project-featured-media {
+    height: clamp(240px, 72vw, 360px);
+  }
+
   .nutrify-showcase-main {
     object-position: 47% center;
   }
