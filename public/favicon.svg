@@ -1,7 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Raya Sesan favicon">
-  <rect width="64" height="64" rx="14" fill="#0a0a0a"/>
-  <rect x="3.5" y="3.5" width="57" height="57" rx="11.5" fill="none" stroke="#262626" stroke-width="3"/>
-  <path d="M16 52V12h18c11 0 18 7 18 17 0 7-4 13-10 15l10 16H39L30 46h-4v14H16v-8Zm10-16h8c5 0 8-3 8-7s-3-7-8-7h-8v14Z" fill="#f7f7f7"/>
-  <rect x="47" y="8" width="10" height="10" rx="3" fill="#ef4444"/>
-  <rect x="46" y="52" width="10" height="5" rx="2.5" fill="#ef4444"/>
+  <rect width="64" height="64" rx="14" fill="#070707"/>
+  <rect x="4" y="4" width="56" height="56" rx="11" fill="none" stroke="#262626" stroke-width="2"/>
+  <text x="30" y="43" fill="#f7f7f7" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="900" text-anchor="middle">R</text>
+  <circle cx="48" cy="42" r="5" fill="#ef4444"/>
 </svg>
