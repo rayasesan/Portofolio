@@ -216,7 +216,7 @@ export default function Projects() {
 
 function FeaturedProject({ project }) {
   return (
-    <article className="proj-card reveal bg-r-gray border border-r-red/30 card-lift rounded overflow-hidden mb-4">
+    <article className="proj-card reveal visible bg-r-gray border border-r-red/30 card-lift rounded overflow-hidden mb-4">
       <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="aspect-[16/10] lg:aspect-auto min-h-[280px] overflow-hidden relative">
           <ProjectImage project={project} />
@@ -243,7 +243,7 @@ function FeaturedProject({ project }) {
 
 function ProjectCard({ project }) {
   return (
-    <article className="proj-card reveal bg-r-gray border border-r-steel card-lift rounded overflow-hidden">
+    <article className="proj-card reveal visible bg-r-gray border border-r-steel card-lift rounded overflow-hidden">
       <div className="aspect-[16/10] overflow-hidden relative">
         <ProjectImage project={project} />
       </div>
