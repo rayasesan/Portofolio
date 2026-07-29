@@ -83,6 +83,7 @@ const currentFocus = [
 export default function Experience() {
   const sectionRef = useRef(null);
   const timelineRef = useRef(null);
+  const credentialTrackRef = useRef(null);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -153,6 +154,13 @@ export default function Experience() {
     };
   }, []);
 
+  const scrollCredentials = (direction) => {
+    credentialTrackRef.current?.scrollBy({
+      left: direction * 245,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <section ref={sectionRef} id="experience" className="py-20 lg:py-24 border-t border-r-steel">
       <div className="max-w-[1100px] mx-auto px-5">
@@ -188,38 +196,60 @@ export default function Experience() {
             </div>
 
             <div className="reveal bg-r-gray border border-r-steel rounded p-5" data-delay="120">
-              <div className="flex items-center justify-between gap-3 mb-3">
-                <p className="text-r-red text-[10px] font-bold tracking-[0.2em] uppercase">Credentials & Awards</p>
-                <p className="text-r-silver text-[10px] font-bold tracking-wider uppercase">{credentials.length} verified</p>
-              </div>
-              <div className="space-y-2.5">
-                {credentials.map((credential) => (
-                  <a
-                    key={credential.name}
-                    href={credential.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`group flex gap-3 items-start rounded border p-3 transition-all hover:border-r-red/60 hover:bg-r-red/5 ${
-                      credential.featured ? 'border-r-red/25 bg-r-red/5' : 'border-r-steel bg-r-dark'
-                    }`}
-                    aria-label={`View credential: ${credential.name}`}
+              <div className="flex items-start justify-between gap-3 mb-3">
+                <div>
+                  <p className="text-r-red text-[10px] font-bold tracking-[0.2em] uppercase">Credentials & Awards</p>
+                  <p className="text-r-silver text-[10px] font-bold tracking-wider uppercase mt-1">{credentials.length} verified</p>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => scrollCredentials(-1)}
+                    className="w-7 h-7 rounded border border-r-steel bg-r-dark text-r-silver hover:border-r-red/60 hover:text-r-red transition-colors flex items-center justify-center"
+                    aria-label="Previous credential"
                   >
-                    <div className="w-8 h-8 rounded bg-r-red/10 flex items-center justify-center flex-shrink-0">
-                      <span className="iconify text-r-red" data-icon={credential.icon} data-width="13"></span>
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-start justify-between gap-2">
-                        <p className="text-white text-xs font-semibold leading-snug">{credential.name}</p>
-                        <span className="iconify text-r-silver group-hover:text-r-red transition-colors flex-shrink-0 mt-0.5" data-icon="lucide:external-link" data-width="12"></span>
+                    <span className="iconify" data-icon="lucide:chevron-left" data-width="14"></span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => scrollCredentials(1)}
+                    className="w-7 h-7 rounded border border-r-steel bg-r-dark text-r-silver hover:border-r-red/60 hover:text-r-red transition-colors flex items-center justify-center"
+                    aria-label="Next credential"
+                  >
+                    <span className="iconify" data-icon="lucide:chevron-right" data-width="14"></span>
+                  </button>
+                </div>
+              </div>
+              <div className="credential-slider">
+                <div ref={credentialTrackRef} className="credential-track flex gap-3 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-1">
+                  {credentials.map((credential) => (
+                    <a
+                      key={credential.name}
+                      href={credential.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`credential-card group flex min-w-[235px] snap-start gap-3 items-start rounded border p-3 transition-all hover:border-r-red/60 hover:bg-r-red/5 ${
+                        credential.featured ? 'border-r-red/25 bg-r-red/5' : 'border-r-steel bg-r-dark'
+                      }`}
+                      aria-label={`View credential: ${credential.name}`}
+                    >
+                      <div className="w-8 h-8 rounded bg-r-red/10 flex items-center justify-center flex-shrink-0">
+                        <span className="iconify text-r-red" data-icon={credential.icon} data-width="13"></span>
                       </div>
-                      <p className="text-r-silver text-[10px] leading-relaxed">{credential.issuer} - {credential.year}</p>
-                      <p className="text-r-light text-[10px] leading-relaxed mt-1">{credential.note}</p>
-                      {credential.badge && (
-                        <p className="text-r-red text-[10px] font-bold uppercase tracking-wider mt-1">{credential.badge}</p>
-                      )}
-                    </div>
-                  </a>
-                ))}
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-start justify-between gap-2">
+                          <p className="text-white text-xs font-semibold leading-snug">{credential.name}</p>
+                          <span className="iconify text-r-silver group-hover:text-r-red transition-colors flex-shrink-0 mt-0.5" data-icon="lucide:external-link" data-width="12"></span>
+                        </div>
+                        <p className="text-r-silver text-[10px] leading-relaxed">{credential.issuer} - {credential.year}</p>
+                        <p className="text-r-light text-[10px] leading-relaxed mt-1">{credential.note}</p>
+                        {credential.badge && (
+                          <p className="text-r-red text-[10px] font-bold uppercase tracking-wider mt-1">{credential.badge}</p>
+                        )}
+                      </div>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
 
