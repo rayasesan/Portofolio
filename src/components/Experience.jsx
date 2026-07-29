@@ -73,6 +73,7 @@ export default function Experience() {
       }
 
       const rect = timeline.getBoundingClientRect();
+      const visualStartOffset = 12;
       const startY = window.innerHeight * 0.72;
       const endY = window.innerHeight * 0.32;
       const distance = rect.height + startY - endY;
@@ -80,7 +81,7 @@ export default function Experience() {
 
       timeline.style.setProperty('--timeline-progress', progress.toFixed(4));
 
-      const lineEnd = rect.top + rect.height * progress;
+      const lineEnd = rect.top + visualStartOffset + (rect.height - visualStartOffset) * progress;
       timeline.querySelectorAll('.tl-dot').forEach((dot) => {
         const dotRect = dot.getBoundingClientRect();
         const dotCenter = dotRect.top + dotRect.height / 2;
