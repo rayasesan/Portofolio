@@ -369,6 +369,47 @@ html:not(.js-enabled) .tl-dot {
 .project-featured-media {
   border-bottom: 1px solid #262626;
 }
+.project-media-button {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: hidden;
+  cursor: zoom-in;
+  text-align: left;
+}
+.project-media-button:focus-visible {
+  outline: 2px solid #ef4444;
+  outline-offset: -4px;
+}
+.project-media-expand {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.42);
+  color: #ffffff;
+  opacity: 0;
+  transform: translateY(6px) scale(0.94);
+  transition: opacity 0.24s ease, transform 0.24s ease, border-color 0.24s ease;
+  backdrop-filter: blur(10px);
+  z-index: 8;
+}
+.project-media-button:hover .project-media-expand,
+.project-media-button:focus-visible .project-media-expand {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  border-color: rgba(239, 68, 68, 0.7);
+}
 .nutrify-showcase {
   position: absolute;
   inset: 0;
@@ -376,8 +417,13 @@ html:not(.js-enabled) .tl-dot {
   background: #08110d;
 }
 .nutrify-showcase-main {
+  position: absolute;
+  inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
+  min-width: 100%;
+  min-height: 100%;
   object-fit: cover;
   object-position: center;
   filter: saturate(1.04) contrast(1.02) brightness(0.9);
@@ -517,6 +563,117 @@ html:not(.js-enabled) .tl-dot {
   animation: projectResultsIn 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.project-preview-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+.project-preview-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(12px);
+  cursor: zoom-out;
+}
+.project-preview-panel {
+  position: relative;
+  z-index: 1;
+  width: min(1120px, 100%);
+  max-height: min(90vh, 820px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(239, 68, 68, 0.34);
+  border-radius: 8px;
+  background: #0a0a0a;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.62);
+  animation: previewPanelIn 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.project-preview-topbar {
+  min-height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border-bottom: 1px solid #262626;
+}
+.project-preview-close {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #262626;
+  border-radius: 999px;
+  color: #ffffff;
+  background: #111111;
+  transition: border-color 0.24s ease, color 0.24s ease, transform 0.24s ease;
+}
+.project-preview-close:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+  transform: rotate(90deg);
+}
+.project-preview-image-wrap {
+  min-height: 0;
+  padding: 12px;
+  background:
+    linear-gradient(135deg, rgba(239, 68, 68, 0.08), transparent 36%),
+    #050505;
+  overflow: auto;
+}
+.project-preview-image-wrap img {
+  width: 100%;
+  height: auto;
+  max-height: 68vh;
+  object-fit: contain;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.project-preview-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 16px 16px;
+  border-top: 1px solid #262626;
+}
+.project-preview-tabs button {
+  min-height: 34px;
+  padding: 8px 12px;
+  border: 1px solid #262626;
+  border-radius: 999px;
+  color: #c0c0c0;
+  background: #111111;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: border-color 0.24s ease, color 0.24s ease, background 0.24s ease;
+}
+.project-preview-tabs button:hover,
+.project-preview-tabs button.is-active {
+  border-color: #ef4444;
+  color: #000000;
+  background: #ef4444;
+}
+
+@keyframes previewPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .reveal {
   opacity: 1;
   transform: translateY(0);
@@ -541,6 +698,11 @@ html:not(.js-enabled) .tl-dot {
 
   .project-card-shell:hover::before {
     opacity: 0;
+  }
+
+  .project-media-expand {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -585,6 +747,7 @@ html:not(.js-enabled) .tl-dot {
   .project-card-shell,
   .projects-results,
   .project-count,
+  .project-preview-panel,
   .project-image-fallback::before {
     animation: none !important;
   }

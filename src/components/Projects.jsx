@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const filters = [
   { id: 'all', label: 'All', icon: 'lucide:layout-grid' },
@@ -23,6 +23,10 @@ const projects = [
       landing: '/nutrify-landing.jpg',
       scanner: '/nutrify-preview.jpg',
     },
+    galleryImages: [
+      { src: '/nutrify-landing.jpg', label: 'Landing Page' },
+      { src: '/nutrify-preview.jpg', label: 'Food Scanner' },
+    ],
     fallbackTitle: 'Nutrify Scanner Preview',
     fallbackText: 'Food scanner result with nutrition breakdown, health score, and AI recommendation.',
     alt: 'Landing page and food scanner preview of Nutrify AI-powered nutrition platform',
@@ -178,6 +182,7 @@ const filterCounts = filters.reduce((counts, filterItem) => {
 
 export default function Projects() {
   const [filter, setFilter] = useState('all');
+  const [preview, setPreview] = useState(null);
 
   const filteredProjects = projects.filter(
     (project) => filter === 'all' || project.category === filter
@@ -185,6 +190,15 @@ export default function Projects() {
   const featuredProject = filteredProjects.find((project) => project.featured);
   const supportingProjects = filteredProjects.filter((project) => !project.featured);
   const projectCountLabel = `${filteredProjects.length} ${filteredProjects.length === 1 ? 'Project' : 'Projects'} Showing`;
+  const openProjectPreview = (project, activeIndex = 0) => {
+    const images = project.galleryImages ?? (project.image ? [{ src: project.image, label: project.title }] : []);
+
+    if (!images.length) {
+      return;
+    }
+
+    setPreview({ title: project.title, images, activeIndex });
+  };
 
   return (
     <section id="projects" className="py-20 lg:py-24 border-t border-r-steel">
@@ -225,7 +239,13 @@ export default function Projects() {
         </p>
 
         <div key={filter} className="projects-results">
-          {featuredProject && <FeaturedProject project={featuredProject} index={0} />}
+          {featuredProject && (
+            <FeaturedProject
+              project={featuredProject}
+              index={0}
+              onOpenPreview={openProjectPreview}
+            />
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {supportingProjects.map((project, index) => (
@@ -233,11 +253,13 @@ export default function Projects() {
                 key={project.id}
                 project={project}
                 index={index + (featuredProject ? 1 : 0)}
+                onOpenPreview={openProjectPreview}
               />
             ))}
           </div>
         </div>
       </div>
+      <ProjectPreviewModal preview={preview} onClose={() => setPreview(null)} onSelect={setPreview} />
     </section>
   );
 }
@@ -248,7 +270,7 @@ function handleProjectPointerMove(event) {
   event.currentTarget.style.setProperty('--pointer-y', `${event.clientY - rect.top}px`);
 }
 
-function FeaturedProject({ project, index }) {
+function FeaturedProject({ project, index, onOpenPreview }) {
   return (
     <article
       className="proj-card project-card-shell project-featured-card reveal visible bg-r-gray border border-r-red/30 card-lift rounded overflow-hidden mb-4"
@@ -256,17 +278,27 @@ function FeaturedProject({ project, index }) {
       style={{ '--project-index': index }}
     >
       <div className="project-featured-media aspect-[16/9] min-h-[250px] max-h-[470px] overflow-hidden relative bg-r-dark">
-        {project.showcaseImages ? (
-          <NutrifyShowcase project={project} />
-        ) : (
-          <>
-            <ProjectImage project={project} />
-            <div className="project-media-shade" aria-hidden="true"></div>
-          </>
-        )}
-        <span className="absolute top-3 right-3 bg-r-red text-black text-[10px] font-black tracking-[0.15em] uppercase px-2.5 py-1 rounded">
-          Featured
-        </span>
+        <button
+          type="button"
+          className="project-media-button"
+          onClick={() => onOpenPreview(project)}
+          aria-label={`View ${project.title} screenshots`}
+        >
+          {project.showcaseImages ? (
+            <NutrifyShowcase project={project} />
+          ) : (
+            <>
+              <ProjectImage project={project} />
+              <div className="project-media-shade" aria-hidden="true"></div>
+            </>
+          )}
+          <span className="project-media-expand" aria-hidden="true">
+            <span className="iconify" data-icon="lucide:expand" data-width="16"></span>
+          </span>
+          <span className="absolute top-3 right-3 bg-r-red text-black text-[10px] font-black tracking-[0.15em] uppercase px-2.5 py-1 rounded">
+            Featured
+          </span>
+        </button>
       </div>
       <div className="p-5 lg:p-7 grid grid-cols-1 lg:grid-cols-[1.12fr_0.88fr] gap-6">
         <div>
@@ -321,7 +353,9 @@ function NutrifyShowcase({ project }) {
   );
 }
 
-function ProjectCard({ project, index }) {
+function ProjectCard({ project, index, onOpenPreview }) {
+  const hasPreview = Boolean(project.image);
+
   return (
     <article
       className="proj-card project-card-shell reveal visible bg-r-gray border border-r-steel card-lift rounded overflow-hidden"
@@ -329,7 +363,21 @@ function ProjectCard({ project, index }) {
       style={{ '--project-index': index }}
     >
       <div className="aspect-[16/10] overflow-hidden relative">
-        <ProjectImage project={project} />
+        {hasPreview ? (
+          <button
+            type="button"
+            className="project-media-button"
+            onClick={() => onOpenPreview(project)}
+            aria-label={`View ${project.title} preview`}
+          >
+            <ProjectImage project={project} />
+            <span className="project-media-expand" aria-hidden="true">
+              <span className="iconify" data-icon="lucide:expand" data-width="16"></span>
+            </span>
+          </button>
+        ) : (
+          <ProjectImage project={project} />
+        )}
       </div>
       <div className="p-5">
         <p className="text-r-red text-[10px] font-bold tracking-[0.2em] uppercase mb-1.5">{project.categoryLabel}</p>
@@ -340,6 +388,73 @@ function ProjectCard({ project, index }) {
         <ProjectActions links={project.links} />
       </div>
     </article>
+  );
+}
+
+function ProjectPreviewModal({ preview, onClose, onSelect }) {
+  useEffect(() => {
+    if (!preview) {
+      return undefined;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [preview, onClose]);
+
+  if (!preview) {
+    return null;
+  }
+
+  const activeImage = preview.images[preview.activeIndex] ?? preview.images[0];
+
+  return (
+    <div className="project-preview-modal" role="dialog" aria-modal="true" aria-label={`${preview.title} image preview`}>
+      <button type="button" className="project-preview-backdrop" onClick={onClose} aria-label="Close preview"></button>
+      <div className="project-preview-panel">
+        <div className="project-preview-topbar">
+          <div>
+            <p className="text-r-red text-[10px] font-bold tracking-[0.2em] uppercase">Project Preview</p>
+            <h3 className="text-white text-sm md:text-base font-black uppercase tracking-tight">{preview.title}</h3>
+          </div>
+          <button type="button" className="project-preview-close" onClick={onClose} aria-label="Close preview">
+            <span className="iconify" data-icon="lucide:x" data-width="18"></span>
+          </button>
+        </div>
+
+        <div className="project-preview-image-wrap">
+          <img src={activeImage.src} alt={`${preview.title} - ${activeImage.label}`} />
+        </div>
+
+        {preview.images.length > 1 && (
+          <div className="project-preview-tabs" aria-label="Preview images">
+            {preview.images.map((image, index) => (
+              <button
+                key={image.src}
+                type="button"
+                className={index === preview.activeIndex ? 'is-active' : ''}
+                onClick={() => onSelect({ ...preview, activeIndex: index })}
+                aria-pressed={index === preview.activeIndex}
+              >
+                {image.label}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 
