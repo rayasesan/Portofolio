@@ -217,21 +217,69 @@ button:focus-visible {
   animation: barGlow 3s ease-in-out infinite;
 }
 
+.experience-timeline {
+  --timeline-progress: 0;
+  position: relative;
+  isolation: isolate;
+}
+.experience-timeline::before,
+.experience-timeline::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 4px;
+  width: 2px;
+  border-radius: 999px;
+  pointer-events: none;
+}
+.experience-timeline::before {
+  z-index: 0;
+  background: linear-gradient(to bottom, rgba(239, 68, 68, 0.24), #333 42%, transparent);
+}
+.experience-timeline::after {
+  z-index: 1;
+  background: linear-gradient(to bottom, #ef4444, #f87171 55%, rgba(239, 68, 68, 0.22));
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.28);
+  transform: scaleY(var(--timeline-progress));
+  transform-origin: top;
+  transition: transform 0.08s linear;
+}
+.experience-item {
+  position: relative;
+  z-index: 2;
+}
+.timeline-marker {
+  width: 10px;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 3;
+}
 .tl-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  border: 2px solid #ef4444;
+  border: 2px solid #3a3a3a;
   background: #0a0a0a;
+  box-shadow: 0 0 0 4px #0a0a0a;
   flex-shrink: 0;
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
-.tl-dot.dim {
-  border-color: #333;
+.tl-dot.is-lit {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 4px #0a0a0a, 0 0 18px rgba(239, 68, 68, 0.42);
 }
-.tl-line {
-  width: 1px;
-  flex: 1;
-  background: linear-gradient(to bottom, #ef4444, #333, transparent);
+.tl-dot.current.is-lit {
+  background: #ef4444;
+}
+
+html:not(.js-enabled) .experience-timeline::after {
+  transform: scaleY(1);
+}
+html:not(.js-enabled) .tl-dot {
+  border-color: #ef4444;
 }
 
 .mob-menu {

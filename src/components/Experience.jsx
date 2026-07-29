@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 const experiences = [
   {
     date: 'Feb 2026 - Jul 2026',
@@ -47,6 +49,69 @@ const currentFocus = [
 ];
 
 export default function Experience() {
+  const timelineRef = useRef(null);
+
+  useEffect(() => {
+    const timeline = timelineRef.current;
+
+    if (!timeline) {
+      return undefined;
+    }
+
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let frame = 0;
+
+    const clamp = (value) => Math.min(Math.max(value, 0), 1);
+
+    const updateTimeline = () => {
+      frame = 0;
+
+      if (motionQuery.matches) {
+        timeline.style.setProperty('--timeline-progress', '1');
+        timeline.querySelectorAll('.tl-dot').forEach((dot) => dot.classList.add('is-lit'));
+        return;
+      }
+
+      const rect = timeline.getBoundingClientRect();
+      const startY = window.innerHeight * 0.72;
+      const endY = window.innerHeight * 0.32;
+      const distance = rect.height + startY - endY;
+      const progress = distance > 0 ? clamp((startY - rect.top) / distance) : 0;
+
+      timeline.style.setProperty('--timeline-progress', progress.toFixed(4));
+
+      const lineEnd = rect.top + rect.height * progress;
+      timeline.querySelectorAll('.tl-dot').forEach((dot) => {
+        const dotRect = dot.getBoundingClientRect();
+        const dotCenter = dotRect.top + dotRect.height / 2;
+        dot.classList.toggle('is-lit', dotCenter <= lineEnd || progress >= 0.99);
+      });
+    };
+
+    const requestUpdate = () => {
+      if (frame) {
+        return;
+      }
+
+      frame = window.requestAnimationFrame(updateTimeline);
+    };
+
+    updateTimeline();
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+    motionQuery.addEventListener('change', requestUpdate);
+
+    return () => {
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+      }
+
+      window.removeEventListener('scroll', requestUpdate);
+      window.removeEventListener('resize', requestUpdate);
+      motionQuery.removeEventListener('change', requestUpdate);
+    };
+  }, []);
+
   return (
     <section id="experience" className="py-20 lg:py-24 border-t border-r-steel">
       <div className="max-w-[1100px] mx-auto px-5">
@@ -57,7 +122,7 @@ export default function Experience() {
           </h2>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_290px] gap-10">
-          <div className="space-y-0">
+          <div ref={timelineRef} className="experience-timeline space-y-0">
             {experiences.map((experience, index) => (
               <ExperienceItem
                 key={experience.title}
@@ -120,10 +185,9 @@ export default function Experience() {
 
 function ExperienceItem({ date, title, subtitle, desc, tags, isActive, isLast }) {
   return (
-    <article className={`reveal flex gap-5 ${isLast ? '' : 'pb-9'}`}>
-      <div className="flex flex-col items-center pt-0.5">
-        <div className={`tl-dot ${!isActive ? 'dim' : ''}`}></div>
-        {!isLast && <div className="tl-line mt-1"></div>}
+    <article className={`reveal experience-item flex gap-5 ${isLast ? '' : 'pb-9'}`}>
+      <div className="timeline-marker pt-0.5" aria-hidden="true">
+        <div className={`tl-dot ${isActive ? 'current' : ''}`}></div>
       </div>
       <div className="flex-1">
         <p className="text-r-red text-[10px] font-bold tracking-[0.2em] uppercase mb-1.5">{date}</p>
