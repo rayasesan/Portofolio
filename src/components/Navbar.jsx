@@ -1,14 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 
-const navLinks = [
+const mainLinks = [
+  { href: '#top', label: 'Home' },
   { href: '#skills', label: 'Skills' },
   { href: '#experience', label: 'Experience' },
   { href: '#projects', label: 'Projects' },
+];
+
+const navLinks = [
+  ...mainLinks,
   { href: '#contact', label: 'Contact' },
 ];
 
 const mobileLinks = [
-  { href: '#top', label: 'Home' },
   ...navLinks,
 ];
 
@@ -67,7 +71,7 @@ export default function Navbar() {
             Raya Sesan<span className="text-r-red transition-colors group-hover:text-r-red-light">.</span>
           </a>
           <div className="hidden md:flex items-center gap-7">
-            {navLinks.slice(0, 3).map((link) => (
+            {mainLinks.map((link) => (
               <a key={link.href} href={link.href} className="text-[10px] font-semibold tracking-[0.2em] uppercase text-r-silver hover:text-r-red transition-colors">
                 {link.label}
               </a>
