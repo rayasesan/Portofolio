@@ -17,8 +17,10 @@ const projects = [
     role: 'AI Engineer',
     contribution: 'Developed the Indonesian food classification pipeline using TensorFlow and transfer learning, implemented custom TensorFlow components, deployed model inference through FastAPI, and integrated Gemini-based nutrition recommendations with the application backend.',
     image: '/nutrify-preview.jpg',
-    fallbackTitle: 'Nutrify Preview Pending',
-    fallbackText: 'Add the real app screenshot to public/nutrify-preview.jpg.',
+    imageFit: 'contain',
+    imageTone: 'natural',
+    fallbackTitle: 'Nutrify Scanner Preview',
+    fallbackText: 'Food scanner result with nutrition breakdown, health score, and AI recommendation.',
     alt: 'Screenshot preview of Nutrify AI-powered nutrition platform',
     tags: ['Python', 'TensorFlow', 'Keras', 'Computer Vision', 'Transfer Learning', 'FastAPI', 'Gemini API', 'REST API', 'TensorBoard'],
     stats: [
@@ -259,6 +261,12 @@ function ProjectCard({ project }) {
 
 function ProjectImage({ project }) {
   const [hasError, setHasError] = useState(false);
+  const imageClassName = project.imageFit === 'contain'
+    ? 'proj-img w-full h-full object-contain object-center bg-r-dark transition-transform duration-700'
+    : 'proj-img w-full h-full object-cover transition-transform duration-700';
+  const imageStyle = project.imageTone === 'natural'
+    ? { filter: 'contrast(1.02) saturate(1.04) brightness(0.96)' }
+    : { filter: 'grayscale(45%) contrast(1.08) brightness(0.72)' };
 
   if (hasError || !project.image) {
     return <ImageFallback title={project.fallbackTitle} text={project.fallbackText} />;
@@ -269,9 +277,9 @@ function ProjectImage({ project }) {
       src={project.image}
       alt={project.alt}
       onError={() => setHasError(true)}
-      className="proj-img w-full h-full object-cover transition-transform duration-700"
+      className={imageClassName}
       loading={project.featured ? 'eager' : 'lazy'}
-      style={{ filter: 'grayscale(45%) contrast(1.08) brightness(0.72)' }}
+      style={imageStyle}
     />
   );
 }
