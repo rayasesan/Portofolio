@@ -1,175 +1,334 @@
 import { useState } from 'react';
 
+const filters = [
+  { id: 'all', label: 'All' },
+  { id: 'ai', label: 'AI/ML' },
+  { id: 'sql', label: 'SQL' },
+  { id: 'bi', label: 'BI' },
+];
+
+const projects = [
+  {
+    id: 'nutrify',
+    category: 'ai',
+    categoryLabel: 'AI ENGINEERING / COMPUTER VISION / GENERATIVE AI',
+    title: 'Nutrify - AI-Powered Nutrition Platform',
+    desc: 'An AI-powered nutrition platform that identifies Indonesian food from images, analyzes nutritional information, and provides personalized recommendations through an AI nutrition coach.',
+    role: 'AI Engineer',
+    contribution: 'Developed the Indonesian food classification pipeline using TensorFlow and transfer learning, implemented custom TensorFlow components, deployed model inference through FastAPI, and integrated Gemini-based nutrition recommendations with the application backend.',
+    image: '/nutrify-preview.jpg',
+    fallbackTitle: 'Nutrify Preview Pending',
+    fallbackText: 'Add the real app screenshot to public/nutrify-preview.jpg.',
+    alt: 'Screenshot preview of Nutrify AI-powered nutrition platform',
+    tags: ['Python', 'TensorFlow', 'Keras', 'Computer Vision', 'Transfer Learning', 'FastAPI', 'Gemini API', 'REST API', 'TensorBoard'],
+    stats: [
+      { value: '92.44%', label: 'Model Accuracy' },
+      { value: 'FastAPI', label: 'Model Serving' },
+      { value: 'Gemini', label: 'AI Nutrition Coach' },
+    ],
+    featured: true,
+    links: [
+      {
+        label: 'Live Demo',
+        href: 'https://nutrify.biz.id',
+        ariaLabel: 'Open Nutrify live application',
+        primary: true,
+      },
+      {
+        label: 'Main Repository',
+        href: 'https://github.com/coding-camp-project/Project-Utama',
+        ariaLabel: 'Open Nutrify main repository',
+      },
+      {
+        label: 'AI Repository',
+        href: 'https://github.com/coding-camp-project/AI',
+        ariaLabel: 'Open Nutrify AI repository',
+      },
+    ],
+  },
+  {
+    id: 'customer-churn',
+    category: 'ai',
+    categoryLabel: 'MACHINE LEARNING',
+    title: 'Customer Churn Prediction',
+    desc: 'Predicts customer churn from telco demographic, service, billing, and contract data using Logistic Regression and Random Forest. The final model supports retention analysis by identifying high-risk customers and churn-driving factors.',
+    image: '/customer-churn-preview.png',
+    fallbackTitle: 'Customer Churn Prediction',
+    fallbackText: 'Machine learning model evaluation and churn insight visuals.',
+    alt: 'Preview image for Customer Churn Prediction project',
+    tags: ['Python', 'Scikit-learn', 'Pandas', 'Logistic Regression', 'Random Forest'],
+    stats: [
+      { value: '7,043', label: 'Customers' },
+      { value: '84.26%', label: 'ROC-AUC' },
+      { value: 'Logistic Regression', label: 'Best Model' },
+    ],
+    links: [
+      {
+        label: 'View Repository',
+        href: 'https://github.com/rayasesan/customer-churn-prediction',
+        ariaLabel: 'Open Customer Churn Prediction repository',
+        primary: true,
+      },
+      {
+        label: 'Notebook',
+        href: 'https://github.com/rayasesan/customer-churn-prediction/blob/main/customer_churn_prediction.ipynb',
+        ariaLabel: 'Open Customer Churn Prediction notebook',
+      },
+    ],
+  },
+  {
+    id: 'credit-risk',
+    category: 'ai',
+    categoryLabel: 'MACHINE LEARNING',
+    title: 'Credit Risk Prediction',
+    desc: 'Classifies borrower default risk using demographic, financial, and loan-related features. Random Forest outperformed Logistic Regression and was selected as the final model for credit risk assessment.',
+    image: '/credit_risk_ml.jpg',
+    fallbackTitle: 'Credit Risk Prediction',
+    fallbackText: 'Classification workflow for default risk analysis.',
+    alt: 'Preview image for Credit Risk Prediction project',
+    tags: ['Python', 'Scikit-learn', 'Classification', 'Random Forest', 'Feature Engineering'],
+    stats: [
+      { value: '93.23%', label: 'Accuracy' },
+      { value: '93.11%', label: 'ROC-AUC' },
+      { value: 'Random Forest', label: 'Best Model' },
+    ],
+    links: [
+      {
+        label: 'View Repository',
+        href: 'https://github.com/rayasesan/credit-risk-prediction',
+        ariaLabel: 'Open Credit Risk Prediction repository',
+        primary: true,
+      },
+      {
+        label: 'Notebook',
+        href: 'https://github.com/rayasesan/credit-risk-prediction/blob/main/credit_risk_prediction.ipynb',
+        ariaLabel: 'Open Credit Risk Prediction notebook',
+      },
+    ],
+  },
+  {
+    id: 'bank-marketing-sql',
+    category: 'sql',
+    categoryLabel: 'DATA ANALYSIS / SQL',
+    title: 'Bank Marketing SQL Analytics',
+    desc: 'Analyzes a bank marketing campaign dataset with SQLite to find customer segments and campaign factors linked to term deposit subscriptions. The analysis covers conversion by job, education, contact channel, campaign timing, and previous campaign outcome.',
+    image: '/sql_analytics.jpg',
+    fallbackTitle: 'Bank Marketing SQL Analytics',
+    fallbackText: 'SQL campaign segmentation and conversion analysis.',
+    alt: 'Preview image for Bank Marketing SQL Analytics project',
+    tags: ['SQL', 'SQLite', 'CTE', 'Window Functions', 'Segmentation'],
+    stats: [
+      { value: '45,211', label: 'Records' },
+      { value: '6', label: 'Business Questions' },
+      { value: '64.73%', label: 'Previous Success Conversion' },
+    ],
+    links: [
+      {
+        label: 'View Repository',
+        href: 'https://github.com/rayasesan/bank-marketing-sql-analysis',
+        ariaLabel: 'Open Bank Marketing SQL Analysis repository',
+        primary: true,
+      },
+      {
+        label: 'SQL File',
+        href: 'https://github.com/rayasesan/bank-marketing-sql-analysis/blob/main/bank_marketing_analysis.sql',
+        ariaLabel: 'Open Bank Marketing SQL analysis file',
+      },
+    ],
+  },
+  {
+    id: 'telco-dashboard',
+    category: 'bi',
+    categoryLabel: 'BUSINESS INTELLIGENCE',
+    title: 'Telco Churn Dashboard',
+    desc: 'Power BI dashboard analyzing telco churn behavior through customer, churn, and churn-rate KPIs. The report visualizes churn by contract type, internet service, payment method, and tenure group.',
+    image: '/telco-dashboard-preview.jpg',
+    fallbackTitle: 'Telco Churn Dashboard',
+    fallbackText: 'Power BI dashboard preview and KPI summary.',
+    alt: 'Preview image for Telco Churn Dashboard project',
+    tags: ['Power BI', 'DAX', 'Data Visualization', 'Dashboard'],
+    stats: [
+      { value: '3', label: 'KPIs' },
+      { value: '4', label: 'Visualizations' },
+      { value: 'PBIX', label: 'Dashboard File' },
+    ],
+    links: [
+      {
+        label: 'View Repository',
+        href: 'https://github.com/rayasesan/telco-customer-churn-dashboard-powerbi',
+        ariaLabel: 'Open Telco Churn Dashboard repository',
+        primary: true,
+      },
+    ],
+  },
+];
+
 export default function Projects() {
   const [filter, setFilter] = useState('all');
 
-  const filters = [
-    { id: 'all', label: 'All' },
-    { id: 'ml', label: 'ML' },
-    { id: 'sql', label: 'SQL' },
-    { id: 'bi', label: 'BI' },
-  ];
-
-  const projects = [
-    {
-      id: 1,
-      category: 'ml',
-      categoryLabel: 'MACHINE LEARNING',
-      title: 'Customer Churn Prediction',
-      desc: 'Logistic Regression & Random Forest models. Full EDA, feature engineering, evaluation, and retention insights.',
-      image: 'public/churn_prediction_ml.jpg',
-      tags: ['Python', 'Scikit-learn', 'Pandas', 'Random Forest'],
-      stats: [
-        { val: '2', label: 'models' },
-        { val: 'pipeline', label: 'E2E' },
-        { val: 'Retention', label: 'insights' },
-      ],
-      featured: true,
-      links: { notebook: '#', code: '#' }
-    },
-    {
-      id: 2,
-      category: 'ml',
-      categoryLabel: 'MACHINE LEARNING',
-      title: 'Credit Risk Prediction',
-      desc: 'Classification models for credit risk assessment. Business insights for lending decisions and default analysis.',
-      image: 'public/credit_risk_ml.jpg',
-      tags: ['Python', 'Classification', 'Scikit-learn'],
-      stats: [
-        { val: 'Risk', label: 'assessment' },
-        { val: 'Business', label: 'insights' },
-        { val: 'Lending', label: 'decisions' },
-      ],
-      links: { notebook: '#', code: '#' }
-    },
-    {
-      id: 3,
-      category: 'sql',
-      categoryLabel: 'DATA ANALYSIS — SQL',
-      title: 'Bank Marketing SQL Analytics',
-      desc: 'Advanced SQL with CTEs, Window Functions, CASE WHEN, GROUP BY for customer segmentation and campaign analysis.',
-      image: 'public/sql_analytics.jpg',
-      tags: ['SQL', 'SQLite', 'CTEs', 'Window Func'],
-      stats: [
-        { val: 'Advanced', label: 'queries' },
-        { val: 'Segmentation', label: '' },
-        { val: 'Campaign', label: 'analysis' },
-      ],
-      links: { notebook: '#', code: '#' }
-    },
-    {
-      id: 4,
-      category: 'bi',
-      categoryLabel: 'BUSINESS INTELLIGENCE',
-      title: 'Telco Churn Dashboard',
-      desc: 'Interactive Power BI dashboard with KPI tracking, churn analysis by contract, internet service, payment method, and tenure.',
-      image: 'public/powerbi_dashboard.jpg',
-      tags: ['Power BI', 'KPI', 'DAX', 'Dashboard'],
-      stats: [
-        { val: 'Interactive', label: '' },
-        { val: 'Multi', label: '-dimension' },
-        { val: 'KPI', label: 'driven' },
-      ],
-      links: { dashboard: '#' }
-    }
-  ];
-
   const filteredProjects = projects.filter(
-    proj => filter === 'all' || proj.category === filter
+    (project) => filter === 'all' || project.category === filter
   );
+  const featuredProject = filteredProjects.find((project) => project.featured);
+  const supportingProjects = filteredProjects.filter((project) => !project.featured);
 
   return (
     <section id="projects" className="py-20 lg:py-24 border-t border-r-steel">
       <div className="max-w-[1100px] mx-auto px-5">
         <div className="reveal flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
           <div>
-            <p className="text-r-red text-[9px] font-bold tracking-[0.25em] uppercase mb-2">03 / Projects</p>
+            <p className="text-r-red text-[10px] font-bold tracking-[0.25em] uppercase mb-2">03 / Projects</p>
             <h2 className="text-white font-black text-3xl lg:text-4xl uppercase tracking-tight leading-[0.9]">
               Things I've Built
             </h2>
           </div>
-          <div className="flex gap-2">
-            {filters.map(f => (
+          <div className="flex flex-wrap gap-2" aria-label="Project filters">
+            {filters.map((filterItem) => (
               <button
-                key={f.id}
-                onClick={() => setFilter(f.id)}
-                className={`text-[9px] font-bold tracking-[0.18em] uppercase px-4 py-1.5 border rounded transition-all ${filter === f.id
-                    ? 'border-r-red bg-r-red/10 text-r-red'
-                    : 'border-r-steel text-r-silver hover:text-r-red hover:border-r-red/40'
-                  }`}
+                key={filterItem.id}
+                type="button"
+                onClick={() => setFilter(filterItem.id)}
+                className={`min-h-10 text-[10px] font-bold tracking-[0.18em] uppercase px-4 py-2 border rounded transition-all ${filter === filterItem.id
+                  ? 'border-r-red bg-r-red/10 text-r-red'
+                  : 'border-r-steel text-r-silver hover:text-r-red hover:border-r-red/40'
+                }`}
+                aria-pressed={filter === filterItem.id}
               >
-                {f.label}
+                {filterItem.label}
               </button>
             ))}
           </div>
         </div>
 
+        {featuredProject && <FeaturedProject project={featuredProject} />}
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredProjects.map((proj) => (
-            <div
-              key={proj.id}
-              className="proj-card reveal bg-r-gray border border-r-steel card-lift rounded overflow-hidden"
-              style={{
-                animation: 'fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards'
-              }}
-            >
-              <div className="aspect-[16/10] overflow-hidden relative">
-                <img
-                  src={proj.image}
-                  alt={proj.title}
-                  className="proj-img w-full h-full object-cover transition-transform duration-700"
-                  style={{ filter: 'grayscale(60%) contrast(1.1) brightness(0.7)' }}
-                />
-                <div className="proj-over absolute inset-0 bg-black/70 flex items-center justify-center gap-3">
-                  {proj.links.notebook && (
-                    <a href={proj.links.notebook} className="bg-r-red text-black text-[8px] font-black tracking-[0.15em] uppercase px-4 py-1.5 rounded hover:bg-r-red-light transition-colors">
-                      Notebook
-                    </a>
-                  )}
-                  {proj.links.code && (
-                    <a href={proj.links.code} className="border border-white text-white text-[8px] font-black tracking-[0.15em] uppercase px-4 py-1.5 rounded hover:bg-white hover:text-black transition-all">
-                      Code
-                    </a>
-                  )}
-                  {proj.links.dashboard && (
-                    <a href={proj.links.dashboard} className="bg-r-red text-black text-[8px] font-black tracking-[0.15em] uppercase px-4 py-1.5 rounded hover:bg-r-red-light transition-colors">
-                      Dashboard
-                    </a>
-                  )}
-                </div>
-                {proj.featured && (
-                  <span className="absolute top-3 right-3 bg-r-red text-black text-[7px] font-black tracking-[0.15em] uppercase px-2 py-0.5 rounded">
-                    Featured
-                  </span>
-                )}
-              </div>
-              <div className="p-5">
-                <p className="text-r-red text-[8px] font-bold tracking-[0.2em] uppercase mb-1.5">{proj.categoryLabel}</p>
-                <h3 className="text-white font-bold text-base uppercase tracking-tight mb-2">{proj.title}</h3>
-                <p className="text-r-light text-[11px] leading-relaxed mb-3">{proj.desc}</p>
-                <div className="flex flex-wrap gap-1.5 mb-3">
-                  {proj.tags.map((tag, idx) => (
-                    <span key={idx} className="text-[7px] font-bold tracking-wider uppercase px-2 py-0.5 bg-r-steel text-r-light rounded">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex gap-5 pt-3 border-t border-r-steel text-[9px] text-r-silver">
-                  {proj.stats.map((stat, idx) => (
-                    <span key={idx}>
-                      {stat.label && stat.val.match(/^[0-9]+$/) ? (
-                        <><span className="text-white font-bold">{stat.val}</span> {stat.label}</>
-                      ) : (
-                        <><span className="text-white font-bold">{stat.val}</span> {stat.label}</>
-                      )}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
+          {supportingProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function FeaturedProject({ project }) {
+  return (
+    <article className="proj-card reveal bg-r-gray border border-r-red/30 card-lift rounded overflow-hidden mb-4">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="aspect-[16/10] lg:aspect-auto min-h-[280px] overflow-hidden relative">
+          <ProjectImage project={project} />
+          <span className="absolute top-3 right-3 bg-r-red text-black text-[10px] font-black tracking-[0.15em] uppercase px-2.5 py-1 rounded">
+            Featured
+          </span>
+        </div>
+        <div className="p-5 lg:p-7 flex flex-col">
+          <p className="text-r-red text-[10px] font-bold tracking-[0.2em] uppercase mb-2">{project.categoryLabel}</p>
+          <h3 className="text-white font-black text-2xl lg:text-3xl uppercase tracking-tight leading-[0.95] mb-3">{project.title}</h3>
+          <p className="text-r-light text-sm leading-relaxed mb-4">{project.desc}</p>
+          <div className="border-y border-r-steel py-3 mb-4">
+            <p className="text-r-red text-[10px] font-bold tracking-[0.16em] uppercase mb-1">Role: {project.role}</p>
+            <p className="text-r-light text-xs leading-relaxed">{project.contribution}</p>
+          </div>
+          <ProjectTags tags={project.tags} />
+          <ProjectStats stats={project.stats} />
+          <ProjectActions links={project.links} />
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function ProjectCard({ project }) {
+  return (
+    <article className="proj-card reveal bg-r-gray border border-r-steel card-lift rounded overflow-hidden">
+      <div className="aspect-[16/10] overflow-hidden relative">
+        <ProjectImage project={project} />
+      </div>
+      <div className="p-5">
+        <p className="text-r-red text-[10px] font-bold tracking-[0.2em] uppercase mb-1.5">{project.categoryLabel}</p>
+        <h3 className="text-white font-bold text-base uppercase tracking-tight mb-2">{project.title}</h3>
+        <p className="text-r-light text-xs leading-relaxed mb-3">{project.desc}</p>
+        <ProjectTags tags={project.tags} />
+        <ProjectStats stats={project.stats} />
+        <ProjectActions links={project.links} />
+      </div>
+    </article>
+  );
+}
+
+function ProjectImage({ project }) {
+  const [hasError, setHasError] = useState(false);
+
+  if (hasError || !project.image) {
+    return <ImageFallback title={project.fallbackTitle} text={project.fallbackText} />;
+  }
+
+  return (
+    <img
+      src={project.image}
+      alt={project.alt}
+      onError={() => setHasError(true)}
+      className="proj-img w-full h-full object-cover transition-transform duration-700"
+      loading={project.featured ? 'eager' : 'lazy'}
+      style={{ filter: 'grayscale(45%) contrast(1.08) brightness(0.72)' }}
+    />
+  );
+}
+
+function ImageFallback({ title, text }) {
+  return (
+    <div className="project-image-fallback h-full min-h-[220px] flex flex-col justify-end p-5">
+      <span className="iconify text-r-red mb-4" data-icon="lucide:image-off" data-width="28"></span>
+      <p className="text-white text-sm font-black uppercase tracking-[0.12em] mb-2">{title}</p>
+      <p className="text-r-light text-xs leading-relaxed max-w-xs">{text}</p>
+    </div>
+  );
+}
+
+function ProjectTags({ tags }) {
+  return (
+    <div className="flex flex-wrap gap-1.5 mb-3">
+      {tags.map((tag) => (
+        <span key={tag} className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 bg-r-steel text-r-light rounded">
+          {tag}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function ProjectStats({ stats }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-3 border-t border-r-steel text-r-silver mb-4">
+      {stats.map((stat) => (
+        <div key={`${stat.value}-${stat.label}`} className="bg-r-dark border border-r-steel rounded px-2.5 py-2">
+          <p className="text-white text-xs font-bold leading-tight">{stat.value}</p>
+          <p className="text-r-silver text-[10px] leading-tight mt-1">{stat.label}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ProjectActions({ links }) {
+  return (
+    <div className="flex flex-wrap gap-2 mt-auto">
+      {links.map((link) => (
+        <a
+          key={link.href}
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={link.ariaLabel}
+          className={`${link.primary
+            ? 'bg-r-red text-black hover:bg-r-red-light'
+            : 'border border-r-steel text-white hover:border-r-red hover:text-r-red'
+          } inline-flex min-h-10 items-center justify-center px-4 py-2 rounded text-[10px] font-black tracking-[0.14em] uppercase transition-colors`}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
   );
 }

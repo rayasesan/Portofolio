@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <section className="min-h-screen flex items-center relative overflow-hidden pt-14">
+    <section id="top" className="min-h-screen flex items-center relative overflow-hidden pt-14">
       <div
         className="absolute right-[5%] top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-[0.05] pointer-events-none"
         style={{ background: 'radial-gradient(circle, #EF4444, transparent 70%)' }}
@@ -14,7 +14,7 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8 lg:gap-14 items-center">
           <div className="order-2 lg:order-1">
             <div className="fade-up" style={{ animationDelay: '0.1s' }}>
-              <p className="text-r-red text-[9px] font-bold tracking-[0.25em] uppercase mb-4">
+              <p className="text-r-red text-[10px] font-bold tracking-[0.25em] uppercase mb-4">
                 Informatics Engineering · Gunadarma University
               </p>
             </div>
@@ -26,7 +26,10 @@ export default function Hero() {
             <div className="fade-up" style={{ animationDelay: '0.45s' }}>
               <div className="red-bar mb-5"></div>
               <p className="text-r-light text-sm leading-relaxed max-w-md mb-7">
-                Aspiring Data Scientist with hands-on experience in ML, SQL analytics, and Power BI dashboards. Currently in the AI Engineer Cohort at DBS Foundation. Seeking AI Engineering internship.
+                Informatics Engineering student focused on machine learning, data science, computer vision, and AI-powered applications. Experienced in end-to-end model development, data analysis, backend API integration, and model deployment through collaborative, academic, and personal projects.
+              </p>
+              <p className="inline-flex border border-r-red/30 bg-r-red/10 text-r-red text-[10px] font-bold tracking-[0.12em] uppercase px-3 py-1.5 rounded">
+                Open to Machine Learning, Data Science, and AI Engineering internship opportunities.
               </p>
             </div>
             <div className="fade-up flex flex-wrap gap-3 mb-8" style={{ animationDelay: '0.6s' }}>
@@ -47,14 +50,12 @@ export default function Hero() {
               <a href="mailto:rayasesan@gmail.com" className="text-r-silver hover:text-r-red transition-all hover:scale-125" aria-label="Email">
                 <span className="iconify" data-icon="lucide:mail" data-width="16"></span>
               </a>
-              <a href="https://linkedin.com/in/rayasesann" target="_blank" rel="noreferrer" className="text-r-silver hover:text-r-red transition-all hover:scale-125" aria-label="LinkedIn">
+              <a href="https://linkedin.com/in/rayasesann" target="_blank" rel="noopener noreferrer" className="text-r-silver hover:text-r-red transition-all hover:scale-125" aria-label="LinkedIn">
                 <span className="iconify" data-icon="lucide:linkedin" data-width="16"></span>
               </a>
-              <a href="https://github.com/rayasesan" target="_blank" rel="noreferrer" className="text-r-silver hover:text-r-red transition-all hover:scale-125" aria-label="GitHub">
+              <a href="https://github.com/rayasesan" target="_blank" rel="noopener noreferrer" className="text-r-silver hover:text-r-red transition-all hover:scale-125" aria-label="GitHub">
                 <span className="iconify" data-icon="lucide:github" data-width="16"></span>
               </a>
-              <span className="w-px h-4 bg-r-steel"></span>
-              <span className="text-r-steel text-[10px] tracking-wider">+62 813-9811-6769</span>
             </div>
           </div>
           <div className="order-1 lg:order-2 flex justify-center lg:justify-end scale-in" style={{ animationDelay: '0.2s' }}>

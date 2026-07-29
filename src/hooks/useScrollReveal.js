@@ -2,34 +2,30 @@ import { useEffect } from 'react';
 
 export function useScrollReveal() {
   useEffect(() => {
-    // Skill bars
-    const skillObs = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.style.width = entry.target.getAttribute('data-w');
-          skillObs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
+    const revealElements = document.querySelectorAll('.reveal');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    document.querySelectorAll('.skill-fill').forEach((bar) => {
-      skillObs.observe(bar);
-    });
+    if (!('IntersectionObserver' in window) || prefersReducedMotion) {
+      revealElements.forEach((element) => element.classList.add('visible'));
+      return undefined;
+    }
 
-    // Scroll reveal
+    const timers = new Set();
     const revealObs = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const delay = entry.target.getAttribute('data-delay');
-          setTimeout(() => {
+          const timer = setTimeout(() => {
             entry.target.classList.add('visible');
+            timers.delete(timer);
           }, delay ? parseInt(delay) : 0);
+          timers.add(timer);
           revealObs.unobserve(entry.target);
         }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    document.querySelectorAll('.reveal').forEach((el, i) => {
+    revealElements.forEach((el, i) => {
       if (!el.hasAttribute('data-delay')) {
         el.setAttribute('data-delay', (i % 10) * 80);
       }
@@ -37,7 +33,7 @@ export function useScrollReveal() {
     });
 
     return () => {
-      skillObs.disconnect();
+      timers.forEach((timer) => clearTimeout(timer));
       revealObs.disconnect();
     };
   }, []);
