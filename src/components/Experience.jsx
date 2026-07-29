@@ -49,12 +49,14 @@ const currentFocus = [
 ];
 
 export default function Experience() {
+  const sectionRef = useRef(null);
   const timelineRef = useRef(null);
 
   useEffect(() => {
+    const section = sectionRef.current;
     const timeline = timelineRef.current;
 
-    if (!timeline) {
+    if (!section || !timeline) {
       return undefined;
     }
 
@@ -67,25 +69,30 @@ export default function Experience() {
       frame = 0;
 
       if (motionQuery.matches) {
-        timeline.style.setProperty('--timeline-progress', '1');
+        timeline.style.setProperty('--timeline-fill-height', 'calc(100% - 27px)');
+        timeline.style.setProperty('--timeline-opacity', '1');
         timeline.querySelectorAll('.tl-dot').forEach((dot) => dot.classList.add('is-lit'));
         return;
       }
 
       const rect = timeline.getBoundingClientRect();
-      const visualStartOffset = 12;
-      const startY = window.innerHeight * 0.72;
-      const endY = window.innerHeight * 0.32;
-      const distance = rect.height + startY - endY;
-      const progress = distance > 0 ? clamp((startY - rect.top) / distance) : 0;
+      const sectionRect = section.getBoundingClientRect();
+      const visualStartOffset = 22;
+      const drawableHeight = Math.max(rect.height - visualStartOffset - 5, 0);
+      const scrollDistance = Math.max(sectionRect.height - window.innerHeight, rect.height * 0.72);
+      const progress = scrollDistance > 0 ? clamp(-sectionRect.top / scrollDistance) : 0;
+      const opacity = clamp(progress / 0.1);
+      const fillHeight = drawableHeight * progress;
+      const hasStarted = progress > 0.02;
 
-      timeline.style.setProperty('--timeline-progress', progress.toFixed(4));
+      timeline.style.setProperty('--timeline-fill-height', `${fillHeight}px`);
+      timeline.style.setProperty('--timeline-opacity', opacity.toFixed(4));
 
-      const lineEnd = rect.top + visualStartOffset + (rect.height - visualStartOffset) * progress;
+      const lineEnd = rect.top + visualStartOffset + fillHeight;
       timeline.querySelectorAll('.tl-dot').forEach((dot) => {
         const dotRect = dot.getBoundingClientRect();
         const dotCenter = dotRect.top + dotRect.height / 2;
-        dot.classList.toggle('is-lit', dotCenter <= lineEnd || progress >= 0.99);
+        dot.classList.toggle('is-lit', hasStarted && (dotCenter <= lineEnd || progress >= 0.99));
       });
     };
 
@@ -114,7 +121,7 @@ export default function Experience() {
   }, []);
 
   return (
-    <section id="experience" className="py-20 lg:py-24 border-t border-r-steel">
+    <section ref={sectionRef} id="experience" className="py-20 lg:py-24 border-t border-r-steel">
       <div className="max-w-[1100px] mx-auto px-5">
         <div className="reveal mb-12">
           <p className="text-r-red text-[10px] font-bold tracking-[0.25em] uppercase mb-2">02 / Experience</p>
