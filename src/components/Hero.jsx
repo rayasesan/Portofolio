@@ -45,6 +45,14 @@ export default function Hero() {
               >
                 See Projects
               </a>
+              <a
+                href="/cv/raya-sesan-firdaus-cv.pdf"
+                download="Raya-Sesan-Firdaus-CV.pdf"
+                className="border border-r-steel hover:border-r-red text-white text-[10px] font-black tracking-[0.18em] uppercase px-7 py-3 transition-all hover:scale-105 inline-flex items-center gap-2"
+              >
+                <span className="iconify" data-icon="lucide:download" data-width="13"></span>
+                Download CV
+              </a>
             </div>
             <div className="fade-up flex items-center gap-5" style={{ animationDelay: '0.75s' }}>
               <a href="mailto:rayasesan@gmail.com" className="text-r-silver hover:text-r-red transition-all hover:scale-125" aria-label="Email">
