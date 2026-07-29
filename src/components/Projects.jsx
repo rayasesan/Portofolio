@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 const filters = [
-  { id: 'all', label: 'All' },
-  { id: 'ai', label: 'AI/ML' },
-  { id: 'sql', label: 'SQL' },
-  { id: 'bi', label: 'BI' },
+  { id: 'all', label: 'All', icon: 'lucide:layout-grid' },
+  { id: 'ai', label: 'AI/ML', icon: 'lucide:brain-circuit' },
+  { id: 'sql', label: 'SQL', icon: 'lucide:database' },
+  { id: 'bi', label: 'BI', icon: 'lucide:bar-chart-3' },
 ];
 
 const projects = [
@@ -17,8 +17,8 @@ const projects = [
     role: 'AI Engineer',
     contribution: 'Developed the Indonesian food classification pipeline using TensorFlow and transfer learning, implemented custom TensorFlow components, deployed model inference through FastAPI, and integrated Gemini-based nutrition recommendations with the application backend.',
     image: '/nutrify-preview.jpg',
-    imageFit: 'contain',
     imageTone: 'natural',
+    imageObjectPosition: 'center top',
     fallbackTitle: 'Nutrify Scanner Preview',
     fallbackText: 'Food scanner result with nutrition breakdown, health score, and AI recommendation.',
     alt: 'Screenshot preview of Nutrify AI-powered nutrition platform',
@@ -84,9 +84,9 @@ const projects = [
     categoryLabel: 'MACHINE LEARNING',
     title: 'Credit Risk Prediction',
     desc: 'Classifies borrower default risk using demographic, financial, and loan-related features. Random Forest outperformed Logistic Regression and was selected as the final model for credit risk assessment.',
-    image: '/credit_risk_ml.jpg',
-    fallbackTitle: 'Credit Risk Prediction',
-    fallbackText: 'Classification workflow for default risk analysis.',
+    image: null,
+    fallbackTitle: 'Preview Coming Soon',
+    fallbackText: 'Project visual will be added after the real screenshot is ready.',
     alt: 'Preview image for Credit Risk Prediction project',
     tags: ['Python', 'Scikit-learn', 'Classification', 'Random Forest', 'Feature Engineering'],
     stats: [
@@ -114,9 +114,9 @@ const projects = [
     categoryLabel: 'DATA ANALYSIS / SQL',
     title: 'Bank Marketing SQL Analytics',
     desc: 'Analyzes a bank marketing campaign dataset with SQLite to find customer segments and campaign factors linked to term deposit subscriptions. The analysis covers conversion by job, education, contact channel, campaign timing, and previous campaign outcome.',
-    image: '/sql_analytics.jpg',
-    fallbackTitle: 'Bank Marketing SQL Analytics',
-    fallbackText: 'SQL campaign segmentation and conversion analysis.',
+    image: null,
+    fallbackTitle: 'Preview Coming Soon',
+    fallbackText: 'Project visual will be added after the real screenshot is ready.',
     alt: 'Preview image for Bank Marketing SQL Analytics project',
     tags: ['SQL', 'SQLite', 'CTE', 'Window Functions', 'Segmentation'],
     stats: [
@@ -165,6 +165,13 @@ const projects = [
   },
 ];
 
+const filterCounts = filters.reduce((counts, filterItem) => {
+  counts[filterItem.id] = filterItem.id === 'all'
+    ? projects.length
+    : projects.filter((project) => project.category === filterItem.id).length;
+  return counts;
+}, {});
+
 export default function Projects() {
   const [filter, setFilter] = useState('all');
 
@@ -173,6 +180,7 @@ export default function Projects() {
   );
   const featuredProject = filteredProjects.find((project) => project.featured);
   const supportingProjects = filteredProjects.filter((project) => !project.featured);
+  const projectCountLabel = `${filteredProjects.length} ${filteredProjects.length === 1 ? 'Project' : 'Projects'} Showing`;
 
   return (
     <section id="projects" className="py-20 lg:py-24 border-t border-r-steel">
@@ -189,49 +197,78 @@ export default function Projects() {
               <button
                 key={filterItem.id}
                 type="button"
-                onClick={() => setFilter(filterItem.id)}
-                className={`min-h-10 text-[10px] font-bold tracking-[0.18em] uppercase px-4 py-2 border rounded transition-all ${filter === filterItem.id
-                  ? 'border-r-red bg-r-red/10 text-r-red'
+                onClick={() => {
+                  if (filter !== filterItem.id) {
+                    setFilter(filterItem.id);
+                  }
+                }}
+                className={`project-filter-btn min-h-10 inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.18em] uppercase px-4 py-2 border rounded transition-all ${filter === filterItem.id
+                  ? 'is-active border-r-red bg-r-red/10 text-r-red'
                   : 'border-r-steel text-r-silver hover:text-r-red hover:border-r-red/40'
                 }`}
                 aria-pressed={filter === filterItem.id}
               >
-                {filterItem.label}
+                <span className="iconify" data-icon={filterItem.icon} data-width="13"></span>
+                <span>{filterItem.label}</span>
+                <span className="project-filter-count">{filterCounts[filterItem.id]}</span>
               </button>
             ))}
           </div>
         </div>
 
-        {featuredProject && <FeaturedProject project={featuredProject} />}
+        <p className="project-count reveal visible text-r-silver text-[10px] font-bold tracking-[0.18em] uppercase mb-4" aria-live="polite">
+          {projectCountLabel}
+        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {supportingProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+        <div key={filter} className="projects-results">
+          {featuredProject && <FeaturedProject project={featuredProject} index={0} />}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {supportingProjects.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index + (featuredProject ? 1 : 0)}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function FeaturedProject({ project }) {
+function handleProjectPointerMove(event) {
+  const rect = event.currentTarget.getBoundingClientRect();
+  event.currentTarget.style.setProperty('--pointer-x', `${event.clientX - rect.left}px`);
+  event.currentTarget.style.setProperty('--pointer-y', `${event.clientY - rect.top}px`);
+}
+
+function FeaturedProject({ project, index }) {
   return (
-    <article className="proj-card reveal visible bg-r-gray border border-r-red/30 card-lift rounded overflow-hidden mb-4">
-      <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="aspect-[16/10] lg:aspect-auto min-h-[280px] overflow-hidden relative">
-          <ProjectImage project={project} />
-          <span className="absolute top-3 right-3 bg-r-red text-black text-[10px] font-black tracking-[0.15em] uppercase px-2.5 py-1 rounded">
-            Featured
-          </span>
-        </div>
-        <div className="p-5 lg:p-7 flex flex-col">
+    <article
+      className="proj-card project-card-shell project-featured-card reveal visible bg-r-gray border border-r-red/30 card-lift rounded overflow-hidden mb-4"
+      onPointerMove={handleProjectPointerMove}
+      style={{ '--project-index': index }}
+    >
+      <div className="project-featured-media aspect-[16/9] min-h-[250px] max-h-[470px] overflow-hidden relative bg-r-dark">
+        <ProjectImage project={project} />
+        <div className="project-media-shade" aria-hidden="true"></div>
+        <span className="absolute top-3 right-3 bg-r-red text-black text-[10px] font-black tracking-[0.15em] uppercase px-2.5 py-1 rounded">
+          Featured
+        </span>
+      </div>
+      <div className="p-5 lg:p-7 grid grid-cols-1 lg:grid-cols-[1.12fr_0.88fr] gap-6">
+        <div>
           <p className="text-r-red text-[10px] font-bold tracking-[0.2em] uppercase mb-2">{project.categoryLabel}</p>
           <h3 className="text-white font-black text-2xl lg:text-3xl uppercase tracking-tight leading-[0.95] mb-3">{project.title}</h3>
           <p className="text-r-light text-sm leading-relaxed mb-4">{project.desc}</p>
-          <div className="border-y border-r-steel py-3 mb-4">
+          <div className="border-y border-r-steel py-3">
             <p className="text-r-red text-[10px] font-bold tracking-[0.16em] uppercase mb-1">Role: {project.role}</p>
             <p className="text-r-light text-xs leading-relaxed">{project.contribution}</p>
           </div>
+        </div>
+        <div className="flex flex-col">
           <ProjectTags tags={project.tags} />
           <ProjectStats stats={project.stats} />
           <ProjectActions links={project.links} />
@@ -241,9 +278,13 @@ function FeaturedProject({ project }) {
   );
 }
 
-function ProjectCard({ project }) {
+function ProjectCard({ project, index }) {
   return (
-    <article className="proj-card reveal visible bg-r-gray border border-r-steel card-lift rounded overflow-hidden">
+    <article
+      className="proj-card project-card-shell reveal visible bg-r-gray border border-r-steel card-lift rounded overflow-hidden"
+      onPointerMove={handleProjectPointerMove}
+      style={{ '--project-index': index }}
+    >
       <div className="aspect-[16/10] overflow-hidden relative">
         <ProjectImage project={project} />
       </div>
@@ -265,8 +306,8 @@ function ProjectImage({ project }) {
     ? 'proj-img w-full h-full object-contain object-center bg-r-dark transition-transform duration-700'
     : 'proj-img w-full h-full object-cover transition-transform duration-700';
   const imageStyle = project.imageTone === 'natural'
-    ? { filter: 'contrast(1.02) saturate(1.04) brightness(0.96)' }
-    : { filter: 'grayscale(45%) contrast(1.08) brightness(0.72)' };
+    ? { filter: 'contrast(1.02) saturate(1.05) brightness(0.98)', objectPosition: project.imageObjectPosition }
+    : { filter: 'grayscale(45%) contrast(1.08) brightness(0.72)', objectPosition: project.imageObjectPosition };
 
   if (hasError || !project.image) {
     return <ImageFallback title={project.fallbackTitle} text={project.fallbackText} />;

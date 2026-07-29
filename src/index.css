@@ -295,15 +295,148 @@ html:not(.js-enabled) .tl-dot {
   pointer-events: auto;
 }
 
+.project-filter-btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.project-filter-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0;
+  background: linear-gradient(120deg, transparent, rgba(239, 68, 68, 0.18), transparent);
+  transform: translateX(-120%);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+}
+.project-filter-btn:hover::before,
+.project-filter-btn.is-active::before {
+  opacity: 1;
+  transform: translateX(120%);
+}
+.project-filter-btn.is-active {
+  box-shadow: 0 0 22px rgba(239, 68, 68, 0.12);
+}
+.project-filter-count {
+  min-width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  font-size: 9px;
+  line-height: 1;
+}
+.project-filter-btn.is-active .project-filter-count {
+  background: #ef4444;
+  color: #000;
+}
+.projects-results {
+  animation: projectResultsIn 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.project-card-shell {
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+  position: relative;
+  isolation: isolate;
+  animation: projectCardIn 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--project-index, 0) * 80ms);
+}
+.project-card-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    420px circle at var(--pointer-x) var(--pointer-y),
+    rgba(239, 68, 68, 0.16),
+    transparent 42%
+  );
+  transition: opacity 0.28s ease;
+}
+.project-card-shell:hover::before {
+  opacity: 1;
+}
+.project-card-shell > * {
+  position: relative;
+  z-index: 2;
+}
+.project-featured-media {
+  border-bottom: 1px solid #262626;
+}
+.project-media-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent 56%, rgba(0, 0, 0, 0.42));
+}
 .proj-card:hover .proj-img {
   transform: scale(1.06);
 }
+.project-featured-card:hover .proj-img {
+  transform: scale(1.025);
+}
 
 .project-image-fallback {
+  position: relative;
+  overflow: hidden;
   background:
     linear-gradient(135deg, rgba(239, 68, 68, 0.16), rgba(17, 17, 17, 0.82)),
     repeating-linear-gradient(90deg, rgba(239, 68, 68, 0.06) 0 1px, transparent 1px 22px),
     #0a0a0a;
+}
+.project-image-fallback::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, rgba(239, 68, 68, 0.18), transparent);
+  transform: translateY(-100%);
+  animation: projectFallbackScan 4s ease-in-out infinite;
+}
+.project-image-fallback > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes projectResultsIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes projectCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes projectFallbackScan {
+  0%,
+  45% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(130%);
+  }
+}
+
+.project-count {
+  animation: projectResultsIn 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .reveal {
@@ -327,6 +460,10 @@ html:not(.js-enabled) .tl-dot {
   .card-lift:hover {
     transform: none;
   }
+
+  .project-card-shell:hover::before {
+    opacity: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -342,5 +479,12 @@ html:not(.js-enabled) .tl-dot {
   .js-enabled .reveal {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  .project-card-shell,
+  .projects-results,
+  .project-count,
+  .project-image-fallback::before {
+    animation: none !important;
   }
 }
