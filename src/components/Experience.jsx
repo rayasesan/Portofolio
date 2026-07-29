@@ -181,7 +181,7 @@ export default function Experience() {
             ))}
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 lg:-mt-12">
             <div className="reveal bg-r-gray border border-r-steel rounded p-5" data-delay="0">
               <p className="text-r-red text-[10px] font-bold tracking-[0.2em] uppercase mb-3">Education</p>
               <p className="text-white text-sm font-semibold">S1 Informatics Engineering</p>
