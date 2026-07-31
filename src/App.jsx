@@ -7,6 +7,7 @@ import CredentialProof from './components/CredentialProof';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import LivingGradientBackground from './components/LivingGradientBackground';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
 function App() {
@@ -14,15 +15,18 @@ function App() {
 
   return (
     <>
-      <Navbar />
-      <Hero />
-      <Marquee />
-      <Skills />
-      <Experience />
-      <CredentialProof />
-      <Projects />
-      <Contact />
-      <Footer />
+      <LivingGradientBackground />
+      <div className="site-shell">
+        <Navbar />
+        <Hero />
+        <Marquee />
+        <Skills />
+        <Experience />
+        <CredentialProof />
+        <Projects />
+        <Contact />
+        <Footer />
+      </div>
     </>
   );
 }

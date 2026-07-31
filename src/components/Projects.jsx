@@ -234,7 +234,7 @@ export default function Projects() {
           </div>
         </div>
 
-        <p className="project-count reveal visible text-r-silver text-[10px] font-bold tracking-[0.18em] uppercase mb-4" aria-live="polite">
+        <p className="project-count reveal text-r-silver text-[10px] font-bold tracking-[0.18em] uppercase mb-4" aria-live="polite">
           {projectCountLabel}
         </p>
 
@@ -273,7 +273,7 @@ function handleProjectPointerMove(event) {
 function FeaturedProject({ project, index, onOpenPreview }) {
   return (
     <article
-      className="proj-card project-card-shell project-featured-card reveal visible bg-r-gray border border-r-red/30 card-lift rounded overflow-hidden mb-4"
+      className="proj-card project-card-shell project-featured-card reveal bg-r-gray border border-r-red/30 card-lift rounded overflow-hidden mb-4"
       onPointerMove={handleProjectPointerMove}
       style={{ '--project-index': index }}
     >
@@ -358,7 +358,7 @@ function ProjectCard({ project, index, onOpenPreview }) {
 
   return (
     <article
-      className="proj-card project-card-shell reveal visible bg-r-gray border border-r-steel card-lift rounded overflow-hidden"
+      className="proj-card project-card-shell reveal bg-r-gray border border-r-steel card-lift rounded overflow-hidden"
       onPointerMove={handleProjectPointerMove}
       style={{ '--project-index': index }}
     >

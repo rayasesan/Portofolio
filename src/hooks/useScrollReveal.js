@@ -58,7 +58,7 @@ export function useScrollReveal() {
           revealObs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 
     const observeRevealElement = (element) => {
       if (revealElements.has(element) || element.classList.contains('visible')) {
@@ -68,7 +68,7 @@ export function useScrollReveal() {
       revealElements.add(element);
 
       if (!element.hasAttribute('data-delay')) {
-        element.setAttribute('data-delay', (revealIndex % 10) * 80);
+        element.setAttribute('data-delay', (revealIndex % 8) * 45);
       }
 
       revealIndex += 1;
