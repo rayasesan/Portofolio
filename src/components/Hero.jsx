@@ -1,10 +1,8 @@
-import GlobeCdn from './GlobeCdn';
-
 export default function Hero() {
   return (
     <section id="top" className="min-h-screen flex items-center relative overflow-hidden pt-14">
       <div className="max-w-[1100px] mx-auto px-5 w-full py-10 lg:py-0">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_390px] gap-8 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_330px] gap-8 lg:gap-14 items-center">
           <div className="order-2 lg:order-1">
             <div className="fade-up" style={{ animationDelay: '0.1s' }}>
               <p className="text-r-red text-[10px] font-bold tracking-[0.25em] uppercase mb-4">
@@ -60,26 +58,11 @@ export default function Hero() {
             </div>
           </div>
           <div className="order-1 lg:order-2 flex justify-center lg:justify-end scale-in" style={{ animationDelay: '0.2s' }}>
-            <div className="hero-visual w-full max-w-[360px] sm:max-w-[390px] lg:max-w-[410px]">
-              <GlobeCdn className="hero-globe" />
-              <div className="hero-signal hero-signal-top">
-                <span>API</span>
-                <strong>Integrated</strong>
-              </div>
-              <div className="hero-signal hero-signal-bottom">
-                <span>ML</span>
-                <strong>Workflow</strong>
-              </div>
-              <div className="photo-wrap hero-photo-card w-[220px] sm:w-[250px] lg:w-[275px]">
-                <img
-                  src="/foto4.jpg"
-                  alt="Raya Sesan Firdaus"
-                />
-              </div>
-              <div className="hero-visual-caption">
-                <span className="iconify" data-icon="lucide:network" data-width="13"></span>
-                Model Serving / API / Data Flow
-              </div>
+            <div className="photo-wrap hero-photo-clean w-[250px] sm:w-[290px] lg:w-full max-w-[320px]">
+              <img
+                src="/foto4.jpg"
+                alt="Raya Sesan Firdaus"
+              />
             </div>
           </div>
         </div>
