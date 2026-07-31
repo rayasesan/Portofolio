@@ -21,6 +21,9 @@
 html {
   scroll-behavior: smooth;
 }
+section {
+  scroll-margin-top: 4.5rem;
+}
 body {
   background: #0a0a0a;
   color: #c0c0c0;
@@ -290,43 +293,11 @@ html:not(.js-enabled) .tl-dot {
   border-color: #ef4444;
 }
 
-.credential-slider {
+.credential-proof-card {
   position: relative;
-  isolation: isolate;
-}
-.credential-slider::before,
-.credential-slider::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 4px;
-  width: 28px;
-  z-index: 2;
-  pointer-events: none;
-}
-.credential-slider::before {
-  left: -1px;
-  background: linear-gradient(to right, #111111, rgba(17, 17, 17, 0));
-}
-.credential-slider::after {
-  right: -1px;
-  background: linear-gradient(to left, #111111, rgba(17, 17, 17, 0));
-}
-.credential-track {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  scroll-padding-inline: 1px;
-}
-.credential-track::-webkit-scrollbar {
-  display: none;
-}
-.credential-card {
-  min-height: 150px;
-  position: relative;
-  overflow: hidden;
   transform: translateZ(0);
 }
-.credential-card::before {
+.credential-proof-card::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -336,10 +307,24 @@ html:not(.js-enabled) .tl-dot {
   transform: translateX(-85%);
   transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.22s ease;
 }
-.credential-card:hover::before,
-.credential-card:focus-visible::before {
+.credential-proof-card:hover::before,
+.credential-proof-card:focus-visible::before {
   opacity: 1;
   transform: translateX(85%);
+}
+.credential-proof-media {
+  aspect-ratio: 16 / 10;
+}
+.credential-proof-media img {
+  filter: saturate(0.92) contrast(0.96);
+}
+.credential-proof-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.42), transparent 35%),
+    linear-gradient(to top, rgba(0, 0, 0, 0.72), transparent 48%);
 }
 
 .mob-menu {

@@ -35,7 +35,7 @@ export default function Contact() {
       <div className="relative z-10 max-w-[1100px] mx-auto px-5">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div className="reveal">
-            <p className="text-r-red text-[10px] font-bold tracking-[0.25em] uppercase mb-2">04 / Contact</p>
+            <p className="text-r-red text-[10px] font-bold tracking-[0.25em] uppercase mb-2">05 / Contact</p>
             <h2 className="text-white font-black text-3xl lg:text-5xl uppercase tracking-tight leading-[0.9] mb-5">
               Let's Work<br />Together
             </h2>

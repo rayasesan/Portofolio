@@ -205,7 +205,7 @@ export default function Projects() {
       <div className="max-w-[1100px] mx-auto px-5">
         <div className="reveal flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
           <div>
-            <p className="text-r-red text-[10px] font-bold tracking-[0.25em] uppercase mb-2">03 / Projects</p>
+            <p className="text-r-red text-[10px] font-bold tracking-[0.25em] uppercase mb-2">04 / Projects</p>
             <h2 className="text-white font-black text-3xl lg:text-4xl uppercase tracking-tight leading-[0.9]">
               Things I've Built
             </h2>

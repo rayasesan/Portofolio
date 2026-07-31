@@ -4,6 +4,7 @@ const mainLinks = [
   { href: '#top', label: 'Home' },
   { href: '#skills', label: 'Skills' },
   { href: '#experience', label: 'Experience' },
+  { href: '#credentials', label: 'Credentials' },
   { href: '#projects', label: 'Projects' },
 ];
 
@@ -70,13 +71,13 @@ export default function Navbar() {
           >
             Raya Sesan<span className="text-r-red transition-colors group-hover:text-r-red-light">.</span>
           </a>
-          <div className="hidden md:flex items-center gap-7">
+          <div className="hidden md:flex items-center gap-4 lg:gap-7">
             {mainLinks.map((link) => (
               <a key={link.href} href={link.href} className="text-[10px] font-semibold tracking-[0.2em] uppercase text-r-silver hover:text-r-red transition-colors">
                 {link.label}
               </a>
             ))}
-            <a href="#contact" className="bg-r-red hover:bg-r-red-light text-black text-[10px] font-black tracking-[0.18em] uppercase px-5 py-2 transition-colors">
+            <a href="#contact" className="bg-r-red hover:bg-r-red-light text-black text-[10px] font-black tracking-[0.18em] uppercase px-4 lg:px-5 py-2 transition-colors">
               Contact Me
             </a>
           </div>
