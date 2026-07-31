@@ -61,7 +61,7 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled ? 'bg-r-dark/95' : 'bg-r-dark/85'
-        } backdrop-blur-[20px]`}
+        }`}
       >
         <div className="max-w-[1100px] mx-auto px-5 h-14 flex items-center justify-between">
           <a

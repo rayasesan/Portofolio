@@ -32,7 +32,7 @@ function CredentialCard({ credential, delay }) {
       href={credential.href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`credential-proof-card reveal group block overflow-hidden rounded border bg-r-gray transition-all duration-300 hover:-translate-y-1 hover:border-r-red/60 hover:shadow-2xl hover:shadow-red-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-r-red ${
+      className={`credential-proof-card reveal group block overflow-hidden rounded border bg-r-gray transition-all duration-300 hover:-translate-y-0.5 hover:border-r-red/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-r-red ${
         credential.featured ? 'border-r-red/35' : 'border-r-steel'
       }`}
       data-delay={delay}

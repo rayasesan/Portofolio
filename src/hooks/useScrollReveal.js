@@ -68,7 +68,7 @@ export function useScrollReveal() {
       revealElements.add(element);
 
       if (!element.hasAttribute('data-delay')) {
-        element.setAttribute('data-delay', (revealIndex % 8) * 45);
+        element.setAttribute('data-delay', (revealIndex % 6) * 30);
       }
 
       revealIndex += 1;

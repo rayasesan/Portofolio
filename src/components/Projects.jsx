@@ -264,17 +264,10 @@ export default function Projects() {
   );
 }
 
-function handleProjectPointerMove(event) {
-  const rect = event.currentTarget.getBoundingClientRect();
-  event.currentTarget.style.setProperty('--pointer-x', `${event.clientX - rect.left}px`);
-  event.currentTarget.style.setProperty('--pointer-y', `${event.clientY - rect.top}px`);
-}
-
 function FeaturedProject({ project, index, onOpenPreview }) {
   return (
     <article
       className="proj-card project-card-shell project-featured-card reveal bg-r-gray border border-r-red/30 card-lift rounded overflow-hidden mb-4"
-      onPointerMove={handleProjectPointerMove}
       style={{ '--project-index': index }}
     >
       <div className="project-featured-media aspect-[16/9] min-h-[250px] max-h-[470px] overflow-hidden relative bg-r-dark">
@@ -359,7 +352,6 @@ function ProjectCard({ project, index, onOpenPreview }) {
   return (
     <article
       className="proj-card project-card-shell reveal bg-r-gray border border-r-steel card-lift rounded overflow-hidden"
-      onPointerMove={handleProjectPointerMove}
       style={{ '--project-index': index }}
     >
       <div className="aspect-[16/10] overflow-hidden relative">

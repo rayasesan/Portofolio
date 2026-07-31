@@ -26,20 +26,20 @@ export default function Hero() {
             <div className="fade-up flex flex-wrap gap-3 mt-5 mb-8" style={{ animationDelay: '0.6s' }}>
               <a
                 href="#contact"
-                className="bg-r-red hover:bg-r-red-light text-black text-[10px] font-black tracking-[0.18em] uppercase px-7 py-3 transition-all hover:scale-105 hover:shadow-lg hover:shadow-red-500/20"
+                className="bg-r-red hover:bg-r-red-light text-black text-[10px] font-black tracking-[0.18em] uppercase px-7 py-3 transition-all hover:scale-[1.02]"
               >
                 Let's Talk
               </a>
               <a
                 href="#projects"
-                className="border border-r-steel hover:border-r-red text-white text-[10px] font-black tracking-[0.18em] uppercase px-7 py-3 transition-all hover:scale-105"
+                className="border border-r-steel hover:border-r-red text-white text-[10px] font-black tracking-[0.18em] uppercase px-7 py-3 transition-all hover:scale-[1.02]"
               >
                 See Projects
               </a>
               <a
                 href="/cv/raya-sesan-firdaus-cv.pdf"
                 download="Raya-Sesan-Firdaus-CV.pdf"
-                className="border border-r-steel hover:border-r-red text-white text-[10px] font-black tracking-[0.18em] uppercase px-7 py-3 transition-all hover:scale-105 inline-flex items-center gap-2"
+                className="border border-r-steel hover:border-r-red text-white text-[10px] font-black tracking-[0.18em] uppercase px-7 py-3 transition-all hover:scale-[1.02] inline-flex items-center gap-2"
               >
                 <span className="iconify" data-icon="lucide:download" data-width="13"></span>
                 Download CV
