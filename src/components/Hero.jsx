@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section id="top" className="min-h-screen flex items-center relative overflow-hidden pt-14">
       <div className="max-w-[1100px] mx-auto px-5 w-full py-10 lg:py-0">
-        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(260px,360px)] gap-10 md:gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(260px,420px)_minmax(0,1fr)] gap-10 md:gap-14 lg:gap-20 items-center">
           <div className="order-2">
             <div className="fade-up" style={{ animationDelay: '0.1s' }}>
               <p className="text-r-red text-[11px] font-semibold tracking-[0.16em] uppercase mb-5">
@@ -59,7 +59,7 @@ export default function Hero() {
             </div>
           </div>
           <div className="order-1 flex justify-center md:justify-start scale-in" style={{ animationDelay: '0.2s' }}>
-            <div className="photo-wrap hero-photo-clean w-[280px] sm:w-[320px] lg:w-full max-w-[360px]">
+            <div className="photo-wrap hero-photo-clean w-[280px] sm:w-[320px] md:w-full max-w-[400px]">
               <img
                 src="/foto4.jpg"
                 alt="Raya Sesan Firdaus"

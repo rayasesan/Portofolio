@@ -32,7 +32,7 @@ export default function Contact() {
           <div className="reveal">
             <p className="section-kicker text-r-red">05 / Contact</p>
             <h2 className="text-white text-5xl lg:text-7xl leading-[0.9] mb-7">
-              Let's build<br /><em>something useful.</em>
+              Let's build<br /><span>something useful.</span>
             </h2>
             <p className="text-r-light text-[15px] leading-[1.75] max-w-xl">
               I'm open to Machine Learning, Data Science, and AI Engineering internship opportunities, as well as collaborative technical projects. Reach out through email or LinkedIn.

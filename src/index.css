@@ -27,7 +27,7 @@
   --radius-card: 24px;
   --radius-box: 18px;
   --radius-small: 12px;
-  --font-display: "Instrument Serif", Georgia, serif;
+  --font-display: "Manrope", "DM Sans", sans-serif;
 }
 
 * {
@@ -970,13 +970,21 @@ h2,
 h3,
 .site-wordmark {
   font-family: var(--font-display);
-  font-weight: 400 !important;
-  letter-spacing: -0.025em !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.045em !important;
   text-transform: none !important;
 }
 
 .site-wordmark {
-  letter-spacing: -0.01em !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.035em !important;
+}
+
+.max-w-\[1100px\] {
+  width: 100%;
+  max-width: 1600px !important;
+  padding-left: clamp(22px, 4.5vw, 80px) !important;
+  padding-right: clamp(22px, 4.5vw, 80px) !important;
 }
 
 .section-kicker {
@@ -1002,7 +1010,7 @@ h3,
 
 .hero-title span {
   color: var(--bronze);
-  font-style: italic;
+  font-style: normal;
 }
 
 .availability-note > span {
@@ -1201,6 +1209,7 @@ h3,
 
 .credential-index {
   font-family: var(--font-display);
+  font-weight: 600;
   font-size: 24px;
   line-height: 1;
 }
@@ -1343,6 +1352,10 @@ footer {
 
 .contact-section .text-r-red {
   color: #c6a274 !important;
+}
+
+.contact-section h2 span {
+  color: #c6a274;
 }
 
 .contact-section.border-r-steel,
