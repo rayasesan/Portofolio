@@ -14,6 +14,12 @@
   --font-sans: "Inter", sans-serif;
 }
 
+:root {
+  --radius-card: 18px;
+  --radius-box: 14px;
+  --radius-small: 10px;
+}
+
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -92,6 +98,14 @@ a:focus-visible,
 button:focus-visible {
   outline: 2px solid #ef4444;
   outline-offset: 3px;
+}
+
+.rounded {
+  border-radius: var(--radius-box);
+}
+
+.rounded-sm {
+  border-radius: var(--radius-small);
 }
 
 .animated-pill {
@@ -309,7 +323,7 @@ button:focus-visible {
 .photo-wrap {
   position: relative;
   padding: 3px;
-  border-radius: 6px;
+  border-radius: calc(var(--radius-card) + 3px);
   background: linear-gradient(
     135deg,
     #ef4444 0%,
@@ -327,7 +341,7 @@ button:focus-visible {
   aspect-ratio: 3/4;
   object-fit: cover;
   object-position: top center;
-  border-radius: 4px;
+  border-radius: var(--radius-card);
   transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), filter 0.8s ease;
 }
 .photo-wrap:hover img {
@@ -341,6 +355,7 @@ button:focus-visible {
 }
 
 .card-lift {
+  border-radius: var(--radius-card);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.035),
     0 14px 34px rgba(0, 0, 0, 0.18);
@@ -463,6 +478,7 @@ html:not(.js-enabled) .tl-dot {
 .credential-proof-card {
   position: relative;
   min-width: 0;
+  border-radius: var(--radius-card);
   scroll-snap-align: start;
   transform: translateZ(0);
 }
@@ -646,7 +662,7 @@ html:not(.js-enabled) .tl-dot {
   aspect-ratio: 16/9;
   overflow: hidden;
   border: 2px solid rgba(255, 255, 255, 0.62);
-  border-radius: 6px;
+  border-radius: var(--radius-box);
   background: #ffffff;
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(239, 68, 68, 0.35);
   transform: translateY(10px) rotate(-1deg);
@@ -769,7 +785,7 @@ html:not(.js-enabled) .tl-dot {
   flex-direction: column;
   overflow: hidden;
   border: 1px solid rgba(239, 68, 68, 0.34);
-  border-radius: 8px;
+  border-radius: calc(var(--radius-card) + 2px);
   background: #0a0a0a;
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.62);
   animation: previewPanelIn 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -813,7 +829,7 @@ html:not(.js-enabled) .tl-dot {
   height: auto;
   max-height: 68vh;
   object-fit: contain;
-  border-radius: 4px;
+  border-radius: var(--radius-box);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 .project-preview-tabs {

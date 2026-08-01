@@ -130,7 +130,7 @@ export default function Navbar() {
               href={link.href}
               tabIndex={isOpen ? 0 : -1}
               className={`mob-link ${link.href === '#contact'
-                ? 'inline-block bg-r-red text-black text-xs font-black tracking-[0.18em] uppercase px-7 py-3 mt-4 w-fit'
+                ? 'inline-block bg-r-red text-black text-xs font-black tracking-[0.18em] uppercase px-7 py-3 mt-4 w-fit rounded'
                 : 'text-2xl font-black text-white uppercase tracking-tight hover:text-r-red transition-colors'
               }`}
               onClick={closeMenu}
