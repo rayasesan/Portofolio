@@ -1,3 +1,5 @@
+import AnimatedLink from './AnimatedLink';
+
 export default function Hero() {
   return (
     <section id="top" className="min-h-screen flex items-center relative overflow-hidden pt-14">
@@ -24,26 +26,25 @@ export default function Hero() {
               </p>
             </div>
             <div className="fade-up flex flex-wrap gap-3 mt-5 mb-8" style={{ animationDelay: '0.6s' }}>
-              <a
+              <AnimatedLink
                 href="#contact"
-                className="bg-r-red hover:bg-r-red-light text-black text-[10px] font-black tracking-[0.18em] uppercase px-7 py-3 transition-all hover:scale-[1.02]"
+                variant="red"
               >
                 Let's Talk
-              </a>
-              <a
+              </AnimatedLink>
+              <AnimatedLink
                 href="#projects"
-                className="border border-r-steel hover:border-r-red text-white text-[10px] font-black tracking-[0.18em] uppercase px-7 py-3 transition-all hover:scale-[1.02]"
+                variant="light"
               >
                 See Projects
-              </a>
-              <a
+              </AnimatedLink>
+              <AnimatedLink
                 href="/cv/raya-sesan-firdaus-cv.pdf"
                 download="Raya-Sesan-Firdaus-CV.pdf"
-                className="border border-r-steel hover:border-r-red text-white text-[10px] font-black tracking-[0.18em] uppercase px-7 py-3 transition-all hover:scale-[1.02] inline-flex items-center gap-2"
+                variant="light"
               >
-                <span className="iconify" data-icon="lucide:download" data-width="13"></span>
                 Download CV
-              </a>
+              </AnimatedLink>
             </div>
             <div className="fade-up flex items-center gap-5" style={{ animationDelay: '0.75s' }}>
               <a href="mailto:rayasesan@gmail.com" className="text-r-silver hover:text-r-red transition-all hover:scale-125" aria-label="Email">

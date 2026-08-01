@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import AnimatedLink from './AnimatedLink';
 
 const mainLinks = [
   { href: '#top', label: 'Home' },
@@ -77,9 +78,9 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
-            <a href="#contact" className="bg-r-red hover:bg-r-red-light text-black text-[10px] font-black tracking-[0.18em] uppercase px-4 lg:px-5 py-2 transition-colors">
+            <AnimatedLink href="#contact" compact>
               Contact Me
-            </a>
+            </AnimatedLink>
           </div>
           <button
             ref={menuButtonRef}

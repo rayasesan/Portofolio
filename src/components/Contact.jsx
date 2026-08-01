@@ -1,3 +1,5 @@
+import AnimatedLink from './AnimatedLink';
+
 const contactLinks = [
   {
     label: 'Send Email',
@@ -76,20 +78,16 @@ export default function Contact() {
             </p>
             <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
               {contactLinks.map((link, index) => (
-                <a
+                <AnimatedLink
                   key={link.href}
                   href={link.href}
                   target={link.external ? '_blank' : undefined}
                   rel={link.external ? 'noopener noreferrer' : undefined}
                   aria-label={link.ariaLabel}
-                  className={`${index === 0
-                    ? 'bg-r-red hover:bg-r-red-light text-black'
-                    : 'border border-r-steel hover:border-r-red text-white hover:text-r-red'
-                  } inline-flex items-center justify-center gap-2 min-h-11 px-4 py-3 rounded text-[10px] font-black tracking-[0.16em] uppercase transition-all`}
+                  variant={index === 0 ? 'red' : 'light'}
                 >
-                  <span className="iconify" data-icon={link.icon} data-width="15"></span>
                   {link.label}
-                </a>
+                </AnimatedLink>
               ))}
             </div>
           </div>

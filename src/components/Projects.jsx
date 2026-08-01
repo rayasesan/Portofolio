@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import AnimatedLink from './AnimatedLink';
 
 const filters = [
   { id: 'all', label: 'All', icon: 'lucide:layout-grid' },
@@ -514,19 +515,17 @@ function ProjectActions({ links }) {
   return (
     <div className="flex flex-wrap gap-2 mt-auto">
       {links.map((link) => (
-        <a
+        <AnimatedLink
           key={link.href}
           href={link.href}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={link.ariaLabel}
-          className={`${link.primary
-            ? 'bg-r-red text-black hover:bg-r-red-light'
-            : 'border border-r-steel text-white hover:border-r-red hover:text-r-red'
-          } inline-flex min-h-10 items-center justify-center px-4 py-2 rounded text-[10px] font-black tracking-[0.14em] uppercase transition-colors`}
+          compact
+          variant={link.primary ? 'red' : 'light'}
         >
           {link.label}
-        </a>
+        </AnimatedLink>
       ))}
     </div>
   );

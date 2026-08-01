@@ -94,6 +94,139 @@ button:focus-visible {
   outline-offset: 3px;
 }
 
+.animated-pill {
+  --pill-accent: #ef4444;
+  --pill-foreground: #050505;
+  position: relative;
+  isolation: isolate;
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 10px 38px 10px 31px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(9, 9, 9, 0.42);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+  transform: translateZ(0);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.animated-pill--light {
+  --pill-accent: #f4f4f5;
+  --pill-foreground: #111111;
+}
+
+.animated-pill__fill {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 15px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--pill-accent);
+  transform: translateY(-50%);
+  transition:
+    left 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.animated-pill__label,
+.animated-pill__arrow {
+  position: relative;
+  z-index: 1;
+}
+
+.animated-pill__label {
+  transition:
+    color 0.14s ease 0.07s,
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.animated-pill__arrow {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  color: var(--pill-foreground);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1;
+  opacity: 0;
+  transform: translate(-8px, -52%);
+  transition:
+    opacity 0.14s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.animated-pill:hover,
+.animated-pill:focus-visible {
+  border-color: var(--pill-accent);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.26);
+  transform: translateY(-1px);
+}
+
+.animated-pill:hover .animated-pill__fill,
+.animated-pill:focus-visible .animated-pill__fill {
+  left: 3px;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+}
+
+.animated-pill:hover .animated-pill__label,
+.animated-pill:focus-visible .animated-pill__label {
+  color: var(--pill-foreground);
+  transform: translateX(-5px);
+}
+
+.animated-pill:hover .animated-pill__arrow,
+.animated-pill:focus-visible .animated-pill__arrow {
+  opacity: 1;
+  transform: translate(0, -52%);
+  transition-delay: 0.08s;
+}
+
+.animated-pill:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.animated-pill--compact {
+  min-height: 36px;
+  padding: 8px 33px 8px 27px;
+  letter-spacing: 0.14em;
+}
+
+.animated-pill--compact .animated-pill__fill {
+  left: 13px;
+  width: 5px;
+  height: 5px;
+}
+
+.animated-pill--compact .animated-pill__arrow {
+  right: 10px;
+  font-size: 15px;
+}
+
+.animated-pill--compact:hover .animated-pill__fill,
+.animated-pill--compact:focus-visible .animated-pill__fill {
+  left: 3px;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+}
+
 @keyframes marquee {
   0% {
     transform: translateX(0);
