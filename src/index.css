@@ -447,6 +447,20 @@ html:not(.js-enabled) .tl-dot {
   border-color: #ef4444;
 }
 
+.credential-scroll-section {
+  --credential-scroll-distance: 0px;
+  height: calc(100vh - 56px + var(--credential-scroll-distance));
+  min-height: calc(560px + var(--credential-scroll-distance));
+}
+.credential-sticky-shell {
+  position: sticky;
+  top: 56px;
+  min-height: max(560px, calc(100vh - 56px));
+  display: flex;
+  align-items: center;
+  overflow: clip;
+  padding: clamp(56px, 8vh, 84px) 0;
+}
 .credential-rail {
   display: grid;
   grid-auto-flow: column;

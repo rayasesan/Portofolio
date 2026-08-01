@@ -19,8 +19,6 @@ export default function CredentialProof() {
     const clamp = (value) => Math.min(Math.max(value, 0), 1);
 
     const syncRailToPage = () => {
-      frame = 0;
-
       if (motionQuery.matches) {
         return;
       }
@@ -33,10 +31,8 @@ export default function CredentialProof() {
         return;
       }
 
-      const startLine = window.innerHeight * 0.88;
-      const endLine = window.innerHeight * 0.18;
-      const travelDistance = Math.max(rect.height + startLine - endLine, 1);
-      const progress = clamp((startLine - rect.top) / travelDistance);
+      const stickyOffset = 56;
+      const progress = clamp((stickyOffset - rect.top) / maxScroll);
 
       rail.scrollLeft = maxScroll * progress;
     };
@@ -46,13 +42,40 @@ export default function CredentialProof() {
         return;
       }
 
-      frame = window.requestAnimationFrame(syncRailToPage);
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        syncRailToPage();
+      });
     };
 
-    syncRailToPage();
+    const updateLayout = () => {
+      const maxScroll = Math.max(rail.scrollWidth - rail.clientWidth, 0);
+
+      if (motionQuery.matches) {
+        section.style.setProperty('--credential-scroll-distance', '0px');
+        rail.scrollLeft = 0;
+        return;
+      }
+
+      section.style.setProperty('--credential-scroll-distance', `${maxScroll}px`);
+      syncRailToPage();
+    };
+
+    const requestLayout = () => {
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+      }
+
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        updateLayout();
+      });
+    };
+
+    updateLayout();
     window.addEventListener('scroll', requestSync, { passive: true });
-    window.addEventListener('resize', requestSync);
-    motionQuery.addEventListener('change', requestSync);
+    window.addEventListener('resize', requestLayout);
+    motionQuery.addEventListener('change', requestLayout);
 
     return () => {
       if (frame) {
@@ -60,41 +83,43 @@ export default function CredentialProof() {
       }
 
       window.removeEventListener('scroll', requestSync);
-      window.removeEventListener('resize', requestSync);
-      motionQuery.removeEventListener('change', requestSync);
+      window.removeEventListener('resize', requestLayout);
+      motionQuery.removeEventListener('change', requestLayout);
     };
   }, []);
 
   return (
-    <section ref={sectionRef} id="credentials" className="py-20 lg:py-24 border-t border-r-steel">
-      <div className="max-w-[1100px] mx-auto px-5">
-        <div className="reveal mb-7 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <p className="text-r-red text-[10px] font-bold tracking-[0.25em] uppercase mb-2">03 / Credentials</p>
-            <h2 className="text-white font-black text-3xl lg:text-4xl uppercase tracking-tight leading-[0.9]">
-              Verified Proof
-            </h2>
+    <section ref={sectionRef} id="credentials" className="credential-scroll-section border-t border-r-steel">
+      <div className="credential-sticky-shell">
+        <div className="max-w-[1100px] mx-auto px-5 w-full">
+          <div className="reveal mb-7 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <p className="text-r-red text-[10px] font-bold tracking-[0.25em] uppercase mb-2">03 / Credentials</p>
+              <h2 className="text-white font-black text-3xl lg:text-4xl uppercase tracking-tight leading-[0.9]">
+                Verified Proof
+              </h2>
+            </div>
+            <div className="max-w-sm lg:text-right">
+              <p className="text-r-light text-sm leading-relaxed">
+                Selected certificates and awards. Scroll down or swipe to browse.
+              </p>
+              <p className="mt-2 text-r-red text-[9px] font-bold uppercase tracking-[0.18em]">
+                {credentials.length} verified credentials
+              </p>
+            </div>
           </div>
-          <div className="max-w-sm lg:text-right">
-            <p className="text-r-light text-sm leading-relaxed">
-              Selected certificates and awards. Scroll down or swipe to browse.
-            </p>
-            <p className="mt-2 text-r-red text-[9px] font-bold uppercase tracking-[0.18em]">
-              {credentials.length} verified credentials
-            </p>
-          </div>
-        </div>
 
-        <div
-          ref={railRef}
-          className="credential-rail"
-          role="region"
-          aria-label="Verified credentials"
-          tabIndex="0"
-        >
-          {credentials.map((credential) => (
-            <CredentialCard key={credential.name} credential={credential} />
-          ))}
+          <div
+            ref={railRef}
+            className="credential-rail"
+            role="region"
+            aria-label="Verified credentials"
+            tabIndex="0"
+          >
+            {credentials.map((credential) => (
+              <CredentialCard key={credential.name} credential={credential} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
