@@ -482,18 +482,6 @@ html:not(.js-enabled) .tl-dot {
   scroll-snap-align: start;
   transform: translateZ(0);
 }
-.credential-proof-media {
-  aspect-ratio: 16 / 9;
-}
-.credential-proof-media img {
-  filter: saturate(0.88) contrast(0.94);
-}
-.credential-proof-shade {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.32), transparent 42%);
-}
 
 .mob-menu {
   transform: translateX(100%);

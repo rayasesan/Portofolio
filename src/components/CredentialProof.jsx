@@ -42,33 +42,32 @@ function CredentialCard({ credential }) {
       href={credential.href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`credential-proof-card group block overflow-hidden rounded border bg-r-gray transition-all duration-300 hover:border-r-red/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-r-red ${
+      className={`credential-proof-card group flex min-h-[270px] flex-col rounded border bg-r-gray p-5 transition-all duration-300 hover:border-r-red/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-r-red ${
         credential.featured ? 'border-r-red/35' : 'border-r-steel'
       }`}
       aria-label={`View credential: ${credential.name}`}
     >
-      <div className="credential-proof-media relative overflow-hidden bg-r-dark">
-        <img
-          src={credential.preview}
-          alt={`${credential.name} certificate preview`}
-          loading="lazy"
-          className="h-full w-full object-cover object-top"
-        />
-        <div className="credential-proof-shade" aria-hidden="true"></div>
+      <div className="mb-6 flex min-h-9 items-start justify-between gap-3">
+        <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded bg-r-red/10 text-r-red transition-colors group-hover:bg-r-red/20">
+          <span className="iconify" data-icon={credential.icon} data-width="17"></span>
+        </span>
         {credential.badge && (
-          <span className="absolute left-3 top-3 rounded bg-r-red px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.14em] text-black">
+          <span className="rounded bg-r-red px-2.5 py-1 text-right text-[9px] font-black uppercase tracking-[0.14em] text-black">
             {credential.badge}
           </span>
         )}
       </div>
 
-      <div className="p-4">
-        <p className="text-r-red text-[9px] font-bold uppercase tracking-[0.18em]">{credential.issuer}</p>
-        <h3 className="mt-1.5 min-h-9 text-white text-sm font-black uppercase tracking-tight leading-tight">{credential.name}</h3>
-        <div className="mt-3 flex items-end justify-between gap-4 border-t border-r-steel pt-3">
+      <p className="text-r-red text-[9px] font-bold uppercase tracking-[0.18em]">{credential.issuer}</p>
+      <h3 className="mt-2 text-white text-base font-black uppercase tracking-tight leading-tight">{credential.name}</h3>
+      <p className="mt-3 text-r-light text-xs leading-relaxed">{credential.summary}</p>
+
+      <div className="mt-auto flex items-end justify-between gap-4 border-t border-r-steel pt-4">
+        <div>
           <p className="text-r-silver text-[9px] font-bold uppercase tracking-wider leading-relaxed">{credential.note}</p>
-          <p className="text-white text-[10px] font-black uppercase tracking-wider">{credential.year}</p>
+          <p className="mt-1 text-r-red text-[9px] font-black uppercase tracking-[0.15em]">View credential</p>
         </div>
+        <p className="text-white text-[10px] font-black uppercase tracking-wider">{credential.year}</p>
       </div>
     </a>
   );
