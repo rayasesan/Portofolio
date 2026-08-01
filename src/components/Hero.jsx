@@ -45,7 +45,7 @@ export default function Hero() {
                 download="Raya-Sesan-Firdaus-CV.pdf"
                 variant="light"
               >
-                Download résumé
+                Download CV
               </AnimatedLink>
             </div>
             <div className="fade-up flex items-center gap-5" style={{ animationDelay: '0.75s' }}>
