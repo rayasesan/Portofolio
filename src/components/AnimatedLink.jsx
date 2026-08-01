@@ -16,7 +16,6 @@ export default function AnimatedLink({
     <a {...props} className={classes}>
       <span className="animated-pill__fill" aria-hidden="true"></span>
       <span className="animated-pill__label">{children}</span>
-      <span className="animated-pill__arrow" aria-hidden="true">→</span>
     </a>
   );
 }
