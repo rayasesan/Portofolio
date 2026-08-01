@@ -105,7 +105,7 @@ export default function AnimatedEarth() {
       stars.forEach((star) => {
         const shimmer = motionQuery.matches ? 0.74 : 0.62 + Math.sin(time * 0.001 + star.phase) * 0.28;
         context.beginPath();
-        context.fillStyle = `rgba(226, 218, 201, ${star.alpha * shimmer})`;
+        context.fillStyle = `rgba(80, 91, 112, ${star.alpha * shimmer})`;
         context.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
         context.fill();
       });
@@ -129,14 +129,14 @@ export default function AnimatedEarth() {
         centerY,
         radius,
       );
-      globeGradient.addColorStop(0, 'rgba(106, 94, 67, 0.58)');
-      globeGradient.addColorStop(0.42, 'rgba(34, 31, 25, 0.94)');
-      globeGradient.addColorStop(1, 'rgba(6, 6, 6, 0.995)');
+      globeGradient.addColorStop(0, 'rgba(60, 102, 220, 0.28)');
+      globeGradient.addColorStop(0.42, 'rgba(202, 212, 235, 0.9)');
+      globeGradient.addColorStop(1, 'rgba(239, 242, 248, 0.99)');
       context.fillStyle = globeGradient;
       context.fillRect(centerX - radius, centerY - radius, radius * 2, radius * 2);
 
       context.lineWidth = 0.7;
-      context.strokeStyle = 'rgba(214, 201, 170, 0.11)';
+      context.strokeStyle = 'rgba(45, 82, 170, 0.12)';
 
       for (let latitude = -75; latitude <= 75; latitude += 15) {
         const line = [];
@@ -155,8 +155,8 @@ export default function AnimatedEarth() {
       }
 
       context.lineWidth = 1.05;
-      context.strokeStyle = 'rgba(223, 211, 184, 0.34)';
-      context.shadowColor = 'rgba(188, 169, 126, 0.28)';
+      context.strokeStyle = 'rgba(35, 77, 190, 0.34)';
+      context.shadowColor = 'rgba(36, 93, 255, 0.2)';
       context.shadowBlur = 7;
       continents.forEach((continent) => {
         drawProjectedLine(context, continent, rotation, centerX, centerY, radius);
@@ -168,7 +168,7 @@ export default function AnimatedEarth() {
       ));
 
       context.lineWidth = 0.65;
-      context.strokeStyle = 'rgba(213, 195, 153, 0.13)';
+      context.strokeStyle = 'rgba(36, 93, 255, 0.14)';
       visibleNodes.forEach((node, index) => {
         const next = visibleNodes[(index + 3) % visibleNodes.length];
         if (!node.visible || !next.visible) return;
@@ -182,7 +182,7 @@ export default function AnimatedEarth() {
         if (!node.visible) return;
         const pulse = motionQuery.matches ? 1 : 1 + Math.sin(time * 0.002 + index) * 0.35;
         context.beginPath();
-        context.fillStyle = `rgba(235, 222, 192, ${0.42 + node.depth * 0.44})`;
+        context.fillStyle = `rgba(36, 93, 255, ${0.42 + node.depth * 0.44})`;
         context.arc(node.x, node.y, (1.2 + node.depth * 1.5) * pulse, 0, Math.PI * 2);
         context.fill();
       });
@@ -193,8 +193,8 @@ export default function AnimatedEarth() {
       context.beginPath();
       context.arc(centerX, centerY, radius + 2, Math.PI, Math.PI * 2);
       context.lineWidth = 2;
-      context.strokeStyle = 'rgba(224, 207, 166, 0.58)';
-      context.shadowColor = 'rgba(171, 145, 91, 0.42)';
+      context.strokeStyle = 'rgba(36, 93, 255, 0.52)';
+      context.shadowColor = 'rgba(36, 93, 255, 0.34)';
       context.shadowBlur = 22;
       context.stroke();
       context.restore();
