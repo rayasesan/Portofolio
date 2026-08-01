@@ -2,49 +2,71 @@ import { useEffect, useRef } from 'react';
 import { credentials } from '../data/credentials';
 
 export default function CredentialProof() {
+  const sectionRef = useRef(null);
   const railRef = useRef(null);
 
   useEffect(() => {
+    const section = sectionRef.current;
     const rail = railRef.current;
 
-    if (!rail) {
+    if (!section || !rail) {
       return undefined;
     }
 
-    const handleWheel = (event) => {
-      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) {
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let frame = 0;
+
+    const clamp = (value) => Math.min(Math.max(value, 0), 1);
+
+    const syncRailToPage = () => {
+      frame = 0;
+
+      if (motionQuery.matches) {
         return;
       }
 
+      const rect = section.getBoundingClientRect();
       const maxScroll = rail.scrollWidth - rail.clientWidth;
-      const scrollingRight = event.deltaY > 0;
-      const canMoveRight = rail.scrollLeft < maxScroll - 1;
-      const canMoveLeft = rail.scrollLeft > 1;
 
-      if ((scrollingRight && !canMoveRight) || (!scrollingRight && !canMoveLeft)) {
+      if (maxScroll <= 0) {
+        rail.scrollLeft = 0;
         return;
       }
 
-      event.preventDefault();
+      const startLine = window.innerHeight * 0.88;
+      const endLine = window.innerHeight * 0.18;
+      const travelDistance = Math.max(rect.height + startLine - endLine, 1);
+      const progress = clamp((startLine - rect.top) / travelDistance);
 
-      const modeMultiplier = event.deltaMode === 1
-        ? 20
-        : event.deltaMode === 2
-          ? rail.clientWidth
-          : 1;
-      const rawDistance = event.deltaY * modeMultiplier * 1.15;
-      const distance = Math.sign(rawDistance) * Math.min(Math.abs(rawDistance), 180);
-
-      rail.scrollLeft += distance;
+      rail.scrollLeft = maxScroll * progress;
     };
 
-    rail.addEventListener('wheel', handleWheel, { passive: false });
+    const requestSync = () => {
+      if (frame) {
+        return;
+      }
 
-    return () => rail.removeEventListener('wheel', handleWheel);
+      frame = window.requestAnimationFrame(syncRailToPage);
+    };
+
+    syncRailToPage();
+    window.addEventListener('scroll', requestSync, { passive: true });
+    window.addEventListener('resize', requestSync);
+    motionQuery.addEventListener('change', requestSync);
+
+    return () => {
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+      }
+
+      window.removeEventListener('scroll', requestSync);
+      window.removeEventListener('resize', requestSync);
+      motionQuery.removeEventListener('change', requestSync);
+    };
   }, []);
 
   return (
-    <section id="credentials" className="py-20 lg:py-24 border-t border-r-steel">
+    <section ref={sectionRef} id="credentials" className="py-20 lg:py-24 border-t border-r-steel">
       <div className="max-w-[1100px] mx-auto px-5">
         <div className="reveal mb-7 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
