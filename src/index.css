@@ -3700,8 +3700,37 @@ body footer .text-r-steel {
   display: flex;
   align-items: center;
   gap: clamp(18px, 2.6vw, 42px);
-  margin-right: 84px;
+  margin-right: clamp(22px, 3.5vw, 58px);
+  margin-left: auto;
   transition: opacity 0.28s ease, transform 0.35s cubic-bezier(0.4, 0, 0, 1);
+}
+
+.site-header-contact {
+  position: relative;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 19px;
+  border: 1px solid #151515;
+  border-radius: 999px;
+  background: #151515;
+  color: #f1efed;
+  font-size: 11px;
+  font-weight: 600;
+  transition:
+    border-color 0.28s ease,
+    background-color 0.28s ease,
+    color 0.28s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-header-contact:hover,
+.site-header-contact:focus-visible {
+  border-color: #e2754d;
+  background: #e2754d;
+  color: #151515;
+  transform: translateY(-2px);
 }
 
 .site-header-quicklinks a {
@@ -3729,7 +3758,7 @@ body footer .text-r-steel {
   z-index: 203;
   width: 60px;
   height: 60px;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 0;
@@ -4015,6 +4044,14 @@ body footer .text-r-steel {
     display: none;
   }
 
+  .site-header-contact {
+    display: none;
+  }
+
+  .site-header-button {
+    display: flex;
+  }
+
   .site-menu__body {
     grid-template-columns: 1fr;
     gap: 34px;
@@ -4023,6 +4060,12 @@ body footer .text-r-steel {
   .site-menu__aside {
     align-self: start;
     max-width: 420px;
+  }
+}
+
+@media (min-width: 901px) {
+  .site-menu {
+    display: none;
   }
 }
 

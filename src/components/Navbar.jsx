@@ -32,6 +32,19 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    const desktopQuery = window.matchMedia('(min-width: 901px)');
+    const closeOnDesktop = () => {
+      if (desktopQuery.matches) {
+        setIsOpen(false);
+      }
+    };
+
+    closeOnDesktop();
+    desktopQuery.addEventListener('change', closeOnDesktop);
+    return () => desktopQuery.removeEventListener('change', closeOnDesktop);
+  }, []);
+
+  useEffect(() => {
     document.documentElement.classList.toggle('has-site-menu-open', isOpen);
     document.body.style.overflow = isOpen ? 'hidden' : '';
 
@@ -93,6 +106,10 @@ export default function Navbar() {
               <a key={link.href} href={link.href}>{link.label}</a>
             ))}
           </div>
+
+          <a href="#contact" className="site-header-contact">
+            Contact
+          </a>
 
           <button
             ref={menuButtonRef}
