@@ -432,38 +432,51 @@ html:not(.js-enabled) .tl-dot {
   border-color: #ef4444;
 }
 
+.credential-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: clamp(255px, 30vw, 310px);
+  gap: 14px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  padding: 2px 2px 16px;
+  scroll-padding-inline: 2px;
+  scroll-snap-type: inline mandatory;
+  scrollbar-color: #ef4444 #181818;
+  scrollbar-width: thin;
+}
+.credential-rail::-webkit-scrollbar {
+  height: 4px;
+}
+.credential-rail::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: #181818;
+}
+.credential-rail::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: #ef4444;
+}
+.credential-rail:focus-visible {
+  outline: 1px solid rgba(239, 68, 68, 0.7);
+  outline-offset: 6px;
+}
 .credential-proof-card {
   position: relative;
+  min-width: 0;
+  scroll-snap-align: start;
   transform: translateZ(0);
 }
-.credential-proof-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0;
-  background: linear-gradient(120deg, transparent, rgba(239, 68, 68, 0.12), transparent);
-  transform: translateX(-85%);
-  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.22s ease;
-}
-.credential-proof-card:hover::before,
-.credential-proof-card:focus-visible::before {
-  opacity: 1;
-  transform: translateX(85%);
-}
 .credential-proof-media {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
 }
 .credential-proof-media img {
-  filter: saturate(0.92) contrast(0.96);
+  filter: saturate(0.88) contrast(0.94);
 }
 .credential-proof-shade {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.42), transparent 35%),
-    linear-gradient(to top, rgba(0, 0, 0, 0.72), transparent 48%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.32), transparent 42%);
 }
 
 .mob-menu {
