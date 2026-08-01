@@ -5,7 +5,7 @@ const projects = [
   {
     id: 'nutrify',
     category: 'AI Engineering · Computer Vision',
-    title: 'Nutrify — AI-Powered Nutrition Platform',
+    title: 'Nutrify: AI-Powered Nutrition Platform',
     shortTitle: 'Nutrify',
     desc: 'An AI-powered nutrition platform that identifies Indonesian food from images, analyzes nutritional information, and provides personalized recommendations through an AI nutrition coach.',
     role: 'AI Engineer',
@@ -195,7 +195,7 @@ function ProjectDetails({ project }) {
         <p className="section-kicker text-r-red">{project.category}</p>
         <h3 className="text-white text-3xl md:text-4xl leading-tight">{project.title}</h3>
         <p className="mt-4 max-w-2xl text-r-light text-sm leading-[1.75]">{project.desc}</p>
-        <p className="mt-4 text-r-silver text-xs">Role — {project.role}</p>
+        <p className="mt-4 text-r-silver text-xs">Role: {project.role}</p>
       </div>
 
       <div className="project-tray-meta">

@@ -130,7 +130,7 @@ export default function Experience() {
               <p className="section-kicker text-r-red mb-4">Education</p>
               <p className="text-white text-xl">S1 Informatics Engineering</p>
               <p className="text-r-silver text-[13px] mt-1">Gunadarma University</p>
-              <p className="text-r-red text-[11px] font-semibold mt-2">Sep 2023 — Present</p>
+              <p className="text-r-red text-[11px] font-semibold mt-2">Sep 2023 to Present</p>
               <div className="mt-3 pt-3 border-t border-r-steel flex items-start gap-2">
                 <span className="w-1.5 h-1.5 bg-r-red rounded-full mt-1.5 flex-shrink-0"></span>
                 <p className="text-r-light text-xs leading-relaxed">

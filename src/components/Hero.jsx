@@ -50,13 +50,12 @@ export default function Hero() {
           <div className="hero-intro-row">
             <div className="hero-round-portrait scale-in" style={{ animationDelay: '0.28s' }}>
               <img src="/foto4.jpg" alt="Raya Sesan Firdaus" />
-              <span>R / S</span>
             </div>
 
             <div className="hero-intro-copy fade-up" style={{ animationDelay: '0.34s' }}>
               <p>
                 I turn raw data into machine-learning products, computer-vision systems,
-                and useful decisions—built from model to deployment.
+                and useful decisions, built from model to deployment.
               </p>
               <div className="availability-note">
                 <span aria-hidden="true"></span>
