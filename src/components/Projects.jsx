@@ -204,11 +204,11 @@ export default function Projects() {
   return (
     <section id="projects" className="py-20 lg:py-24 border-t border-r-steel">
       <div className="max-w-[1100px] mx-auto px-5">
-        <div className="reveal flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+        <div className="section-heading reveal flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
           <div>
-            <p className="text-r-red text-[10px] font-bold tracking-[0.25em] uppercase mb-2">04 / Projects</p>
-            <h2 className="text-white font-black text-3xl lg:text-4xl uppercase tracking-tight leading-[0.9]">
-              Things I've Built
+            <p className="section-kicker text-r-red">04 / Selected work</p>
+            <h2 className="text-white text-4xl lg:text-6xl leading-[0.95]">
+              Built with purpose
             </h2>
           </div>
           <div className="flex flex-wrap gap-2" aria-label="Project filters">
@@ -221,13 +221,12 @@ export default function Projects() {
                     setFilter(filterItem.id);
                   }
                 }}
-                className={`project-filter-btn min-h-10 inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.18em] uppercase px-4 py-2 border rounded transition-all ${filter === filterItem.id
+                className={`project-filter-btn min-h-10 inline-flex items-center gap-2 text-[12px] font-medium px-4 py-2 border rounded transition-all ${filter === filterItem.id
                   ? 'is-active border-r-red bg-r-red/10 text-r-red'
                   : 'border-r-steel text-r-silver hover:text-r-red hover:border-r-red/40'
                 }`}
                 aria-pressed={filter === filterItem.id}
               >
-                <span className="iconify" data-icon={filterItem.icon} data-width="13"></span>
                 <span>{filterItem.label}</span>
                 <span className="project-filter-count">{filterCounts[filterItem.id]}</span>
               </button>
@@ -235,7 +234,7 @@ export default function Projects() {
           </div>
         </div>
 
-        <p className="project-count reveal text-r-silver text-[10px] font-bold tracking-[0.18em] uppercase mb-4" aria-live="polite">
+        <p className="project-count reveal text-r-silver text-[11px] font-medium mb-5" aria-live="polite">
           {projectCountLabel}
         </p>
 
@@ -268,7 +267,7 @@ export default function Projects() {
 function FeaturedProject({ project, index, onOpenPreview }) {
   return (
     <article
-      className="proj-card project-card-shell project-featured-card reveal bg-r-gray border border-r-red/30 card-lift rounded overflow-hidden mb-4"
+      className="proj-card project-card-shell project-featured-card reveal bg-r-gray border border-r-steel card-lift rounded overflow-hidden mb-5"
       style={{ '--project-index': index }}
     >
       <div className="project-featured-media aspect-[16/9] min-h-[250px] max-h-[470px] overflow-hidden relative bg-r-dark">
@@ -289,19 +288,19 @@ function FeaturedProject({ project, index, onOpenPreview }) {
           <span className="project-media-expand" aria-hidden="true">
             <span className="iconify" data-icon="lucide:expand" data-width="16"></span>
           </span>
-          <span className="absolute top-3 right-3 bg-r-red text-black text-[10px] font-black tracking-[0.15em] uppercase px-2.5 py-1 rounded">
-            Featured
+          <span className="project-featured-label absolute top-4 right-4 text-[10px] font-semibold px-3 py-1.5 rounded">
+            Case study
           </span>
         </button>
       </div>
-      <div className="p-5 lg:p-7 grid grid-cols-1 lg:grid-cols-[1.12fr_0.88fr] gap-6">
+      <div className="p-6 lg:p-9 grid grid-cols-1 lg:grid-cols-[1.18fr_0.82fr] gap-8 lg:gap-12">
         <div>
-          <p className="text-r-red text-[10px] font-bold tracking-[0.2em] uppercase mb-2">{project.categoryLabel}</p>
-          <h3 className="text-white font-black text-2xl lg:text-3xl uppercase tracking-tight leading-[0.95] mb-3">{project.title}</h3>
-          <p className="text-r-light text-sm leading-relaxed mb-4">{project.desc}</p>
-          <div className="border-y border-r-steel py-3">
-            <p className="text-r-red text-[10px] font-bold tracking-[0.16em] uppercase mb-1">Role: {project.role}</p>
-            <p className="text-r-light text-xs leading-relaxed">{project.contribution}</p>
+          <p className="text-r-red text-[10px] font-semibold tracking-[0.1em] mb-2">{project.categoryLabel}</p>
+          <h3 className="text-white text-3xl lg:text-4xl leading-[1] mb-4">{project.title}</h3>
+          <p className="text-r-light text-sm leading-[1.75] mb-5">{project.desc}</p>
+          <div className="border-t border-r-steel pt-4">
+            <p className="text-r-red text-[11px] font-semibold mb-1.5">Role — {project.role}</p>
+            <p className="text-r-light text-xs leading-[1.7]">{project.contribution}</p>
           </div>
         </div>
         <div className="flex flex-col">
@@ -372,10 +371,10 @@ function ProjectCard({ project, index, onOpenPreview }) {
           <ProjectImage project={project} />
         )}
       </div>
-      <div className="p-5">
-        <p className="text-r-red text-[10px] font-bold tracking-[0.2em] uppercase mb-1.5">{project.categoryLabel}</p>
-        <h3 className="text-white font-bold text-base uppercase tracking-tight mb-2">{project.title}</h3>
-        <p className="text-r-light text-xs leading-relaxed mb-3">{project.desc}</p>
+      <div className="p-6 lg:p-7">
+        <p className="text-r-red text-[10px] font-semibold tracking-[0.1em] mb-2">{project.categoryLabel}</p>
+        <h3 className="text-white text-2xl leading-tight mb-3">{project.title}</h3>
+        <p className="text-r-light text-xs leading-[1.7] mb-4">{project.desc}</p>
         <ProjectTags tags={project.tags} />
         <ProjectStats stats={project.stats} />
         <ProjectActions links={project.links} />
@@ -419,8 +418,8 @@ function ProjectPreviewModal({ preview, onClose, onSelect }) {
       <div className="project-preview-panel">
         <div className="project-preview-topbar">
           <div>
-            <p className="text-r-red text-[10px] font-bold tracking-[0.2em] uppercase">Project Preview</p>
-            <h3 className="text-white text-sm md:text-base font-black uppercase tracking-tight">{preview.title}</h3>
+            <p className="text-r-red text-[10px] font-semibold tracking-[0.1em]">Project preview</p>
+            <h3 className="text-white text-xl md:text-2xl">{preview.title}</h3>
           </div>
           <button type="button" className="project-preview-close" onClick={onClose} aria-label="Close preview">
             <span className="iconify" data-icon="lucide:x" data-width="18"></span>
@@ -480,7 +479,7 @@ function ImageFallback({ title, text }) {
   return (
     <div className="project-image-fallback h-full min-h-[220px] flex flex-col justify-end p-5">
       <span className="iconify text-r-red mb-4" data-icon="lucide:image-off" data-width="28"></span>
-      <p className="text-white text-sm font-black uppercase tracking-[0.12em] mb-2">{title}</p>
+      <p className="text-white text-2xl mb-2">{title}</p>
       <p className="text-r-light text-xs leading-relaxed max-w-xs">{text}</p>
     </div>
   );
@@ -488,9 +487,9 @@ function ImageFallback({ title, text }) {
 
 function ProjectTags({ tags }) {
   return (
-    <div className="flex flex-wrap gap-1.5 mb-3">
+    <div className="project-tags flex flex-wrap gap-x-4 gap-y-1.5 mb-5">
       {tags.map((tag) => (
-        <span key={tag} className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 bg-r-steel text-r-light rounded">
+        <span key={tag} className="text-[11px] font-medium text-r-silver">
           {tag}
         </span>
       ))}
@@ -500,10 +499,10 @@ function ProjectTags({ tags }) {
 
 function ProjectStats({ stats }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-3 border-t border-r-steel text-r-silver mb-4">
+    <div className="project-stats grid grid-cols-1 sm:grid-cols-3 border-y border-r-steel text-r-silver mb-5">
       {stats.map((stat) => (
-        <div key={`${stat.value}-${stat.label}`} className="bg-r-dark border border-r-steel rounded px-2.5 py-2">
-          <p className="text-white text-xs font-bold leading-tight">{stat.value}</p>
+        <div key={`${stat.value}-${stat.label}`} className="py-3 pr-3">
+          <p className="text-white text-[13px] font-semibold leading-tight">{stat.value}</p>
           <p className="text-r-silver text-[10px] leading-tight mt-1">{stat.label}</p>
         </div>
       ))}

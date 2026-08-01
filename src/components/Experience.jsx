@@ -108,10 +108,10 @@ export default function Experience() {
   return (
     <section ref={sectionRef} id="experience" className="py-20 lg:py-24 border-t border-r-steel">
       <div className="max-w-[1100px] mx-auto px-5">
-        <div className="reveal mb-12">
-          <p className="text-r-red text-[10px] font-bold tracking-[0.25em] uppercase mb-2">02 / Experience</p>
-          <h2 className="text-white font-black text-3xl lg:text-4xl uppercase tracking-tight leading-[0.9]">
-            Experience & Education
+        <div className="section-heading reveal mb-14">
+          <p className="section-kicker text-r-red">02 / Journey</p>
+          <h2 className="text-white text-4xl lg:text-6xl leading-[0.95]">
+            Experience
           </h2>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_290px] gap-10">
@@ -125,12 +125,12 @@ export default function Experience() {
             ))}
           </div>
 
-          <div className="space-y-4 lg:mt-[-5.75rem]">
-            <div className="reveal bg-r-gray border border-r-steel rounded p-5" data-delay="0">
-              <p className="text-r-red text-[10px] font-bold tracking-[0.2em] uppercase mb-3">Education</p>
-              <p className="text-white text-sm font-semibold">S1 Informatics Engineering</p>
-              <p className="text-r-silver text-xs">Gunadarma University</p>
-              <p className="text-r-red text-[10px] font-bold tracking-wider uppercase mt-1">Sep 2023 - Present</p>
+          <div className="space-y-5 lg:mt-[-5.75rem]">
+            <div className="aside-card reveal bg-r-gray border border-r-steel rounded p-6" data-delay="0">
+              <p className="section-kicker text-r-red mb-4">Education</p>
+              <p className="text-white text-xl">S1 Informatics Engineering</p>
+              <p className="text-r-silver text-[13px] mt-1">Gunadarma University</p>
+              <p className="text-r-red text-[11px] font-semibold mt-2">Sep 2023 — Present</p>
               <div className="mt-3 pt-3 border-t border-r-steel flex items-start gap-2">
                 <span className="w-1.5 h-1.5 bg-r-red rounded-full mt-1.5 flex-shrink-0"></span>
                 <p className="text-r-light text-xs leading-relaxed">
@@ -139,12 +139,12 @@ export default function Experience() {
               </div>
             </div>
 
-            <div className="reveal bg-r-gray border border-r-red/15 rounded p-5" data-delay="120">
-              <p className="text-r-red text-[10px] font-bold tracking-[0.2em] uppercase mb-3">Current Focus</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
+            <div className="aside-card reveal bg-r-gray border border-r-steel rounded p-6" data-delay="120">
+              <p className="section-kicker text-r-red mb-4">Current focus</p>
+              <div className="focus-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1">
                 {currentFocus.map((focus) => (
-                  <div key={focus} className="bg-r-dark border border-r-steel rounded py-2.5 px-3">
-                    <p className="text-r-light font-semibold text-xs">{focus}</p>
+                  <div key={focus} className="border-t border-r-steel py-3 first:border-t-0 first:pt-0 last:pb-0">
+                    <p className="text-r-light font-medium text-[13px]">{focus}</p>
                   </div>
                 ))}
               </div>
@@ -163,13 +163,13 @@ function ExperienceItem({ date, title, subtitle, desc, tags, isActive, isLast })
         <div className={`tl-dot ${isActive ? 'current' : ''}`}></div>
       </div>
       <div className="flex-1">
-        <p className="text-r-red text-[10px] font-bold tracking-[0.2em] uppercase mb-1.5">{date}</p>
-        <h3 className="text-white font-bold text-base uppercase tracking-tight mb-0.5">{title}</h3>
-        <p className="text-r-red text-[11px] font-semibold tracking-wider uppercase mb-2">{subtitle}</p>
-        <p className="text-r-light text-sm leading-relaxed mb-3">{desc}</p>
-        <div className="flex flex-wrap gap-1.5">
+        <p className="text-r-red text-[11px] font-semibold mb-2">{date}</p>
+        <h3 className="text-white text-2xl leading-tight mb-1">{title}</h3>
+        <p className="text-r-silver text-[12px] font-medium mb-3">{subtitle}</p>
+        <p className="text-r-light text-sm leading-[1.75] mb-4 max-w-2xl">{desc}</p>
+        <div className="soft-tags flex flex-wrap gap-x-4 gap-y-1.5">
           {tags.map((tag) => (
-            <span key={tag} className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 bg-r-steel text-r-light rounded">
+            <span key={tag} className="text-[11px] font-medium text-r-silver">
               {tag}
             </span>
           ))}

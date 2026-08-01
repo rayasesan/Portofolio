@@ -67,14 +67,14 @@ export default function Navbar() {
         <div className="max-w-[1100px] mx-auto px-5 h-14 flex items-center justify-between">
           <a
             href="#top"
-            className="group text-white font-black text-sm tracking-[0.25em] uppercase transition-colors hover:text-r-red"
+            className="site-wordmark group text-white text-lg transition-colors hover:text-r-red"
             aria-label="Back to home"
           >
             Raya Sesan<span className="text-r-red transition-colors group-hover:text-r-red-light">.</span>
           </a>
           <div className="hidden md:flex items-center gap-4 lg:gap-7">
             {mainLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-[10px] font-semibold tracking-[0.2em] uppercase text-r-silver hover:text-r-red transition-colors">
+              <a key={link.href} href={link.href} className="text-[12px] font-medium text-r-silver hover:text-r-red transition-colors">
                 {link.label}
               </a>
             ))}
@@ -100,7 +100,7 @@ export default function Navbar() {
       <div
         id={mobileMenuId}
         aria-hidden={!isOpen}
-        className={`mob-menu fixed inset-0 z-[60] bg-black/98 flex flex-col ${
+        className={`mob-menu fixed inset-0 z-[60] bg-r-dark flex flex-col ${
           isOpen ? 'open' : ''
         }`}
       >
@@ -108,7 +108,7 @@ export default function Navbar() {
           <a
             href="#top"
             tabIndex={isOpen ? 0 : -1}
-            className="text-white font-black text-sm tracking-[0.25em] uppercase"
+            className="site-wordmark text-white text-lg"
             onClick={closeMenu}
           >
             Raya Sesan<span className="text-r-red">.</span>
@@ -130,8 +130,8 @@ export default function Navbar() {
               href={link.href}
               tabIndex={isOpen ? 0 : -1}
               className={`mob-link ${link.href === '#contact'
-                ? 'inline-block bg-r-red text-black text-xs font-black tracking-[0.18em] uppercase px-7 py-3 mt-4 w-fit rounded'
-                : 'text-2xl font-black text-white uppercase tracking-tight hover:text-r-red transition-colors'
+                ? 'inline-block bg-r-red text-black text-sm font-semibold px-7 py-3 mt-4 w-fit rounded'
+                : 'text-3xl text-white tracking-tight hover:text-r-red transition-colors'
               }`}
               onClick={closeMenu}
             >

@@ -92,18 +92,18 @@ export default function CredentialProof() {
     <section ref={sectionRef} id="credentials" className="credential-scroll-section border-t border-r-steel">
       <div className="credential-sticky-shell">
         <div className="max-w-[1100px] mx-auto px-5 w-full">
-          <div className="reveal mb-7 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div className="section-heading reveal mb-9 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p className="text-r-red text-[10px] font-bold tracking-[0.25em] uppercase mb-2">03 / Credentials</p>
-              <h2 className="text-white font-black text-3xl lg:text-4xl uppercase tracking-tight leading-[0.9]">
-                Verified Proof
+              <p className="section-kicker text-r-red">03 / Credentials</p>
+              <h2 className="text-white text-4xl lg:text-6xl leading-[0.95]">
+                Selected proof
               </h2>
             </div>
             <div className="max-w-sm lg:text-right">
-              <p className="text-r-light text-sm leading-relaxed">
-                Selected certificates and awards. Scroll down or swipe to browse.
+              <p className="text-r-light text-sm leading-[1.7]">
+                Certificates and awards that support the work. Scroll to continue the collection.
               </p>
-              <p className="mt-2 text-r-red text-[9px] font-bold uppercase tracking-[0.18em]">
+              <p className="mt-2 text-r-red text-[10px] font-semibold tracking-[0.08em]">
                 {credentials.length} verified credentials
               </p>
             </div>
@@ -116,8 +116,8 @@ export default function CredentialProof() {
             aria-label="Verified credentials"
             tabIndex="0"
           >
-            {credentials.map((credential) => (
-              <CredentialCard key={credential.name} credential={credential} />
+            {credentials.map((credential, index) => (
+              <CredentialCard key={credential.name} credential={credential} index={index} />
             ))}
           </div>
         </div>
@@ -126,38 +126,36 @@ export default function CredentialProof() {
   );
 }
 
-function CredentialCard({ credential }) {
+function CredentialCard({ credential, index }) {
   return (
     <a
       href={credential.href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`credential-proof-card group flex min-h-[270px] flex-col rounded border bg-r-gray p-5 transition-all duration-300 hover:border-r-red/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-r-red ${
+      className={`credential-proof-card group flex min-h-[285px] flex-col rounded border bg-r-gray p-6 transition-all duration-300 hover:border-r-red/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-r-red ${
         credential.featured ? 'border-r-red/35' : 'border-r-steel'
       }`}
       aria-label={`View credential: ${credential.name}`}
     >
-      <div className="mb-6 flex min-h-9 items-start justify-between gap-3">
-        <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded bg-r-red/10 text-r-red transition-colors group-hover:bg-r-red/20">
-          <span className="iconify" data-icon={credential.icon} data-width="17"></span>
-        </span>
+      <div className="mb-8 flex items-start justify-between gap-3">
+        <span className="credential-index text-r-red">{String(index + 1).padStart(2, '0')}</span>
         {credential.badge && (
-          <span className="rounded bg-r-red px-2.5 py-1 text-right text-[9px] font-black uppercase tracking-[0.14em] text-black">
+          <span className="credential-badge text-right text-[10px] font-medium text-r-red">
             {credential.badge}
           </span>
         )}
       </div>
 
-      <p className="text-r-red text-[9px] font-bold uppercase tracking-[0.18em]">{credential.issuer}</p>
-      <h3 className="mt-2 text-white text-base font-black uppercase tracking-tight leading-tight">{credential.name}</h3>
-      <p className="mt-3 text-r-light text-xs leading-relaxed">{credential.summary}</p>
+      <p className="text-r-red text-[10px] font-medium tracking-[0.08em]">{credential.issuer}</p>
+      <h3 className="mt-2 text-white text-2xl leading-tight">{credential.name}</h3>
+      <p className="mt-4 text-r-light text-xs leading-[1.7]">{credential.summary}</p>
 
       <div className="mt-auto flex items-end justify-between gap-4 border-t border-r-steel pt-4">
         <div>
-          <p className="text-r-silver text-[9px] font-bold uppercase tracking-wider leading-relaxed">{credential.note}</p>
-          <p className="mt-1 text-r-red text-[9px] font-black uppercase tracking-[0.15em]">View credential</p>
+          <p className="text-r-silver text-[10px] font-medium leading-relaxed">{credential.note}</p>
+          <p className="mt-1.5 text-r-red text-[10px] font-semibold">Open credential</p>
         </div>
-        <p className="text-white text-[10px] font-black uppercase tracking-wider">{credential.year}</p>
+        <p className="text-white text-[11px] font-medium">{credential.year}</p>
       </div>
     </a>
   );
