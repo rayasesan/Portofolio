@@ -31,7 +31,7 @@ export default function CredentialProof() {
         return;
       }
 
-      const stickyOffset = 66;
+      const stickyOffset = 56;
       const progress = clamp((stickyOffset - rect.top) / maxScroll);
 
       rail.scrollLeft = maxScroll * progress;

@@ -1,73 +1,93 @@
 import AnimatedLink from './AnimatedLink';
-import AnimatedEarth from './AnimatedEarth';
+
+const socialLinks = [
+  { label: 'Email', href: 'mailto:rayasesan@gmail.com' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/rayasesann', external: true },
+  { label: 'GitHub', href: 'https://github.com/rayasesan', external: true },
+];
 
 export default function Hero() {
+  const handlePointerMove = (event) => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+    event.currentTarget.style.setProperty('--hero-pointer-x', `${x * 26}px`);
+    event.currentTarget.style.setProperty('--hero-pointer-y', `${y * 26}px`);
+  };
+
+  const resetPointer = (event) => {
+    event.currentTarget.style.setProperty('--hero-pointer-x', '0px');
+    event.currentTarget.style.setProperty('--hero-pointer-y', '0px');
+  };
+
   return (
-    <section id="top" className="hero-stage min-h-screen flex items-center relative overflow-hidden">
-      <AnimatedEarth />
-      <div className="relative z-10 max-w-[1100px] mx-auto px-5 w-full py-10 lg:py-0">
-        <div className="grid grid-cols-1 md:grid-cols-[minmax(260px,420px)_minmax(0,1fr)] gap-10 md:gap-14 lg:gap-20 items-center">
-          <div className="order-2">
-            <div className="fade-up" style={{ animationDelay: '0.1s' }}>
-              <p className="text-r-red text-[11px] font-semibold tracking-[0.16em] uppercase mb-5">
-                Machine Learning · Data Science · AI Systems
-              </p>
+    <section
+      id="top"
+      className="hero-stage appart-hero relative flex min-h-screen items-center overflow-hidden"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetPointer}
+    >
+      <div className="hero-geometry" aria-hidden="true">
+        {[0, 1, 2, 3, 4, 5].map((index) => (
+          <span key={index} style={{ '--orbit-index': index }}></span>
+        ))}
+        <i className="hero-axis hero-axis--horizontal"></i>
+        <i className="hero-axis hero-axis--vertical"></i>
+      </div>
+
+      <div className="appart-hero-inner relative z-10 mx-auto w-full max-w-[1100px] px-5">
+        <div className="hero-topline fade-up">
+          <p>AI Engineer / Data Scientist</p>
+          <p>Jakarta, Indonesia</p>
+        </div>
+
+        <div className="hero-editorial-copy">
+          <h1 className="appart-hero-title">
+            <span className="fade-up" style={{ animationDelay: '0.08s' }}>Raya builds</span>
+            <span className="fade-up" style={{ animationDelay: '0.18s' }}>intelligent systems.</span>
+          </h1>
+
+          <div className="hero-intro-row">
+            <div className="hero-round-portrait scale-in" style={{ animationDelay: '0.28s' }}>
+              <img src="/foto4.jpg" alt="Raya Sesan Firdaus" />
+              <span>R / S</span>
             </div>
-            <div className="fade-up" style={{ animationDelay: '0.25s' }}>
-              <h1 className="hero-title text-white leading-[0.86] text-[clamp(58px,9vw,104px)] mb-7">
-                Raya<br /><span>Sesan.</span>
-              </h1>
-            </div>
-            <div className="fade-up" style={{ animationDelay: '0.45s' }}>
-              <p className="text-r-light text-[15px] leading-[1.75] max-w-xl mb-7">
-                Informatics Engineering student focused on machine learning, data science, computer vision, and AI-powered applications. Experienced in end-to-end model development, data analysis, backend API integration, and model deployment through collaborative, academic, and personal projects.
+
+            <div className="hero-intro-copy fade-up" style={{ animationDelay: '0.34s' }}>
+              <p>
+                I turn raw data into machine-learning products, computer-vision systems,
+                and useful decisions—built from model to deployment.
               </p>
-              <p className="availability-note inline-flex items-center gap-2 text-r-light text-[12px] font-medium">
+              <div className="availability-note">
                 <span aria-hidden="true"></span>
-                Open to ML, Data Science, and AI Engineering internships.
-              </p>
+                Available for ML, Data Science, and AI Engineering internships.
+              </div>
             </div>
-            <div className="fade-up flex flex-wrap gap-3 mt-5 mb-8" style={{ animationDelay: '0.6s' }}>
-              <AnimatedLink
-                href="#contact"
-                variant="red"
-              >
-                Start a conversation
-              </AnimatedLink>
-              <AnimatedLink
-                href="#projects"
-                variant="light"
-              >
-                Selected work
-              </AnimatedLink>
-              <AnimatedLink
-                href="/cv/raya-sesan-firdaus-cv.pdf"
-                download="Raya-Sesan-Firdaus-CV.pdf"
-                variant="light"
-              >
+
+            <div className="hero-actions fade-up" style={{ animationDelay: '0.42s' }}>
+              <AnimatedLink href="#projects">Selected work</AnimatedLink>
+              <AnimatedLink href="/cv/raya-sesan-firdaus-cv.pdf" download="Raya-Sesan-Firdaus-CV.pdf" variant="light">
                 Download CV
               </AnimatedLink>
             </div>
-            <div className="fade-up flex items-center gap-5" style={{ animationDelay: '0.75s' }}>
-              <a href="mailto:rayasesan@gmail.com" className="text-r-silver hover:text-r-red transition-all hover:scale-125" aria-label="Email">
-                <span className="iconify" data-icon="lucide:mail" data-width="16"></span>
-              </a>
-              <a href="https://linkedin.com/in/rayasesann" target="_blank" rel="noopener noreferrer" className="text-r-silver hover:text-r-red transition-all hover:scale-125" aria-label="LinkedIn">
-                <span className="iconify" data-icon="lucide:linkedin" data-width="16"></span>
-              </a>
-              <a href="https://github.com/rayasesan" target="_blank" rel="noopener noreferrer" className="text-r-silver hover:text-r-red transition-all hover:scale-125" aria-label="GitHub">
-                <span className="iconify" data-icon="lucide:github" data-width="16"></span>
-              </a>
-            </div>
           </div>
-          <div className="order-1 flex justify-center md:justify-start scale-in" style={{ animationDelay: '0.2s' }}>
-            <div className="photo-wrap hero-photo-clean w-[280px] sm:w-[320px] md:w-full max-w-[400px]">
-              <img
-                src="/foto4.jpg"
-                alt="Raya Sesan Firdaus"
-              />
-            </div>
+        </div>
+
+        <div className="hero-footerline fade-up" style={{ animationDelay: '0.5s' }}>
+          <p>Your ideas, made intelligent.</p>
+          <div>
+            {socialLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target={link.external ? '_blank' : undefined}
+                rel={link.external ? 'noopener noreferrer' : undefined}
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
+          <a href="#skills" className="hero-scroll-link">Scroll to explore</a>
         </div>
       </div>
     </section>

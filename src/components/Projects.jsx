@@ -117,7 +117,7 @@ export default function Projects() {
         <div className="projects-tray-heading reveal text-center">
           <p className="section-kicker text-r-red">04 / Selected work</p>
           <h2 className="text-white text-4xl md:text-6xl lg:text-7xl leading-[0.95]">
-            Explore my projects
+              Selected cases
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-r-light text-sm leading-[1.75]">
             Hover through the stack, then select a project to explore the work behind it.
