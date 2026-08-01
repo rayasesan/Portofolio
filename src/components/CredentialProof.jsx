@@ -31,7 +31,7 @@ export default function CredentialProof() {
         return;
       }
 
-      const stickyOffset = 56;
+      const stickyOffset = 66;
       const progress = clamp((stickyOffset - rect.top) / maxScroll);
 
       rail.scrollLeft = maxScroll * progress;
@@ -90,7 +90,7 @@ export default function CredentialProof() {
 
   return (
     <section ref={sectionRef} id="credentials" className="credential-scroll-section border-t border-r-steel">
-      <div className="credential-sticky-shell">
+      <div className="credential-sticky-shell credential-frame">
         <div className="max-w-[1100px] mx-auto px-5 w-full">
           <div className="section-heading reveal mb-9 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>

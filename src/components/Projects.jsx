@@ -111,8 +111,9 @@ export default function Projects() {
   const selectedProject = projects.find((project) => project.id === selectedId) ?? projects[0];
 
   return (
-    <section id="projects" className="projects-tray-section border-t border-r-steel">
+    <section id="projects" className="section-frame projects-tray-section">
       <div className="max-w-[1100px] mx-auto px-5 w-full py-20 lg:py-28">
+        <div className="projects-gallery-stage">
         <div className="projects-tray-heading reveal text-center">
           <p className="section-kicker text-r-red">04 / Selected work</p>
           <h2 className="text-white text-4xl md:text-6xl lg:text-7xl leading-[0.95]">
@@ -177,6 +178,8 @@ export default function Projects() {
           <div className="projects-tray-front" aria-hidden="true">
             <span>Selected work · {projects.length} projects</span>
           </div>
+        </div>
+
         </div>
 
         <ProjectDetails project={selectedProject} />

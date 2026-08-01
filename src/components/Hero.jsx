@@ -3,7 +3,7 @@ import AnimatedEarth from './AnimatedEarth';
 
 export default function Hero() {
   return (
-    <section id="top" className="min-h-screen flex items-center relative overflow-hidden pt-14">
+    <section id="top" className="hero-stage min-h-screen flex items-center relative overflow-hidden">
       <AnimatedEarth />
       <div className="relative z-10 max-w-[1100px] mx-auto px-5 w-full py-10 lg:py-0">
         <div className="grid grid-cols-1 md:grid-cols-[minmax(260px,420px)_minmax(0,1fr)] gap-10 md:gap-14 lg:gap-20 items-center">

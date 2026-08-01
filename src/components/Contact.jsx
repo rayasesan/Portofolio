@@ -26,7 +26,7 @@ const contactLinks = [
 
 export default function Contact() {
   return (
-    <section id="contact" className="contact-section py-24 lg:py-32 border-t border-r-steel relative overflow-hidden">
+    <section id="contact" className="section-frame contact-section py-24 lg:py-32 relative overflow-hidden">
       <div className="relative z-10 max-w-[1100px] mx-auto px-5">
         <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-14 lg:gap-24 items-start">
           <div className="reveal">

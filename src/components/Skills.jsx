@@ -24,7 +24,7 @@ const skillGroups = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-20 lg:py-24">
+    <section id="skills" className="section-frame py-20 lg:py-24">
       <div className="max-w-[1100px] mx-auto px-5">
         <div className="section-heading grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-5 lg:gap-16 mb-14">
           <div className="reveal">
