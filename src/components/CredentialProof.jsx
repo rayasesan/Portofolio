@@ -1,6 +1,48 @@
+import { useEffect, useRef } from 'react';
 import { credentials } from '../data/credentials';
 
 export default function CredentialProof() {
+  const railRef = useRef(null);
+
+  useEffect(() => {
+    const rail = railRef.current;
+
+    if (!rail) {
+      return undefined;
+    }
+
+    const handleWheel = (event) => {
+      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) {
+        return;
+      }
+
+      const maxScroll = rail.scrollWidth - rail.clientWidth;
+      const scrollingRight = event.deltaY > 0;
+      const canMoveRight = rail.scrollLeft < maxScroll - 1;
+      const canMoveLeft = rail.scrollLeft > 1;
+
+      if ((scrollingRight && !canMoveRight) || (!scrollingRight && !canMoveLeft)) {
+        return;
+      }
+
+      event.preventDefault();
+
+      const modeMultiplier = event.deltaMode === 1
+        ? 20
+        : event.deltaMode === 2
+          ? rail.clientWidth
+          : 1;
+      const rawDistance = event.deltaY * modeMultiplier * 1.15;
+      const distance = Math.sign(rawDistance) * Math.min(Math.abs(rawDistance), 180);
+
+      rail.scrollLeft += distance;
+    };
+
+    rail.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => rail.removeEventListener('wheel', handleWheel);
+  }, []);
+
   return (
     <section id="credentials" className="py-20 lg:py-24 border-t border-r-steel">
       <div className="max-w-[1100px] mx-auto px-5">
@@ -13,7 +55,7 @@ export default function CredentialProof() {
           </div>
           <div className="max-w-sm lg:text-right">
             <p className="text-r-light text-sm leading-relaxed">
-              Selected certificates and awards. Swipe or scroll to browse.
+              Selected certificates and awards. Scroll down or swipe to browse.
             </p>
             <p className="mt-2 text-r-red text-[9px] font-bold uppercase tracking-[0.18em]">
               {credentials.length} verified credentials
@@ -22,6 +64,7 @@ export default function CredentialProof() {
         </div>
 
         <div
+          ref={railRef}
           className="credential-rail"
           role="region"
           aria-label="Verified credentials"

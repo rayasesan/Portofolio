@@ -456,20 +456,11 @@ html:not(.js-enabled) .tl-dot {
   overscroll-behavior-inline: contain;
   padding: 2px 2px 16px;
   scroll-padding-inline: 2px;
-  scroll-snap-type: inline mandatory;
-  scrollbar-color: #ef4444 #181818;
-  scrollbar-width: thin;
+  scroll-snap-type: inline proximity;
+  scrollbar-width: none;
 }
 .credential-rail::-webkit-scrollbar {
-  height: 4px;
-}
-.credential-rail::-webkit-scrollbar-track {
-  border-radius: 999px;
-  background: #181818;
-}
-.credential-rail::-webkit-scrollbar-thumb {
-  border-radius: 999px;
-  background: #ef4444;
+  display: none;
 }
 .credential-rail:focus-visible {
   outline: 1px solid rgba(239, 68, 68, 0.7);
