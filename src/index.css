@@ -314,8 +314,8 @@ img { display: block; max-width: 100%; }
 /* About */
 .about-section { position: relative; z-index: 3; }
 .scene-panel { min-height: 100svh; overflow: hidden; padding: 120px clamp(50px,10vw,190px); }
-.about-opening { position: relative; background: rgba(25,0,66,.58); }
-.about-opening__copy { position: absolute; top: 50%; right: 10%; transform: translateY(-50%); }
+.about-opening { position: relative; min-height: 72svh; background: rgba(25,0,66,.58); }
+.about-opening__copy { position: absolute; top: 80%; right: 10%; transform: translateY(-50%); }
 .about-opening h2 { margin: 0; color: transparent; font-family: var(--display); font-size: clamp(105px,12vw,220px); font-weight: 300; letter-spacing: -.035em; line-height: .78; -webkit-text-stroke: 1.5px var(--paper); }
 .about-opening .scene-kicker { margin-bottom: 24px; }
 
@@ -324,7 +324,7 @@ img { display: block; max-width: 100%; }
 .about-name::after { content: ""; position: absolute; z-index: -1; width: 42vw; height: 2px; opacity: .42; background: #ff60ff; box-shadow: 0 0 12px #ff40ff; transform: rotate(-38deg); }
 .about-name::before { top: 32%; left: -9%; }
 .about-name::after { display: none; }
-.about-name h2 { position: absolute; top: 12%; right: 9%; margin: 0; color: var(--paper); font-family: var(--serif); font-size: clamp(118px,12vw,220px); font-weight: 400; letter-spacing: -.03em; line-height: .72; }
+.about-name h2 { position: absolute; top: 9%; right: 9%; margin: 0; color: var(--paper); font-family: var(--serif); font-size: clamp(118px,12vw,220px); font-weight: 400; letter-spacing: -.03em; line-height: .72; }
 .about-name h2 span { display: block; }
 .about-name p { position: absolute; top: 58%; right: 9%; width: min(47%,760px); margin: 0; padding-top: 30px; border-top: 1px solid var(--paper); color: var(--paper); font-size: clamp(15px,1.25vw,20px); text-align: left; }
 
@@ -475,10 +475,11 @@ img { display: block; max-width: 100%; }
   .hero-scroll { display: none; }
 
   .scene-panel { min-height: 95svh; padding: 100px 20px; }
-  .about-opening__copy { top: 49%; right: 18px; }
+  .about-opening { min-height: 70svh; }
+  .about-opening__copy { top: 76%; right: 18px; }
   .about-opening h2 { font-size: 24vw; -webkit-text-stroke-width: 1px; }
   .about-name { min-height: 100svh; }
-  .about-name h2 { top: 10%; right: 16px; font-size: 29vw; }
+  .about-name h2 { top: 4%; right: 16px; font-size: 29vw; }
   .about-name p { top: 55%; right: 20px; width: 72%; padding-top: 22px; text-align: left; }
   .about-statement { display: block; min-height: auto; padding: 100px 20px; }
   .about-statement figure { width: 74%; }
