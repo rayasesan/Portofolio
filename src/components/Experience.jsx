@@ -1,6 +1,10 @@
 const experiences = [
   {
-    date: 'Feb — Jul 2026', title: 'AI Engineer Graduate with Distinction', place: 'Coding Camp 2026 / DBS Foundation x Dicoding',
+    date: 'Jul — Aug 2026', title: 'Backend AI Engineer Intern', place: 'FlyRank AI',
+    description: 'Develop backend components for AI-powered applications, including API integration, workflow automation, and reliable data exchange across services.',
+  },
+  {
+    date: 'Feb — Jul 2026', title: 'AI Engineer Graduate — Distinction', place: 'Coding Camp 2026 / DBS Foundation x Dicoding',
     description: 'Completed 934 hours of structured learning and contributed as an AI Engineer to Nutrify, combining computer vision, FastAPI model serving, and a Generative AI nutrition coach.',
   },
   {
@@ -27,7 +31,7 @@ export default function Experience() {
           </article>
         ))}
       </div>
-      <aside className="education-note reveal"><strong>S1 Informatics Engineering</strong><span>Gunadarma University / Sep 2023 — present</span></aside>
+      <aside className="education-note reveal"><strong>Bachelor of Informatics Engineering</strong><span>Gunadarma University / Sep 2023 — present</span></aside>
     </section>
   );
 }

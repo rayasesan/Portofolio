@@ -30,17 +30,17 @@ export default function Hero() {
     <section ref={sectionRef} id="top" className="hero-sequence">
       <div className="hero-pin">
         <div className="hero-availability">
-          <span></span><p>Available 2026<br /><a href="#contact">Let's work together</a></p>
+          <span></span><p>Open to opportunities<br /><a href="#contact">Let's work together</a></p>
         </div>
 
-        <h1 className="hero-display" aria-label="Raya Sesan — Machine Learning Engineer">
-          <span className="hero-display__top">Machine</span>
-          <span className="hero-display__bottom">Engineer</span>
+        <h1 className="hero-display" aria-label="Raya Sesan — Informatics Engineering Student">
+          <span className="hero-display__top">Informatics</span>
+          <span className="hero-display__bottom">Student</span>
         </h1>
 
         <div className="hero-strap">
-          <p>Applied AI / Computer Vision / Data Systems</p>
-          <p>Building practical machine learning products from experimentation to deployment.</p>
+          <p>Data Science / Machine Learning / AI Applications</p>
+          <p>An Informatics Engineering student learning by turning data and ideas into working projects.</p>
         </div>
 
         <div className="hero-cta">
@@ -50,7 +50,7 @@ export default function Hero() {
 
         <div className="hero-featured">
           <p>Selected toolkit</p>
-          <div><span>Python</span><span>TensorFlow</span><span>FastAPI</span></div>
+          <div><span>Python</span><span>SQL</span><span>Scikit-learn</span></div>
         </div>
         <a className="hero-scroll" href="#skills">Scroll</a>
       </div>

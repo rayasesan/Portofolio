@@ -24,7 +24,8 @@ export default function Navbar() {
     const sync = () => {
       const guide = window.scrollY + window.innerHeight * 0.45;
       const current = [...menuLinks].reverse().find(({ href }) => document.querySelector(href)?.offsetTop <= guide);
-      setActive(current?.href.slice(1) ?? 'top');
+      const currentId = current?.href.slice(1) ?? 'top';
+      setActive(currentId === 'experience' || currentId === 'credentials' ? 'skills' : currentId);
     };
     sync();
     window.addEventListener('scroll', sync, { passive: true });
@@ -61,6 +62,18 @@ export default function Navbar() {
   }, [isOpen]);
 
   const close = () => setIsOpen(false);
+  const moveNavLink = (event) => {
+    if (event.pointerType === 'touch') return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = (event.clientX - rect.left - rect.width / 2) * 0.12;
+    const y = (event.clientY - rect.top - rect.height / 2) * 0.18;
+    event.currentTarget.style.setProperty('--nav-x', `${x.toFixed(2)}px`);
+    event.currentTarget.style.setProperty('--nav-y', `${y.toFixed(2)}px`);
+  };
+  const resetNavLink = (event) => {
+    event.currentTarget.style.setProperty('--nav-x', '0px');
+    event.currentTarget.style.setProperty('--nav-y', '0px');
+  };
 
   return (
     <>
@@ -68,14 +81,19 @@ export default function Navbar() {
         <div className="site-header__inner">
           <a className="site-mark" href="#top" aria-label="Raya Sesan — back to home" onClick={close}>Raya Sesan</a>
           <div className="site-header__links" aria-label="Primary navigation">
-            {links.map((link, index) => (
-              <span key={link.href}>
-                <a href={link.href} className={active === link.href.slice(1) ? 'is-active' : ''}>{link.label}</a>
-                {index < links.length - 1 && <i aria-hidden="true">•</i>}
-              </span>
+            {links.map((link) => (
+              <a
+                href={link.href}
+                key={link.href}
+                className={active === link.href.slice(1) ? 'is-active' : ''}
+                onPointerMove={moveNavLink}
+                onPointerLeave={resetNavLink}
+              >
+                <span>{link.label}</span>
+              </a>
             ))}
           </div>
-          <p className="site-header__locale"><strong>EN</strong> ID</p>
+          <a className="site-header__cv" href="/cv/raya-sesan-firdaus-cv.pdf" download="Raya-Sesan-Firdaus-CV.pdf">Download CV</a>
           <button ref={buttonRef} className="site-menu-button" type="button" aria-label={isOpen ? 'Close menu' : 'Open menu'} aria-expanded={isOpen} aria-controls="site-menu" onClick={() => setIsOpen((value) => !value)}>
             <span></span><span></span>
           </button>
@@ -95,7 +113,7 @@ export default function Navbar() {
               <li key={link.href}><span>{index + 1}</span><a href={link.href} tabIndex={isOpen ? 0 : -1} onClick={close}>{link.label}</a></li>
             ))}
           </ol>
-          <div><p>Machine Learning Engineer</p><p>Depok / Indonesia</p></div>
+          <div><p>Informatics Engineering Student</p><p>Jakarta / Indonesia</p></div>
         </div>
       </div>
     </>

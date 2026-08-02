@@ -28,15 +28,15 @@ export default function Skills() {
 
       <article className="about-name scene-panel">
         <h2 className="reveal"><span>Raya</span><span>Sesan</span></h2>
-        <p className="reveal">I design and engineer machine learning systems, turning raw data and complex requirements into practical AI experiences. I work across modeling, computer vision, APIs, and analytics.</p>
+        <p className="reveal">I'm an Informatics Engineering student focused on data science, machine learning, and AI application development. I learn by turning datasets and ideas into models, APIs, dashboards, and working prototypes.</p>
       </article>
 
       <article className="about-statement">
         <figure className="reveal">
           <img src="/foto4.jpg" alt="Raya Sesan Firdaus" width="783" height="862" loading="lazy" />
-          <figcaption><strong>Raya Sesan</strong><span>Machine Learning Engineer</span></figcaption>
+          <figcaption><strong>Raya Sesan</strong><span>Informatics Engineering Student</span></figcaption>
         </figure>
-        <p className="about-statement__text reveal">I eliminate <span>the friction</span> between <span>models</span> and products.</p>
+        <p className="about-statement__text reveal">I turn <span>data</span> into experiments, models, and <span>useful products.</span></p>
       </article>
 
       <section className="capability-panel">
