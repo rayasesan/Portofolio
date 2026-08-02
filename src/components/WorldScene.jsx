@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 
 const STATES = {
   hero: { x: 0, y: -0.55, z: 0, scale: 1.28, rx: -0.08, ry: -0.24, rz: -0.27, opacity: 1 },
@@ -59,7 +60,8 @@ export default function WorldScene() {
 
     let modelMeshes = [];
     const loader = new GLTFLoader();
-    loader.load('/models/scattering-skull.glb', (gltf) => {
+    loader.setMeshoptDecoder(MeshoptDecoder);
+    loader.load('/models/scattering-skull-optimized.glb', (gltf) => {
       const model = gltf.scene;
       const box = new THREE.Box3().setFromObject(model);
       const size = box.getSize(new THREE.Vector3());
