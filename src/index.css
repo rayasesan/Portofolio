@@ -4357,37 +4357,68 @@ body footer .text-r-steel {
 .project-case-copy {
   min-width: 0;
   align-self: start;
+  padding: clamp(22px, 2.6vw, 34px);
+  border: 1px solid #151515;
+  background: #f1efed;
+  box-shadow: 9px 9px 0 #151515;
+}
+
+.project-case-copy-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(21, 21, 21, 0.24);
 }
 
 .project-case-role {
-  color: rgba(21, 21, 21, 0.64);
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 5px 9px;
+  border: 1px solid rgba(21, 21, 21, 0.28);
+  border-radius: 999px;
+  background: #e2754d;
+  color: #151515;
+}
+
+.project-case-count {
+  color: rgba(21, 21, 21, 0.52);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .project-case-copy h3 {
-  margin-top: 12px;
+  margin-top: 24px;
   color: #151515;
-  font-size: clamp(28px, 3.2vw, 48px);
-  line-height: 0.98;
+  font-size: clamp(30px, 2.65vw, 42px);
+  line-height: 1;
+  letter-spacing: -0.052em !important;
 }
 
 .project-case-description {
-  margin-top: 20px;
-  color: rgba(21, 21, 21, 0.76);
+  max-width: 520px;
+  margin-top: 22px;
+  color: rgba(21, 21, 21, 0.68);
   font-size: 13px;
-  line-height: 1.7;
+  line-height: 1.65;
 }
 
 .project-case-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 7px;
-  margin-top: 22px;
+  margin-top: 24px;
 }
 
 .project-case-tags span {
   padding: 6px 10px;
   border: 1px solid rgba(21, 21, 21, 0.24);
   border-radius: 999px;
+  background: #faf8f5;
   color: #302d2b;
   font-size: 9px;
   font-weight: 600;
@@ -4396,13 +4427,14 @@ body footer .text-r-steel {
 .project-case-stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 24px;
-  border-block: 1px solid rgba(21, 21, 21, 0.28);
+  margin-top: 28px;
+  border: 1px solid rgba(21, 21, 21, 0.28);
+  background: rgba(226, 117, 77, 0.1);
 }
 
 .project-case-stats > div {
   min-width: 0;
-  padding: 14px 10px 14px 0;
+  padding: 14px 12px;
 }
 
 .project-case-stats > div:not(:last-child) {
@@ -4432,7 +4464,7 @@ body footer .text-r-steel {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 24px;
+  margin-top: 28px;
 }
 
 .project-case-links .animated-pill {
@@ -4493,6 +4525,16 @@ body footer .text-r-steel {
     grid-template-columns: 1fr;
     gap: 26px;
     padding: 2px 12px 26px;
+  }
+
+  .project-case-copy {
+    padding: 20px;
+    box-shadow: 5px 5px 0 #151515;
+  }
+
+  .project-case-copy h3 {
+    margin-top: 20px;
+    font-size: clamp(28px, 9vw, 38px);
   }
 }
 

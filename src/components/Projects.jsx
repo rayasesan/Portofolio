@@ -187,7 +187,12 @@ function ProjectCaseDetails({ project, index, isSelected }) {
       </div>
 
       <div className="project-case-copy">
-        <p className="project-case-role">{project.role}</p>
+        <div className="project-case-copy-topline">
+          <p className="project-case-role">{project.role}</p>
+          <p className="project-case-count">
+            Case {String(index + 1).padStart(2, '0')} / 05
+          </p>
+        </div>
         <h3>{project.title}</h3>
         <p className="project-case-description">{project.desc}</p>
 
