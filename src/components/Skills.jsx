@@ -1,58 +1,54 @@
 const capabilities = [
   {
     title: 'Model & reason',
-    description: 'From structured experimentation to evaluated models with clear assumptions and measurable performance.',
-    tools: 'Python / Scikit-learn / TensorFlow / Feature Engineering / Model Evaluation',
+    description: 'I prepare data, design experiments, compare models, and evaluate performance with clear assumptions and measurable results.',
+    tools: 'Python / TensorFlow / Scikit-learn / Feature Engineering / Model Evaluation',
   },
   {
-    title: 'Build & deploy',
-    description: 'Turning trained models into practical interfaces, services, and workflows people can actually use.',
+    title: 'Build and deploy, together',
+    description: 'I turn trained models into usable APIs and product flows, keeping implementation decisions connected to the original problem.',
     tools: 'FastAPI / REST API / Streamlit / Model Serving / Docker Fundamentals',
   },
   {
-    title: 'Analyze & explain',
-    description: 'Finding the useful signal in raw data and communicating it through analysis, SQL, and decision-ready visuals.',
+    title: 'Insight without the noise',
+    description: 'I translate raw data into practical findings through SQL, structured analysis, and decision-ready visual communication.',
     tools: 'SQL / Pandas / NumPy / Power BI / Data Visualization',
   },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="section about-section">
-      <div className="page-shell">
-        <div className="about-heading reveal">
-          <p className="section-index">01 / About</p>
-          <h2>I turn data into <span>systems people can use.</span></h2>
+    <section id="skills" className="about-section">
+      <article className="about-opening scene-panel">
+        <div className="about-opening__copy reveal">
+          <p className="scene-kicker">01 / About</p>
+          <h2>Hey! I'm</h2>
         </div>
+      </article>
 
-        <div className="about-intro reveal">
-          <p className="about-intro__lead">Machine learning is valuable when it survives outside the notebook.</p>
-          <p>
-            I develop practical machine learning applications, computer vision systems,
-            and data products from exploration and modeling through API delivery. My work
-            sits where careful technical thinking meets usable product execution.
-          </p>
-        </div>
+      <article className="about-name scene-panel">
+        <h2 className="reveal"><span>Raya</span><span>Sesan</span></h2>
+        <p className="reveal">I design and engineer machine learning systems, turning raw data and complex requirements into practical AI experiences. I work across modeling, computer vision, APIs, and analytics.</p>
+      </article>
 
-        <div className="capability-section">
-          <div className="capability-heading reveal">
-            <p className="section-index">How I work</p>
-            <h3>One workflow.<br />Three strengths.</h3>
-          </div>
-          <div className="capability-list">
-            {capabilities.map((capability, index) => (
-              <article className="capability-row reveal" key={capability.title}>
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <div>
-                  <h3>{capability.title}</h3>
-                  <p>{capability.description}</p>
-                </div>
-                <p className="capability-row__tools">{capability.tools}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </div>
+      <article className="about-statement">
+        <figure className="reveal">
+          <img src="/foto4.jpg" alt="Raya Sesan Firdaus" width="783" height="862" loading="lazy" />
+          <figcaption><strong>Raya Sesan</strong><span>Machine Learning Engineer</span></figcaption>
+        </figure>
+        <p className="about-statement__text reveal">I eliminate <span>the friction</span> between <span>models</span> and products.</p>
+      </article>
+
+      <section className="capability-panel">
+        <header className="reveal"><p className="scene-kicker">How can I help?</p></header>
+        {capabilities.map((capability) => (
+          <article className="capability-row reveal" key={capability.title}>
+            <h3>{capability.title}</h3>
+            <p>{capability.description}</p>
+            <span>{capability.tools}</span>
+          </article>
+        ))}
+      </section>
     </section>
   );
 }
