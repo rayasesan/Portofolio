@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import AnimatedLink from './AnimatedLink';
 
 const projects = [
@@ -6,7 +5,6 @@ const projects = [
     id: 'nutrify',
     category: 'AI Engineering / Computer Vision',
     title: 'Nutrify: AI-Powered Nutrition Platform',
-    shortTitle: 'Nutrify',
     story: {
       problem: 'Nutrition information for Indonesian dishes is often difficult to estimate from a photo alone.',
       build: 'An end-to-end computer vision platform with model serving and a personalized AI nutrition coach.',
@@ -14,6 +12,8 @@ const projects = [
     },
     role: 'AI Engineer',
     image: '/nutrify-landing.jpg',
+    imageWidth: 1600,
+    imageHeight: 900,
     alt: 'Nutrify AI-powered nutrition platform landing page',
     tags: ['Python', 'TensorFlow', 'Computer Vision', 'FastAPI', 'Gemini API'],
     stats: [
@@ -31,7 +31,6 @@ const projects = [
     id: 'customer-churn',
     category: 'Machine Learning',
     title: 'Customer Churn Prediction',
-    shortTitle: 'Customer Churn',
     story: {
       problem: 'Retention teams need to identify customers at risk of leaving before the contract ends.',
       build: 'A classification workflow using demographic, service, billing, and contract data from 7,043 customers.',
@@ -39,6 +38,8 @@ const projects = [
     },
     role: 'Data Scientist',
     image: '/customer-churn-preview.png',
+    imageWidth: 1057,
+    imageHeight: 547,
     alt: 'Customer churn prediction project preview',
     tags: ['Python', 'Scikit-learn', 'Pandas', 'Logistic Regression', 'Random Forest'],
     stats: [
@@ -55,7 +56,6 @@ const projects = [
     id: 'credit-risk',
     category: 'Machine Learning',
     title: 'Credit Risk Prediction',
-    shortTitle: 'Credit Risk',
     story: {
       problem: 'Credit decisions need a consistent way to estimate borrower default risk from mixed financial data.',
       build: 'A classification pipeline using demographic, financial, and loan features with model comparison.',
@@ -64,6 +64,7 @@ const projects = [
     role: 'Machine Learning',
     image: null,
     alt: 'Credit risk prediction project',
+    fallbackLabel: 'Classification model',
     tags: ['Python', 'Scikit-learn', 'Classification', 'Random Forest', 'Feature Engineering'],
     stats: [
       { value: '93.23%', label: 'Accuracy' },
@@ -79,7 +80,6 @@ const projects = [
     id: 'bank-marketing',
     category: 'Data Analysis / SQL',
     title: 'Bank Marketing SQL Analytics',
-    shortTitle: 'SQL Analytics',
     story: {
       problem: 'Campaign data was too dense to quickly reveal which customer segments were most likely to convert.',
       build: 'Six business-focused SQL analyses using CTEs, window functions, and customer segmentation.',
@@ -88,6 +88,7 @@ const projects = [
     role: 'Data Analyst',
     image: null,
     alt: 'Bank marketing SQL analytics project',
+    fallbackLabel: 'SQL analysis',
     tags: ['SQL', 'SQLite', 'CTE', 'Window Functions', 'Segmentation'],
     stats: [
       { value: '45,211', label: 'Records' },
@@ -103,7 +104,6 @@ const projects = [
     id: 'telco-dashboard',
     category: 'Business Intelligence',
     title: 'Telco Churn Dashboard',
-    shortTitle: 'Telco Dashboard',
     story: {
       problem: 'Churn patterns across contracts, services, payments, and tenure were difficult to monitor in raw tables.',
       build: 'A Power BI dashboard with focused KPIs, DAX measures, and decision-ready segment views.',
@@ -111,6 +111,8 @@ const projects = [
     },
     role: 'BI Developer',
     image: '/telco-dashboard-preview.jpg',
+    imageWidth: 957,
+    imageHeight: 537,
     alt: 'Telco churn Power BI dashboard preview',
     tags: ['Power BI', 'DAX', 'Data Visualization', 'Dashboard'],
     stats: [
@@ -125,95 +127,73 @@ const projects = [
 ];
 
 export default function Projects() {
-  const [selectedId, setSelectedId] = useState(projects[0].id);
-
-  const toggleProject = (projectId) => {
-    setSelectedId((currentId) => (currentId === projectId ? null : projectId));
-  };
-
   return (
     <section id="projects" className="section-frame projects-cases-section">
-      <div className="projects-cases-wrap max-w-[1100px] mx-auto w-full py-20 lg:py-28">
+      <div className="projects-cases-wrap max-w-[1100px] mx-auto w-full">
         <header className="projects-cases-intro reveal">
-          <p className="section-kicker">04 / Selected work</p>
-          <h2>Selected<br />cases</h2>
-          <p className="projects-cases-summary">
-            Five practical projects across AI engineering, machine learning, SQL,
-            and business intelligence. Select a case to see the work behind it.
-          </p>
-          <AnimatedLink
-            href="https://github.com/rayasesan"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View all on GitHub
-          </AnimatedLink>
+          <div>
+            <p className="section-kicker">04 / Projects</p>
+            <h2>Technical case studies</h2>
+          </div>
+          <div>
+            <p className="projects-cases-summary">
+              Five practical projects across AI engineering, machine learning, SQL,
+              and business intelligence. Each case shows the problem, technical approach,
+              and verified output.
+            </p>
+            <AnimatedLink
+              href="https://github.com/rayasesan"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View all on GitHub
+            </AnimatedLink>
+          </div>
         </header>
 
-        <div className="project-case-list reveal" role="list">
-          {projects.map((project, index) => {
-            const isSelected = selectedId === project.id;
-            const panelId = `project-panel-${project.id}`;
-
-            return (
-              <article
-                key={project.id}
-                className={`project-case ${isSelected ? 'is-open' : ''}`}
-                role="listitem"
-              >
-                <button
-                  type="button"
-                  className="project-case-trigger"
-                  aria-expanded={isSelected}
-                  aria-controls={panelId}
-                  onClick={() => toggleProject(project.id)}
-                >
-                  <span className="project-case-number">{String(index + 1).padStart(2, '0')}</span>
-                  <span className="project-case-title">{project.shortTitle}</span>
-                  <span className="project-case-category">{project.category}</span>
-                  <span className="project-case-toggle" aria-hidden="true"></span>
-                </button>
-
-                <div
-                  id={panelId}
-                  className="project-case-panel"
-                  aria-hidden={!isSelected}
-                >
-                  <div className="project-case-panel-inner">
-                    <ProjectCaseDetails project={project} index={index} isSelected={isSelected} />
-                  </div>
-                </div>
-              </article>
-            );
-          })}
+        <div className="project-case-list" role="list">
+          {projects.map((project, index) => (
+            <article
+              key={project.id}
+              className={`project-case reveal ${index % 2 === 1 ? 'is-reversed' : ''}`}
+              role="listitem"
+            >
+              <ProjectCaseDetails project={project} index={index} />
+            </article>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-function ProjectCaseDetails({ project, index, isSelected }) {
+function ProjectCaseDetails({ project, index }) {
   return (
     <div className="project-case-content">
       <div className="project-case-media">
         {project.image ? (
-          <img src={project.image} alt={project.alt} loading="lazy" />
+          <img
+            src={project.image}
+            alt={project.alt}
+            width={project.imageWidth}
+            height={project.imageHeight}
+            loading="lazy"
+          />
         ) : (
-          <div className="project-case-fallback" aria-hidden="true">
+          <div className="project-case-fallback" aria-label={project.alt}>
             <span>{String(index + 1).padStart(2, '0')}</span>
-            <p>Model study</p>
+            <p>{project.fallbackLabel}</p>
           </div>
         )}
       </div>
 
       <div className="project-case-copy">
         <div className="project-case-copy-topline">
-          <p className="project-case-role">{project.role}</p>
-          <p className="project-case-count">
-            Case {String(index + 1).padStart(2, '0')} / 05
-          </p>
+          <p className="project-case-count">Case {String(index + 1).padStart(2, '0')} / 05</p>
+          <p className="project-case-category">{project.category}</p>
         </div>
         <h3>{project.title}</h3>
+        <p className="project-case-role">Role · {project.role}</p>
 
         <dl className="project-case-story">
           <div>
@@ -253,7 +233,6 @@ function ProjectCaseDetails({ project, index, isSelected }) {
               rel="noopener noreferrer"
               compact
               variant={link.primary ? 'red' : 'light'}
-              tabIndex={isSelected ? 0 : -1}
             >
               {link.label}
             </AnimatedLink>

@@ -109,7 +109,7 @@ export default function Experience() {
     <section ref={sectionRef} id="experience" className="section-frame py-20 lg:py-24">
       <div className="max-w-[1100px] mx-auto px-5">
         <div className="section-heading reveal mb-14">
-          <p className="section-kicker text-r-red">02 / Journey</p>
+          <p className="section-kicker text-r-red">02 / Experience</p>
           <h2 className="text-white text-4xl lg:text-6xl leading-[0.95]">
             Experience
           </h2>

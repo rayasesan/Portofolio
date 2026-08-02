@@ -3,14 +3,12 @@ const contactLinks = [
     label: 'Send Email',
     detail: 'rayasesan@gmail.com',
     href: 'mailto:rayasesan@gmail.com',
-    icon: 'lucide:mail',
     ariaLabel: 'Send email to Raya Sesan Firdaus',
   },
   {
     label: 'Connect on LinkedIn',
     detail: 'linkedin.com/in/rayasesann',
     href: 'https://linkedin.com/in/rayasesann',
-    icon: 'lucide:linkedin',
     ariaLabel: 'Open Raya Sesan Firdaus LinkedIn profile',
     external: true,
   },
@@ -18,7 +16,6 @@ const contactLinks = [
     label: 'View GitHub',
     detail: 'github.com/rayasesan',
     href: 'https://github.com/rayasesan',
-    icon: 'lucide:github',
     ariaLabel: 'Open Raya Sesan Firdaus GitHub profile',
     external: true,
   },
@@ -37,6 +34,10 @@ export default function Contact() {
             <p className="text-r-light text-[15px] leading-[1.75] max-w-xl">
               I'm open to Machine Learning, Data Science, and AI Engineering internship opportunities, as well as collaborative technical projects. Reach out through email or LinkedIn.
             </p>
+            <div className="contact-location">
+              <span aria-hidden="true"></span>
+              Depok, Indonesia
+            </div>
           </div>
 
           <div className="contact-links reveal">
@@ -53,9 +54,7 @@ export default function Contact() {
                     <p className="text-r-red text-[11px] font-medium mb-1">{link.label}</p>
                     <p className="text-white text-base font-medium break-words">{link.detail}</p>
                   </div>
-                  <span className="contact-link-icon flex h-10 w-10 flex-shrink-0 items-center justify-center rounded border border-r-steel text-r-red transition-all">
-                    <span className="iconify" data-icon={link.icon} data-width="16"></span>
-                  </span>
+                  <span className="contact-link-action">Open</span>
                 </a>
               ))}
           </div>

@@ -20,6 +20,7 @@ const socialLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('top');
   const menuButtonRef = useRef(null);
   const menuRef = useRef(null);
   const mobileMenuId = 'site-navigation';
@@ -29,6 +30,43 @@ export default function Navbar() {
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const sections = navLinks
+      .map((link) => document.querySelector(link.href))
+      .filter(Boolean);
+    let frame = 0;
+
+    const syncActiveSection = () => {
+      frame = 0;
+      const guide = window.scrollY + window.innerHeight * 0.28;
+      let currentSection = sections[0]?.id ?? 'top';
+
+      sections.forEach((section) => {
+        if (section.offsetTop <= guide) {
+          currentSection = section.id;
+        }
+      });
+
+      setActiveSection(currentSection);
+    };
+
+    const requestSync = () => {
+      if (!frame) {
+        frame = window.requestAnimationFrame(syncActiveSection);
+      }
+    };
+
+    syncActiveSection();
+    window.addEventListener('scroll', requestSync, { passive: true });
+    window.addEventListener('resize', requestSync);
+
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', requestSync);
+      window.removeEventListener('resize', requestSync);
+    };
   }, []);
 
   useEffect(() => {
@@ -101,13 +139,24 @@ export default function Navbar() {
             Raya Sesan<span>.</span>
           </a>
 
-          <div className="site-header-quicklinks" aria-label="Quick navigation">
+          <div className="site-header-quicklinks" aria-label="Primary navigation">
             {quickLinks.map((link) => (
-              <a key={link.href} href={link.href}>{link.label}</a>
+              <a
+                key={link.href}
+                href={link.href}
+                className={activeSection === link.href.slice(1) ? 'is-active' : ''}
+                aria-current={activeSection === link.href.slice(1) ? 'location' : undefined}
+              >
+                {link.label}
+              </a>
             ))}
           </div>
 
-          <a href="#contact" className="site-header-contact">
+          <a
+            href="#contact"
+            className={`site-header-contact ${activeSection === 'contact' ? 'is-active' : ''}`}
+            aria-current={activeSection === 'contact' ? 'location' : undefined}
+          >
             Contact
           </a>
 
@@ -132,13 +181,10 @@ export default function Navbar() {
         className={`site-menu ${isOpen ? 'is-open' : ''}`}
         aria-hidden={!isOpen}
       >
-        <div className="site-menu__curtain site-menu__curtain--left" aria-hidden="true"></div>
-        <div className="site-menu__curtain site-menu__curtain--right" aria-hidden="true"></div>
-
         <div className="site-menu__inner max-w-[1100px] mx-auto">
           <div className="site-menu__eyebrow">
-            <p>Explore the portfolio</p>
-            <p>AI / Data / Engineering</p>
+            <p>Navigation</p>
+            <p>Machine Learning Engineer</p>
           </div>
 
           <div className="site-menu__body">
@@ -173,7 +219,7 @@ export default function Navbar() {
 
           <div className="site-menu__footer">
             <p>Raya Sesan Firdaus</p>
-            <p>Jakarta, Indonesia</p>
+            <p>Depok, Indonesia</p>
           </div>
         </div>
       </div>

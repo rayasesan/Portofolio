@@ -1,104 +1,80 @@
 import AnimatedLink from './AnimatedLink';
 
-const socialLinks = [
-  { label: 'Email', href: 'mailto:rayasesan@gmail.com' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/rayasesann', external: true },
-  { label: 'GitHub', href: 'https://github.com/rayasesan', external: true },
-];
-
-const proofPoints = [
-  'Coding Camp 2026 Distinction Graduate',
-  'Python',
-  'TensorFlow',
-  'FastAPI',
-];
+const selectedToolkit = ['Python', 'TensorFlow', 'Scikit-learn', 'FastAPI'];
 
 export default function Hero() {
-  const handlePointerMove = (event) => {
-    const bounds = event.currentTarget.getBoundingClientRect();
-    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-    event.currentTarget.style.setProperty('--hero-pointer-x', `${x * 26}px`);
-    event.currentTarget.style.setProperty('--hero-pointer-y', `${y * 26}px`);
-  };
-
-  const resetPointer = (event) => {
-    event.currentTarget.style.setProperty('--hero-pointer-x', '0px');
-    event.currentTarget.style.setProperty('--hero-pointer-y', '0px');
-  };
-
   return (
-    <section
-      id="top"
-      className="hero-stage appart-hero relative flex min-h-screen items-center overflow-hidden"
-      onPointerMove={handlePointerMove}
-      onPointerLeave={resetPointer}
-    >
-      <div className="hero-geometry" aria-hidden="true">
-        {[0, 1, 2, 3, 4, 5].map((index) => (
-          <span key={index} style={{ '--orbit-index': index }}></span>
-        ))}
-        <i className="hero-axis hero-axis--horizontal"></i>
-        <i className="hero-axis hero-axis--vertical"></i>
-      </div>
+    <section id="top" className="hero-stage">
+      <div className="hero-grid max-w-[1100px] mx-auto">
+        <figure className="hero-portrait-card scale-in">
+          <div className="hero-portrait-frame">
+            <img
+              src="/foto4.jpg"
+              alt="Portrait of Raya Sesan Firdaus"
+              width="783"
+              height="862"
+              fetchPriority="high"
+            />
+          </div>
+          <figcaption>
+            <span>Raya Sesan Firdaus</span>
+            <span>Depok, Indonesia</span>
+          </figcaption>
+        </figure>
 
-      <div className="appart-hero-inner relative z-10 mx-auto w-full max-w-[1100px] px-5">
-        <div className="hero-topline fade-up">
-          <p>Machine Learning · Data Science · AI Engineering</p>
-          <p>Jakarta, Indonesia</p>
-        </div>
-
-        <div className="hero-editorial-copy">
-          <h1 className="appart-hero-title">
-            <span className="fade-up" style={{ animationDelay: '0.08s' }}>Raya builds machine</span>
-            <span className="fade-up" style={{ animationDelay: '0.16s' }}>learning products</span>
-            <span className="fade-up" style={{ animationDelay: '0.24s' }}>beyond the notebook.</span>
+        <div className="hero-main">
+          <p className="hero-role fade-up">Machine Learning Engineer</p>
+          <h1 className="hero-title fade-up" style={{ animationDelay: '0.08s' }}>
+            Raya builds <em>machine learning systems</em> beyond the notebook.
           </h1>
-
-          <div className="hero-intro-row">
-            <div className="hero-round-portrait scale-in" style={{ animationDelay: '0.28s' }}>
-              <img src="/foto4.jpg" alt="Raya Sesan Firdaus" />
-            </div>
-
-            <div className="hero-intro-copy fade-up" style={{ animationDelay: '0.34s' }}>
-              <p>
-                I build machine learning and computer vision products, from raw data
-                and model development to deployment.
-              </p>
-              <ul className="hero-proof-line" aria-label="Selected credentials and toolkit">
-                {proofPoints.map((point) => <li key={point}>{point}</li>)}
-              </ul>
-              <div className="availability-note">
-                <span aria-hidden="true"></span>
-                Currently open to Machine Learning, Data Science, and AI Engineering internships.
-              </div>
-            </div>
-
-            <div className="hero-actions fade-up" style={{ animationDelay: '0.42s' }}>
-              <AnimatedLink href="#projects">View Projects</AnimatedLink>
-              <AnimatedLink href="/cv/raya-sesan-firdaus-cv.pdf" download="Raya-Sesan-Firdaus-CV.pdf" variant="light">
-                Download CV
-              </AnimatedLink>
-            </div>
+          <p className="hero-summary fade-up" style={{ animationDelay: '0.16s' }}>
+            I develop practical machine learning applications, computer vision systems,
+            and data-driven solutions from experimentation to deployment.
+          </p>
+          <div className="hero-actions fade-up" style={{ animationDelay: '0.22s' }}>
+            <AnimatedLink href="#projects">View Projects</AnimatedLink>
+            <AnimatedLink
+              href="/cv/raya-sesan-firdaus-cv.pdf"
+              download="Raya-Sesan-Firdaus-CV.pdf"
+              variant="light"
+            >
+              Download CV
+            </AnimatedLink>
           </div>
+          <p className="hero-credential fade-up" style={{ animationDelay: '0.28s' }}>
+            <span aria-hidden="true">01</span>
+            Coding Camp 2026 Distinction Graduate
+          </p>
         </div>
 
-        <div className="hero-footerline fade-up" style={{ animationDelay: '0.5s' }}>
-          <p>Your ideas, made intelligent.</p>
-          <div>
-            {socialLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                target={link.external ? '_blank' : undefined}
-                rel={link.external ? 'noopener noreferrer' : undefined}
-              >
-                {link.label}
-              </a>
-            ))}
+        <aside
+          className="hero-technical fade-up"
+          style={{ animationDelay: '0.2s' }}
+          aria-label="Professional details"
+        >
+          <div className="hero-availability">
+            <span aria-hidden="true"></span>
+            <p>Currently open to Machine Learning, Data Science, and AI Engineering internship opportunities.</p>
           </div>
-          <a href="#skills" className="hero-scroll-link">Scroll to explore</a>
-        </div>
+
+          <dl className="hero-facts">
+            <div>
+              <dt>Based in</dt>
+              <dd>Depok, Indonesia</dd>
+            </div>
+            <div>
+              <dt>Focus</dt>
+              <dd>ML systems and applied AI</dd>
+            </div>
+          </dl>
+
+          <div className="hero-toolkit">
+            <p>Selected toolkit</p>
+            <ul>
+              {selectedToolkit.map((tool) => <li key={tool}>{tool}</li>)}
+            </ul>
+          </div>
+        </aside>
       </div>
     </section>
   );
