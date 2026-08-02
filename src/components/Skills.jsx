@@ -20,20 +20,27 @@ export default function Skills() {
   return (
     <section id="skills" className="about-section">
       <article className="about-intro">
+        <figure className="about-intro__portrait reveal">
+          <div className="about-intro__image">
+            <img src="/foto4.jpg" alt="Raya Sesan Firdaus" width="783" height="862" loading="lazy" />
+          </div>
+          <figcaption>
+            <span>Jakarta, Indonesia</span>
+            <strong>Open to opportunities</strong>
+          </figcaption>
+        </figure>
+
         <div className="about-intro__copy reveal">
           <p className="scene-kicker">01 / About</p>
           <p className="about-intro__lead">Hey! I'm</p>
           <h2>Raya Sesan</h2>
           <p className="about-intro__bio">I'm an Informatics Engineering student focused on data science, machine learning, and AI application development. I learn by turning datasets and ideas into models, APIs, dashboards, and working prototypes.</p>
+          <p className="about-intro__statement">I turn data into experiments, models, and <span>useful products.</span></p>
+          <dl className="about-intro__details">
+            <div><dt>Focus</dt><dd>Data Science & Applied AI</dd></div>
+            <div><dt>Currently</dt><dd>Informatics Engineering Student</dd></div>
+          </dl>
         </div>
-      </article>
-
-      <article className="about-statement">
-        <figure className="reveal">
-          <img src="/foto4.jpg" alt="Raya Sesan Firdaus" width="783" height="862" loading="lazy" />
-          <figcaption><strong>Raya Sesan</strong><span>Informatics Engineering Student</span></figcaption>
-        </figure>
-        <p className="about-statement__text reveal">I turn <span>data</span> into experiments, models, and <span>useful products.</span></p>
       </article>
 
       <section className="capability-panel">

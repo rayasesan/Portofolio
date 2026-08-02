@@ -5,7 +5,7 @@ import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.j
 
 const STATES = {
   hero: { x: 1.05, y: -0.34, z: -0.55, scale: 0.96, rx: -0.08, ry: -0.24, rz: -0.18, opacity: 0.82 },
-  about: { x: -1.9, y: -0.18, z: -0.9, scale: 0.78, rx: 0.05, ry: 0.42, rz: -0.1, opacity: 0.34 },
+  about: { x: -2.7, y: -0.18, z: -1, scale: 0.72, rx: 0.05, ry: 0.42, rz: -0.1, opacity: 0.1 },
   experience: { x: 2.5, y: -0.35, z: -1.2, scale: 0.72, rx: -0.08, ry: -0.5, rz: 0.12, opacity: 0.03 },
   credentials: { x: -2.65, y: -0.2, z: -1.1, scale: 0.72, rx: 0.08, ry: 0.58, rz: -0.12, opacity: 0.02 },
   projects: { x: 3.8, y: -0.3, z: -1.25, scale: 0.66, rx: 0.02, ry: -0.72, rz: 0.14, opacity: 0.01 },
