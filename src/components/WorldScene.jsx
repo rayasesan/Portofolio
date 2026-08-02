@@ -4,11 +4,11 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 
 const STATES = {
-  hero: { x: 0, y: -0.55, z: 0, scale: 1.28, rx: -0.08, ry: -0.24, rz: -0.27, opacity: 1 },
-  about: { x: -1.7, y: -0.15, z: -0.4, scale: 1.05, rx: 0.05, ry: 0.42, rz: -0.18, opacity: 0.78 },
+  hero: { x: 0.72, y: -0.45, z: -0.4, scale: 1.04, rx: -0.08, ry: -0.24, rz: -0.22, opacity: 0.9 },
+  about: { x: -1.85, y: -0.2, z: -0.75, scale: 0.86, rx: 0.05, ry: 0.42, rz: -0.12, opacity: 0.68 },
   experience: { x: 2.5, y: -0.35, z: -1.2, scale: 0.8, rx: -0.08, ry: -0.5, rz: 0.12, opacity: 0.24 },
   credentials: { x: -2.65, y: -0.2, z: -1.1, scale: 0.82, rx: 0.08, ry: 0.58, rz: -0.12, opacity: 0.2 },
-  projects: { x: 2.35, y: -0.55, z: -0.55, scale: 1.08, rx: 0.02, ry: -0.72, rz: 0.22, opacity: 0.68 },
+  projects: { x: 3.8, y: -0.3, z: -1.25, scale: 0.72, rx: 0.02, ry: -0.72, rz: 0.14, opacity: 0.16 },
   contact: { x: 3.25, y: -0.72, z: -0.8, scale: 0.92, rx: 0, ry: -0.92, rz: 0.18, opacity: 0.55 },
 };
 

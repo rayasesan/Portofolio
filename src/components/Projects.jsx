@@ -30,34 +30,45 @@ export default function Projects() {
   return (
     <section id="projects" className="projects-section">
       <div className="projects-stage">
-        <h2 className="reveal">Work</h2>
-        <div className="project-orb" aria-live="polite">
-          <span className="project-orb__ring"></span>
-          {active.image ? (
-            <img src={active.image} alt={active.alt} />
-          ) : (
-            <div className="project-orb__fallback"><span>{String(activeIndex + 1).padStart(2, '0')}</span><i></i><i></i></div>
-          )}
-          <p>{active.stat}</p>
-        </div>
+        <header className="projects-heading">
+          <p className="scene-kicker">04 / Selected work</p>
+          <h2>Work</h2>
+          <p>Selected machine learning, AI engineering, analytics, and business intelligence projects.</p>
+        </header>
 
-        <div className="project-list" role="list" aria-label="Selected projects">
-          {projects.map((project, index) => (
-            <a
-              href={project.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              key={project.title}
-              role="listitem"
-              className={`project-row reveal ${activeIndex === index ? 'is-active' : ''}`}
-              onMouseEnter={() => setActiveIndex(index)}
-              onFocus={() => setActiveIndex(index)}
-              onTouchStart={() => setActiveIndex(index)}
-            >
-              <strong>{project.title}</strong>
-              <span>{project.category}</span>
-            </a>
-          ))}
+        <div className="projects-showcase">
+          <div className="project-list" role="list" aria-label="Selected projects">
+            {projects.map((project, index) => (
+              <a
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                key={project.title}
+                role="listitem"
+                className={`project-row ${activeIndex === index ? 'is-active' : ''}`}
+                onMouseEnter={() => setActiveIndex(index)}
+                onFocus={() => setActiveIndex(index)}
+                onTouchStart={() => setActiveIndex(index)}
+              >
+                <span className="project-row__number">{String(index + 1).padStart(2, '0')}</span>
+                <strong>{project.title}</strong>
+                <span className="project-row__category">{project.category}</span>
+              </a>
+            ))}
+          </div>
+
+          <div className="project-visual">
+            <div className="project-orb" aria-live="polite">
+              <span className="project-orb__ring"></span>
+              {active.image ? (
+                <img src={active.image} alt={active.alt} />
+              ) : (
+                <div className="project-orb__fallback"><span>{String(activeIndex + 1).padStart(2, '0')}</span><i></i><i></i></div>
+              )}
+              <p>{active.stat}</p>
+            </div>
+            <p className="project-visual__caption"><span>{String(activeIndex + 1).padStart(2, '0')}</span>{active.title}</p>
+          </div>
         </div>
 
         <a className="projects-all" href="https://github.com/rayasesan" target="_blank" rel="noopener noreferrer">All repositories</a>

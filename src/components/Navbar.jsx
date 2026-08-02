@@ -66,12 +66,12 @@ export default function Navbar() {
     <>
       <nav className={`site-header ${isOpen ? 'is-open' : ''}`}>
         <div className="site-header__inner">
-          <a className="site-mark" href="#top" aria-label="Back to home" onClick={close}>RS</a>
+          <a className="site-mark" href="#top" aria-label="Raya Sesan — back to home" onClick={close}>Raya Sesan</a>
           <div className="site-header__links" aria-label="Primary navigation">
             {links.map((link, index) => (
               <span key={link.href}>
                 <a href={link.href} className={active === link.href.slice(1) ? 'is-active' : ''}>{link.label}</a>
-                {index < links.length - 1 && <i>•</i>}
+                {index < links.length - 1 && <i aria-hidden="true">•</i>}
               </span>
             ))}
           </div>
