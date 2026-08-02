@@ -4,7 +4,7 @@ import AnimatedLink from './AnimatedLink';
 const projects = [
   {
     id: 'nutrify',
-    category: 'AI Engineering · Computer Vision',
+    category: 'AI Engineering / Computer Vision',
     title: 'Nutrify: AI-Powered Nutrition Platform',
     shortTitle: 'Nutrify',
     desc: 'An AI-powered nutrition platform that identifies Indonesian food from images, analyzes nutritional information, and provides personalized recommendations through an AI nutrition coach.',
@@ -65,7 +65,7 @@ const projects = [
   },
   {
     id: 'bank-marketing',
-    category: 'Data Analysis · SQL',
+    category: 'Data Analysis / SQL',
     title: 'Bank Marketing SQL Analytics',
     shortTitle: 'SQL Analytics',
     desc: 'Analyzes a bank marketing campaign dataset with SQLite to find customer segments and campaign factors linked to term deposit subscriptions.',
@@ -104,108 +104,98 @@ const projects = [
   },
 ];
 
-const paperHeights = [190, 245, 305, 245, 190];
-
 export default function Projects() {
   const [selectedId, setSelectedId] = useState(projects[0].id);
-  const selectedProject = projects.find((project) => project.id === selectedId) ?? projects[0];
+
+  const toggleProject = (projectId) => {
+    setSelectedId((currentId) => (currentId === projectId ? null : projectId));
+  };
 
   return (
-    <section id="projects" className="section-frame projects-tray-section">
-      <div className="max-w-[1100px] mx-auto px-5 w-full py-20 lg:py-28">
-        <div className="projects-gallery-stage">
-        <div className="projects-tray-heading reveal text-center">
-          <p className="section-kicker text-r-red">04 / Selected work</p>
-          <h2 className="text-white text-4xl md:text-6xl lg:text-7xl leading-[0.95]">
-              Selected cases
-          </h2>
-          <p className="mx-auto mt-5 max-w-xl text-r-light text-sm leading-[1.75]">
-            Hover through the stack, then select a project to explore the work behind it.
+    <section id="projects" className="section-frame projects-cases-section">
+      <div className="projects-cases-wrap max-w-[1100px] mx-auto w-full py-20 lg:py-28">
+        <header className="projects-cases-intro reveal">
+          <p className="section-kicker">04 / Selected work</p>
+          <h2>Selected<br />cases</h2>
+          <p className="projects-cases-summary">
+            Five practical projects across AI engineering, machine learning, SQL,
+            and business intelligence. Select a case to see the work behind it.
           </p>
-          <div className="mt-7">
-            <AnimatedLink
-              href="https://github.com/rayasesan"
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="light"
-            >
-              View all on GitHub
-            </AnimatedLink>
-          </div>
-        </div>
+          <AnimatedLink
+            href="https://github.com/rayasesan"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View all on GitHub
+          </AnimatedLink>
+        </header>
 
-        <div className="projects-tray reveal" aria-label="Project showcase">
-          <div className="projects-tray-back" aria-hidden="true"></div>
+        <div className="project-case-list reveal" role="list">
+          {projects.map((project, index) => {
+            const isSelected = selectedId === project.id;
+            const panelId = `project-panel-${project.id}`;
 
-          <div className="projects-paper-stack" role="list">
-            {projects.map((project, index) => (
+            return (
               <article
                 key={project.id}
-                className={`project-paper ${selectedId === project.id ? 'is-selected' : ''}`}
-                style={{
-                  '--paper-height': `${paperHeights[index]}px`,
-                  '--paper-order': projects.length - index,
-                }}
+                className={`project-case ${isSelected ? 'is-open' : ''}`}
                 role="listitem"
               >
                 <button
                   type="button"
-                  className="project-paper-button"
-                  onMouseEnter={() => setSelectedId(project.id)}
-                  onFocus={() => setSelectedId(project.id)}
-                  onClick={() => setSelectedId(project.id)}
-                  aria-pressed={selectedId === project.id}
-                  aria-label={`Select project: ${project.title}`}
+                  className="project-case-trigger"
+                  aria-expanded={isSelected}
+                  aria-controls={panelId}
+                  onClick={() => toggleProject(project.id)}
                 >
-                  {project.image ? (
-                    <img src={project.image} alt={project.alt} className="project-paper-image" loading="lazy" />
-                  ) : (
-                    <div className="project-paper-fallback" aria-hidden="true">
-                      <span>{String(index + 1).padStart(2, '0')}</span>
-                      <div className="project-paper-grid"></div>
-                    </div>
-                  )}
-
-                  <div className="project-paper-caption">
-                    <h3>{project.shortTitle}</h3>
-                    <p>{project.category}</p>
-                  </div>
+                  <span className="project-case-number">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="project-case-title">{project.shortTitle}</span>
+                  <span className="project-case-category">{project.category}</span>
+                  <span className="project-case-toggle" aria-hidden="true"></span>
                 </button>
+
+                <div
+                  id={panelId}
+                  className="project-case-panel"
+                  aria-hidden={!isSelected}
+                >
+                  <div className="project-case-panel-inner">
+                    <ProjectCaseDetails project={project} index={index} isSelected={isSelected} />
+                  </div>
+                </div>
               </article>
-            ))}
-          </div>
-
-          <div className="projects-tray-front" aria-hidden="true">
-            <span>Selected work · {projects.length} projects</span>
-          </div>
+            );
+          })}
         </div>
-
-        </div>
-
-        <ProjectDetails project={selectedProject} />
       </div>
     </section>
   );
 }
 
-function ProjectDetails({ project }) {
+function ProjectCaseDetails({ project, index, isSelected }) {
   return (
-    <article key={project.id} className="project-tray-details" aria-live="polite">
-      <div>
-        <p className="section-kicker text-r-red">{project.category}</p>
-        <h3 className="text-white text-3xl md:text-4xl leading-tight">{project.title}</h3>
-        <p className="mt-4 max-w-2xl text-r-light text-sm leading-[1.75]">{project.desc}</p>
-        <p className="mt-4 text-r-silver text-xs">Role: {project.role}</p>
+    <div className="project-case-content">
+      <div className="project-case-media">
+        {project.image ? (
+          <img src={project.image} alt={project.alt} loading="lazy" />
+        ) : (
+          <div className="project-case-fallback" aria-hidden="true">
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <p>Model study</p>
+          </div>
+        )}
       </div>
 
-      <div className="project-tray-meta">
-        <div className="project-tray-tags">
-          {project.tags.map((tag) => (
-            <span key={tag}>{tag}</span>
-          ))}
+      <div className="project-case-copy">
+        <p className="project-case-role">{project.role}</p>
+        <h3>{project.title}</h3>
+        <p className="project-case-description">{project.desc}</p>
+
+        <div className="project-case-tags">
+          {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
         </div>
 
-        <div className="project-tray-stats">
+        <div className="project-case-stats">
           {project.stats.map((stat) => (
             <div key={`${stat.value}-${stat.label}`}>
               <strong>{stat.value}</strong>
@@ -214,7 +204,7 @@ function ProjectDetails({ project }) {
           ))}
         </div>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="project-case-links">
           {project.links.map((link) => (
             <AnimatedLink
               key={link.href}
@@ -223,12 +213,13 @@ function ProjectDetails({ project }) {
               rel="noopener noreferrer"
               compact
               variant={link.primary ? 'red' : 'light'}
+              tabIndex={isSelected ? 0 : -1}
             >
               {link.label}
             </AnimatedLink>
           ))}
         </div>
       </div>
-    </article>
+    </div>
   );
 }
