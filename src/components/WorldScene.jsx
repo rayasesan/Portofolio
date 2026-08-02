@@ -4,12 +4,12 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 
 const STATES = {
-  hero: { x: 0.72, y: -0.45, z: -0.4, scale: 1.04, rx: -0.08, ry: -0.24, rz: -0.22, opacity: 0.9 },
-  about: { x: -1.85, y: -0.2, z: -0.75, scale: 0.86, rx: 0.05, ry: 0.42, rz: -0.12, opacity: 0.68 },
-  experience: { x: 2.5, y: -0.35, z: -1.2, scale: 0.8, rx: -0.08, ry: -0.5, rz: 0.12, opacity: 0.24 },
-  credentials: { x: -2.65, y: -0.2, z: -1.1, scale: 0.82, rx: 0.08, ry: 0.58, rz: -0.12, opacity: 0.2 },
-  projects: { x: 3.8, y: -0.3, z: -1.25, scale: 0.72, rx: 0.02, ry: -0.72, rz: 0.14, opacity: 0.16 },
-  contact: { x: 3.25, y: -0.72, z: -0.8, scale: 0.92, rx: 0, ry: -0.92, rz: 0.18, opacity: 0.55 },
+  hero: { x: 1.05, y: -0.34, z: -0.55, scale: 0.96, rx: -0.08, ry: -0.24, rz: -0.18, opacity: 0.82 },
+  about: { x: -1.9, y: -0.18, z: -0.9, scale: 0.78, rx: 0.05, ry: 0.42, rz: -0.1, opacity: 0.34 },
+  experience: { x: 2.5, y: -0.35, z: -1.2, scale: 0.72, rx: -0.08, ry: -0.5, rz: 0.12, opacity: 0.03 },
+  credentials: { x: -2.65, y: -0.2, z: -1.1, scale: 0.72, rx: 0.08, ry: 0.58, rz: -0.12, opacity: 0.02 },
+  projects: { x: 3.8, y: -0.3, z: -1.25, scale: 0.66, rx: 0.02, ry: -0.72, rz: 0.14, opacity: 0.01 },
+  contact: { x: 3.25, y: -0.72, z: -0.8, scale: 0.72, rx: 0, ry: -0.92, rz: 0.18, opacity: 0.06 },
 };
 
 export default function WorldScene() {
@@ -164,6 +164,8 @@ export default function WorldScene() {
       orbitPink.material.opacity = current.opacity * 0.95;
       orbitBlue.material.opacity = current.opacity * 0.55;
       modelMeshes.forEach((mesh) => { mesh.material.opacity = current.opacity; });
+      stars.material.opacity = current.opacity * 0.55;
+      document.documentElement.style.setProperty('--world-presence', current.opacity.toFixed(3));
       stars.rotation.y += motionQuery.matches ? 0 : delta * 0.004;
 
       renderer.render(scene, camera);
@@ -184,6 +186,7 @@ export default function WorldScene() {
       orbitBlue.geometry.dispose();
       orbitBlue.material.dispose();
       modelMeshes.forEach((mesh) => mesh.material.dispose());
+      document.documentElement.style.removeProperty('--world-presence');
       renderer.domElement.remove();
     };
   }, []);
