@@ -1,56 +1,56 @@
-const skillGroups = [
+const capabilities = [
   {
-    title: 'Programming & Data',
-    description: 'Prepare, explore, transform, and communicate data for reliable analysis and model development.',
-    skills: ['Python', 'SQL', 'Pandas', 'NumPy', 'Data Cleaning', 'Exploratory Data Analysis', 'Data Visualization'],
+    title: 'Model & reason',
+    description: 'From structured experimentation to evaluated models with clear assumptions and measurable performance.',
+    tools: 'Python / Scikit-learn / TensorFlow / Feature Engineering / Model Evaluation',
   },
   {
-    title: 'Machine Learning & AI',
-    description: 'Develop and evaluate practical predictive models, including computer vision and Generative AI applications.',
-    skills: ['Scikit-learn', 'TensorFlow', 'Keras', 'Classification', 'Regression', 'Computer Vision', 'Natural Language Processing', 'Feature Engineering', 'Model Evaluation', 'Generative AI'],
+    title: 'Build & deploy',
+    description: 'Turning trained models into practical interfaces, services, and workflows people can actually use.',
+    tools: 'FastAPI / REST API / Streamlit / Model Serving / Docker Fundamentals',
   },
   {
-    title: 'Model Deployment',
-    description: 'Turn trained models into usable applications through APIs, model serving, and lightweight product interfaces.',
-    skills: ['FastAPI', 'REST API', 'Streamlit', 'Model Serving', 'API Integration', 'Docker Fundamentals'],
-  },
-  {
-    title: 'Tools & Analytics',
-    description: 'Build reproducible workflows and decision-ready analytics using practical development and BI tools.',
-    skills: ['Git', 'GitHub', 'Jupyter Notebook', 'Google Colab', 'Power BI', 'TensorBoard'],
+    title: 'Analyze & explain',
+    description: 'Finding the useful signal in raw data and communicating it through analysis, SQL, and decision-ready visuals.',
+    tools: 'SQL / Pandas / NumPy / Power BI / Data Visualization',
   },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="section-frame expertise-section">
-      <div className="max-w-[1100px] mx-auto">
-        <div className="section-heading section-heading--split">
-          <div className="reveal">
-            <p className="section-kicker">01 / Expertise</p>
-            <h2>Technical capabilities</h2>
-          </div>
-          <div className="reveal">
-            <p>
-              A focused toolkit for turning raw data into reliable models,
-              useful products, and clear business insight.
-            </p>
-          </div>
+    <section id="skills" className="section about-section">
+      <div className="page-shell">
+        <div className="about-heading reveal">
+          <p className="section-index">01 / About</p>
+          <h2>I turn data into <span>systems people can use.</span></h2>
         </div>
 
-        <div className="expertise-list">
-          {skillGroups.map((group, index) => (
-            <article key={group.title} className="skill-card reveal">
-              <p className="skill-number">{String(index + 1).padStart(2, '0')}</p>
-              <div className="skill-copy">
-                <h3>{group.title}</h3>
-                <p>{group.description}</p>
-              </div>
-              <div className="skill-list" aria-label={`${group.title} technologies`}>
-                {group.skills.map((skill) => <span key={skill}>{skill}</span>)}
-              </div>
-            </article>
-          ))}
+        <div className="about-intro reveal">
+          <p className="about-intro__lead">Machine learning is valuable when it survives outside the notebook.</p>
+          <p>
+            I develop practical machine learning applications, computer vision systems,
+            and data products from exploration and modeling through API delivery. My work
+            sits where careful technical thinking meets usable product execution.
+          </p>
+        </div>
+
+        <div className="capability-section">
+          <div className="capability-heading reveal">
+            <p className="section-index">How I work</p>
+            <h3>One workflow.<br />Three strengths.</h3>
+          </div>
+          <div className="capability-list">
+            {capabilities.map((capability, index) => (
+              <article className="capability-row reveal" key={capability.title}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3>{capability.title}</h3>
+                  <p>{capability.description}</p>
+                </div>
+                <p className="capability-row__tools">{capability.tools}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

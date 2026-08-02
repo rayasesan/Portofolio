@@ -2,56 +2,36 @@ import { credentials } from '../data/credentials';
 
 export default function CredentialProof() {
   return (
-    <section id="credentials" className="credential-scroll-section section-frame">
-      <div className="credential-frame max-w-[1100px] mx-auto">
-        <div className="section-heading section-heading--split">
-          <div className="reveal">
-            <p className="section-kicker">03 / Credentials</p>
-            <h2>Credentials</h2>
-          </div>
-          <div className="reveal credential-intro">
-            <p>
-              Verified learning programs, certifications, and achievements that support the technical work.
-            </p>
-            <p className="credential-count">{credentials.length} verified credentials</p>
-          </div>
-        </div>
+    <section id="credentials" className="section credentials-section">
+      <div className="page-shell">
+        <header className="section-title section-title--compact reveal">
+          <p className="section-index">03 / Credentials</p>
+          <h2>Proof, simply.</h2>
+          <p>{credentials.length} verified programs and achievements. Open any title to view the original credential.</p>
+        </header>
 
-        <div className="credential-rail" aria-label="Verified credentials">
+        <div className="credential-list" role="list">
           {credentials.map((credential, index) => (
-            <CredentialCard key={credential.name} credential={credential} index={index} />
+            <a
+              href={credential.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="credential-row reveal"
+              role="listitem"
+              key={credential.name}
+              aria-label={`View credential: ${credential.name}`}
+            >
+              <span className="credential-row__number">{String(index + 1).padStart(2, '0')}</span>
+              <div className="credential-row__title">
+                <h3>{credential.name}</h3>
+                <p>{credential.issuer}</p>
+              </div>
+              <p className="credential-row__badge">{credential.badge ?? credential.note}</p>
+              <p className="credential-row__year">{credential.year}</p>
+            </a>
           ))}
         </div>
       </div>
     </section>
-  );
-}
-
-function CredentialCard({ credential, index }) {
-  return (
-    <a
-      href={credential.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`credential-proof-card reveal ${credential.featured ? 'is-featured' : ''}`}
-      aria-label={`View credential: ${credential.name}`}
-    >
-      <div className="credential-card-topline">
-        <span className="credential-index">{String(index + 1).padStart(2, '0')}</span>
-        {credential.badge && <span className="credential-badge">{credential.badge}</span>}
-      </div>
-
-      <p className="credential-issuer">{credential.issuer}</p>
-      <h3>{credential.name}</h3>
-      <p className="credential-summary">{credential.summary}</p>
-
-      <div className="credential-card-footer">
-        <div>
-          <p>{credential.note}</p>
-          <span>Open credential</span>
-        </div>
-        <p>{credential.year}</p>
-      </div>
-    </a>
   );
 }

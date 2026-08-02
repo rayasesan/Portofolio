@@ -1,131 +1,75 @@
 import { useEffect, useRef, useState } from 'react';
 
-const navLinks = [
+const primaryLinks = [
   { href: '#top', label: 'Home' },
-  { href: '#skills', label: 'Expertise' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#credentials', label: 'Credentials' },
-  { href: '#projects', label: 'Projects' },
+  { href: '#skills', label: 'About' },
+  { href: '#projects', label: 'Work' },
   { href: '#contact', label: 'Contact' },
 ];
 
-const quickLinks = navLinks.slice(1, 5);
-
-const socialLinks = [
-  { href: 'mailto:rayasesan@gmail.com', label: 'Email' },
-  { href: 'https://linkedin.com/in/rayasesann', label: 'LinkedIn', external: true },
-  { href: 'https://github.com/rayasesan', label: 'GitHub', external: true },
+const menuLinks = [
+  ...primaryLinks.slice(0, 2),
+  { href: '#experience', label: 'Experience' },
+  { href: '#credentials', label: 'Credentials' },
+  ...primaryLinks.slice(2),
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('top');
-  const menuButtonRef = useRef(null);
+  const buttonRef = useRef(null);
   const menuRef = useRef(null);
-  const mobileMenuId = 'site-navigation';
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 56);
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const sections = navLinks
-      .map((link) => document.querySelector(link.href))
-      .filter(Boolean);
-    let frame = 0;
-
-    const syncActiveSection = () => {
-      frame = 0;
-      const guide = window.scrollY + window.innerHeight * 0.28;
-      let currentSection = sections[0]?.id ?? 'top';
-
-      sections.forEach((section) => {
-        if (section.offsetTop <= guide) {
-          currentSection = section.id;
-        }
-      });
-
-      setActiveSection(currentSection);
+    const sync = () => {
+      setIsScrolled(window.scrollY > 30);
+      const guide = window.scrollY + window.innerHeight * 0.3;
+      const current = [...menuLinks]
+        .reverse()
+        .find(({ href }) => document.querySelector(href)?.offsetTop <= guide);
+      setActiveSection(current?.href.slice(1) ?? 'top');
     };
 
-    const requestSync = () => {
-      if (!frame) {
-        frame = window.requestAnimationFrame(syncActiveSection);
-      }
-    };
-
-    syncActiveSection();
-    window.addEventListener('scroll', requestSync, { passive: true });
-    window.addEventListener('resize', requestSync);
-
+    sync();
+    window.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
     return () => {
-      if (frame) window.cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', requestSync);
-      window.removeEventListener('resize', requestSync);
+      window.removeEventListener('scroll', sync);
+      window.removeEventListener('resize', sync);
     };
-  }, []);
-
-  useEffect(() => {
-    const desktopQuery = window.matchMedia('(min-width: 901px)');
-    const closeOnDesktop = () => {
-      if (desktopQuery.matches) {
-        setIsOpen(false);
-      }
-    };
-
-    closeOnDesktop();
-    desktopQuery.addEventListener('change', closeOnDesktop);
-    return () => desktopQuery.removeEventListener('change', closeOnDesktop);
   }, []);
 
   useEffect(() => {
     document.documentElement.classList.toggle('has-site-menu-open', isOpen);
     document.body.style.overflow = isOpen ? 'hidden' : '';
 
-    if (!isOpen) {
-      return () => {
-        document.documentElement.classList.remove('has-site-menu-open');
-        document.body.style.overflow = '';
-      };
-    }
+    if (!isOpen) return undefined;
 
-    const handleKeyDown = (event) => {
+    const onKeyDown = (event) => {
       if (event.key === 'Escape') {
         setIsOpen(false);
-        menuButtonRef.current?.focus();
-        return;
+        buttonRef.current?.focus();
       }
 
-      if (event.key !== 'Tab') {
-        return;
-      }
-
-      const menuItems = Array.from(
-        menuRef.current?.querySelectorAll('a[href], button:not([disabled])') ?? [],
-      );
-      const focusableItems = [menuButtonRef.current, ...menuItems].filter(Boolean);
-      const firstItem = focusableItems[0];
-      const lastItem = focusableItems[focusableItems.length - 1];
-
-      if (event.shiftKey && document.activeElement === firstItem) {
+      if (event.key !== 'Tab') return;
+      const items = [buttonRef.current, ...(menuRef.current?.querySelectorAll('a') ?? [])];
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
-        lastItem?.focus();
-      } else if (!event.shiftKey && document.activeElement === lastItem) {
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
         event.preventDefault();
-        firstItem?.focus();
+        first?.focus();
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-
+    window.addEventListener('keydown', onKeyDown);
     return () => {
       document.documentElement.classList.remove('has-site-menu-open');
       document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keydown', onKeyDown);
     };
   }, [isOpen]);
 
@@ -133,14 +77,14 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`site-header fixed inset-x-0 top-0 z-[120] ${isScrolled ? 'is-scrolled' : ''} ${isOpen ? 'is-menu-open' : ''}`}>
-        <div className="max-w-[1100px] mx-auto h-14 flex items-center justify-between">
+      <nav className={`site-header ${isScrolled ? 'is-scrolled' : ''} ${isOpen ? 'is-open' : ''}`}>
+        <div className="page-shell site-header__inner">
           <a href="#top" className="site-wordmark" aria-label="Back to home" onClick={closeMenu}>
-            Raya Sesan<span>.</span>
+            RAYA <span>/</span> SESAN
           </a>
 
-          <div className="site-header-quicklinks" aria-label="Primary navigation">
-            {quickLinks.map((link) => (
+          <div className="site-header__links" aria-label="Primary navigation">
+            {primaryLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -152,73 +96,35 @@ export default function Navbar() {
             ))}
           </div>
 
-          <a
-            href="#contact"
-            className={`site-header-contact ${activeSection === 'contact' ? 'is-active' : ''}`}
-            aria-current={activeSection === 'contact' ? 'location' : undefined}
-          >
-            Contact
-          </a>
+          <p className="site-header__status"><span></span> Available 2026</p>
 
           <button
-            ref={menuButtonRef}
+            ref={buttonRef}
             type="button"
-            className={`site-header-button ${isOpen ? 'is-open' : ''}`}
-            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            className="site-menu-button"
             aria-expanded={isOpen}
-            aria-controls={mobileMenuId}
-            onClick={() => setIsOpen((open) => !open)}
+            aria-controls="site-menu"
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            onClick={() => setIsOpen((value) => !value)}
           >
-            <span className="site-header-button__icon site-header-button__icon--open"></span>
-            <span className="site-header-button__icon site-header-button__icon--close"></span>
+            <span></span><span></span>
           </button>
         </div>
       </nav>
 
-      <div
-        ref={menuRef}
-        id={mobileMenuId}
-        className={`site-menu ${isOpen ? 'is-open' : ''}`}
-        aria-hidden={!isOpen}
-      >
-        <div className="site-menu__inner max-w-[1100px] mx-auto">
-          <div className="site-menu__eyebrow">
-            <p>Navigation</p>
+      <div ref={menuRef} id="site-menu" className={`site-menu ${isOpen ? 'is-open' : ''}`} aria-hidden={!isOpen}>
+        <div className="page-shell site-menu__inner">
+          <p className="site-menu__label">Navigation / Raya Sesan</p>
+          <ol className="site-menu__links">
+            {menuLinks.map((link, index) => (
+              <li key={link.href}>
+                <span>{index + 1}</span>
+                <a href={link.href} tabIndex={isOpen ? 0 : -1} onClick={closeMenu}>{link.label}</a>
+              </li>
+            ))}
+          </ol>
+          <div className="site-menu__meta">
             <p>Machine Learning Engineer</p>
-          </div>
-
-          <div className="site-menu__body">
-            <ol className="site-menu__links">
-              {navLinks.map((link, index) => (
-                <li key={link.href} style={{ '--menu-index': index }}>
-                  <a href={link.href} tabIndex={isOpen ? 0 : -1} onClick={closeMenu}>
-                    <span>{String(index + 1).padStart(2, '0')}</span>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ol>
-
-            <aside className="site-menu__aside">
-              <p>Open for internship opportunities and collaborative AI projects.</p>
-              <div>
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    target={link.external ? '_blank' : undefined}
-                    rel={link.external ? 'noopener noreferrer' : undefined}
-                    tabIndex={isOpen ? 0 : -1}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </aside>
-          </div>
-
-          <div className="site-menu__footer">
-            <p>Raya Sesan Firdaus</p>
             <p>Depok, Indonesia</p>
           </div>
         </div>
