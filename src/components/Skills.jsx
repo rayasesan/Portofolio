@@ -19,16 +19,13 @@ const capabilities = [
 export default function Skills() {
   return (
     <section id="skills" className="about-section">
-      <article className="about-opening scene-panel">
-        <div className="about-opening__copy reveal">
+      <article className="about-intro">
+        <div className="about-intro__copy reveal">
           <p className="scene-kicker">01 / About</p>
-          <h2>Hey! I'm</h2>
+          <p className="about-intro__lead">Hey! I'm</p>
+          <h2>Raya Sesan</h2>
+          <p className="about-intro__bio">I'm an Informatics Engineering student focused on data science, machine learning, and AI application development. I learn by turning datasets and ideas into models, APIs, dashboards, and working prototypes.</p>
         </div>
-      </article>
-
-      <article className="about-name scene-panel">
-        <h2 className="reveal"><span>Raya</span><span>Sesan</span></h2>
-        <p className="reveal">I'm an Informatics Engineering student focused on data science, machine learning, and AI application development. I learn by turning datasets and ideas into models, APIs, dashboards, and working prototypes.</p>
       </article>
 
       <article className="about-statement">

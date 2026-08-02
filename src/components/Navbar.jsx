@@ -62,18 +62,6 @@ export default function Navbar() {
   }, [isOpen]);
 
   const close = () => setIsOpen(false);
-  const moveNavLink = (event) => {
-    if (event.pointerType === 'touch') return;
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = (event.clientX - rect.left - rect.width / 2) * 0.12;
-    const y = (event.clientY - rect.top - rect.height / 2) * 0.18;
-    event.currentTarget.style.setProperty('--nav-x', `${x.toFixed(2)}px`);
-    event.currentTarget.style.setProperty('--nav-y', `${y.toFixed(2)}px`);
-  };
-  const resetNavLink = (event) => {
-    event.currentTarget.style.setProperty('--nav-x', '0px');
-    event.currentTarget.style.setProperty('--nav-y', '0px');
-  };
 
   return (
     <>
@@ -86,8 +74,6 @@ export default function Navbar() {
                 href={link.href}
                 key={link.href}
                 className={active === link.href.slice(1) ? 'is-active' : ''}
-                onPointerMove={moveNavLink}
-                onPointerLeave={resetNavLink}
               >
                 <span>{link.label}</span>
               </a>
