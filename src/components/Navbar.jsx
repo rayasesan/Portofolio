@@ -5,7 +5,7 @@ const navLinks = [
   { href: '#skills', label: 'Expertise' },
   { href: '#experience', label: 'Experience' },
   { href: '#credentials', label: 'Credentials' },
-  { href: '#projects', label: 'Selected work' },
+  { href: '#projects', label: 'Projects' },
   { href: '#contact', label: 'Contact' },
 ];
 

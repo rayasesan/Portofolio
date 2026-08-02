@@ -7,7 +7,11 @@ const projects = [
     category: 'AI Engineering / Computer Vision',
     title: 'Nutrify: AI-Powered Nutrition Platform',
     shortTitle: 'Nutrify',
-    desc: 'An AI-powered nutrition platform that identifies Indonesian food from images, analyzes nutritional information, and provides personalized recommendations through an AI nutrition coach.',
+    story: {
+      problem: 'Nutrition information for Indonesian dishes is often difficult to estimate from a photo alone.',
+      build: 'An end-to-end computer vision platform with model serving and a personalized AI nutrition coach.',
+      outcome: 'The food classifier reached 92.44% accuracy and was shipped as a usable web product.',
+    },
     role: 'AI Engineer',
     image: '/nutrify-landing.jpg',
     alt: 'Nutrify AI-powered nutrition platform landing page',
@@ -28,7 +32,11 @@ const projects = [
     category: 'Machine Learning',
     title: 'Customer Churn Prediction',
     shortTitle: 'Customer Churn',
-    desc: 'Predicts customer churn from telco demographic, service, billing, and contract data. The final model supports retention analysis by identifying high-risk customers and churn-driving factors.',
+    story: {
+      problem: 'Retention teams need to identify customers at risk of leaving before the contract ends.',
+      build: 'A classification workflow using demographic, service, billing, and contract data from 7,043 customers.',
+      outcome: 'Logistic Regression delivered an 84.26% ROC-AUC and clear churn-driving factors.',
+    },
     role: 'Data Scientist',
     image: '/customer-churn-preview.png',
     alt: 'Customer churn prediction project preview',
@@ -48,7 +56,11 @@ const projects = [
     category: 'Machine Learning',
     title: 'Credit Risk Prediction',
     shortTitle: 'Credit Risk',
-    desc: 'Classifies borrower default risk using demographic, financial, and loan-related features. Random Forest was selected as the final model for credit risk assessment.',
+    story: {
+      problem: 'Credit decisions need a consistent way to estimate borrower default risk from mixed financial data.',
+      build: 'A classification pipeline using demographic, financial, and loan features with model comparison.',
+      outcome: 'Random Forest was selected at 93.23% accuracy and a 93.11% ROC-AUC.',
+    },
     role: 'Machine Learning',
     image: null,
     alt: 'Credit risk prediction project',
@@ -68,7 +80,11 @@ const projects = [
     category: 'Data Analysis / SQL',
     title: 'Bank Marketing SQL Analytics',
     shortTitle: 'SQL Analytics',
-    desc: 'Analyzes a bank marketing campaign dataset with SQLite to find customer segments and campaign factors linked to term deposit subscriptions.',
+    story: {
+      problem: 'Campaign data was too dense to quickly reveal which customer segments were most likely to convert.',
+      build: 'Six business-focused SQL analyses using CTEs, window functions, and customer segmentation.',
+      outcome: 'The analysis surfaced a 64.73% conversion rate among customers with previous campaign success.',
+    },
     role: 'Data Analyst',
     image: null,
     alt: 'Bank marketing SQL analytics project',
@@ -88,7 +104,11 @@ const projects = [
     category: 'Business Intelligence',
     title: 'Telco Churn Dashboard',
     shortTitle: 'Telco Dashboard',
-    desc: 'Power BI dashboard analyzing telco churn behavior through customer, churn, and churn-rate KPIs across contract, service, payment, and tenure groups.',
+    story: {
+      problem: 'Churn patterns across contracts, services, payments, and tenure were difficult to monitor in raw tables.',
+      build: 'A Power BI dashboard with focused KPIs, DAX measures, and decision-ready segment views.',
+      outcome: 'The final PBIX brings three core KPIs and four key visualizations into one clear monitoring view.',
+    },
     role: 'BI Developer',
     image: '/telco-dashboard-preview.jpg',
     alt: 'Telco churn Power BI dashboard preview',
@@ -194,8 +214,23 @@ function ProjectCaseDetails({ project, index, isSelected }) {
           </p>
         </div>
         <h3>{project.title}</h3>
-        <p className="project-case-description">{project.desc}</p>
 
+        <dl className="project-case-story">
+          <div>
+            <dt>Problem</dt>
+            <dd>{project.story.problem}</dd>
+          </div>
+          <div>
+            <dt>Built</dt>
+            <dd>{project.story.build}</dd>
+          </div>
+          <div>
+            <dt>Outcome</dt>
+            <dd>{project.story.outcome}</dd>
+          </div>
+        </dl>
+
+        <p className="project-case-tech-label">Technology</p>
         <div className="project-case-tags">
           {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
         </div>

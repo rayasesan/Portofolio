@@ -6,6 +6,13 @@ const socialLinks = [
   { label: 'GitHub', href: 'https://github.com/rayasesan', external: true },
 ];
 
+const proofPoints = [
+  'Coding Camp 2026 Distinction Graduate',
+  'Python',
+  'TensorFlow',
+  'FastAPI',
+];
+
 export default function Hero() {
   const handlePointerMove = (event) => {
     const bounds = event.currentTarget.getBoundingClientRect();
@@ -37,14 +44,15 @@ export default function Hero() {
 
       <div className="appart-hero-inner relative z-10 mx-auto w-full max-w-[1100px] px-5">
         <div className="hero-topline fade-up">
-          <p>AI Engineer / Data Scientist</p>
+          <p>Machine Learning · Data Science · AI Engineering</p>
           <p>Jakarta, Indonesia</p>
         </div>
 
         <div className="hero-editorial-copy">
           <h1 className="appart-hero-title">
-            <span className="fade-up" style={{ animationDelay: '0.08s' }}>Raya builds</span>
-            <span className="fade-up" style={{ animationDelay: '0.18s' }}>intelligent systems.</span>
+            <span className="fade-up" style={{ animationDelay: '0.08s' }}>Raya builds machine</span>
+            <span className="fade-up" style={{ animationDelay: '0.16s' }}>learning products</span>
+            <span className="fade-up" style={{ animationDelay: '0.24s' }}>beyond the notebook.</span>
           </h1>
 
           <div className="hero-intro-row">
@@ -54,17 +62,20 @@ export default function Hero() {
 
             <div className="hero-intro-copy fade-up" style={{ animationDelay: '0.34s' }}>
               <p>
-                I turn raw data into machine-learning products, computer-vision systems,
-                and useful decisions, built from model to deployment.
+                I build machine learning and computer vision products, from raw data
+                and model development to deployment.
               </p>
+              <ul className="hero-proof-line" aria-label="Selected credentials and toolkit">
+                {proofPoints.map((point) => <li key={point}>{point}</li>)}
+              </ul>
               <div className="availability-note">
                 <span aria-hidden="true"></span>
-                Available for ML, Data Science, and AI Engineering internships.
+                Currently open to Machine Learning, Data Science, and AI Engineering internships.
               </div>
             </div>
 
             <div className="hero-actions fade-up" style={{ animationDelay: '0.42s' }}>
-              <AnimatedLink href="#projects">Selected work</AnimatedLink>
+              <AnimatedLink href="#projects">View Projects</AnimatedLink>
               <AnimatedLink href="/cv/raya-sesan-firdaus-cv.pdf" download="Raya-Sesan-Firdaus-CV.pdf" variant="light">
                 Download CV
               </AnimatedLink>
