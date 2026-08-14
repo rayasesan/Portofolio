@@ -7,7 +7,7 @@ import CredentialProof from './components/CredentialProof';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import WorldScene from './components/WorldScene';
+import CustomCursor from './components/CustomCursor';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-      <WorldScene />
+      <CustomCursor />
       <Navbar />
       <Hero />
       <Marquee />

@@ -1,9 +1,10 @@
 export default function Footer() {
   return (
-    <footer className="site-footer">
-      <p>Designed and developed for Raya Sesan Firdaus © {new Date().getFullYear()}</p>
-      <p>3D asset: Scattering Skull by Vladimir Petkovic / CC0</p>
-      <nav aria-label="Footer links"><a href="#top">Back to top</a><a href="https://github.com/rayasesan">GitHub</a><a href="https://linkedin.com/in/rayasesann">LinkedIn</a></nav>
+    <footer className="border-t border-r-steel py-7">
+      <div className="max-w-[1100px] mx-auto px-5 flex flex-col md:flex-row items-center justify-between gap-3">
+        <p className="text-r-steel text-[12px]">&copy; {new Date().getFullYear()} Raya Sesan Firdaus</p>
+        <p className="text-r-steel text-[12px]">Built with code, data & curiosity.</p>
+      </div>
     </footer>
   );
 }

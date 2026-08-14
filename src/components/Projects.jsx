@@ -1,107 +1,265 @@
 import { useState } from 'react';
-import PortfolioModal from './PortfolioModal';
+import AnimatedLink from './AnimatedLink';
 
 const projects = [
   {
-    title: 'Nutrify', category: 'AI Engineering / Computer Vision', image: '/nutrify-landing.jpg', alt: 'Nutrify platform preview',
-    stat: '92.44% accuracy',
-    summary: 'Indonesian food recognition with TensorFlow, FastAPI model serving, and Gemini-powered nutrition recommendations.',
-    actions: [
-      { label: 'Live demo', href: 'https://nutrify.biz.id' },
-      { label: 'Main repository', href: 'https://github.com/coding-camp-project/Project-Utama' },
+    id: 'nutrify',
+    category: 'AI Engineering / Computer Vision',
+    title: 'Nutrify: AI-Powered Nutrition Platform',
+    shortTitle: 'Nutrify',
+    story: {
+      problem: 'Nutrition information for Indonesian dishes is often difficult to estimate from a photo alone.',
+      build: 'An end-to-end computer vision platform with model serving and a personalized AI nutrition coach.',
+      outcome: 'The food classifier reached 92.44% accuracy and was shipped as a usable web product.',
+    },
+    role: 'AI Engineer',
+    image: '/nutrify-landing.jpg',
+    alt: 'Nutrify AI-powered nutrition platform landing page',
+    tags: ['Python', 'TensorFlow', 'Computer Vision', 'FastAPI', 'Gemini API'],
+    stats: [
+      { value: '92.44%', label: 'Model accuracy' },
+      { value: 'FastAPI', label: 'Model serving' },
+      { value: 'Gemini', label: 'AI coach' },
+    ],
+    links: [
+      { label: 'Live Demo', href: 'https://nutrify.biz.id', primary: true },
+      { label: 'Main Repository', href: 'https://github.com/coding-camp-project/Project-Utama' },
+      { label: 'AI Repository', href: 'https://github.com/coding-camp-project/AI' },
     ],
   },
   {
-    title: 'Customer Churn', category: 'Predictive Modeling', image: '/customer-churn-preview.png', alt: 'Customer churn project preview',
-    stat: '84.26% ROC-AUC',
-    summary: 'Classification across 7,043 customer records, from data cleaning and EDA to model evaluation.',
-    actions: [{ label: 'Main repository', href: 'https://github.com/rayasesan/customer-churn-prediction' }],
+    id: 'customer-churn',
+    category: 'Machine Learning',
+    title: 'Customer Churn Prediction',
+    shortTitle: 'Customer Churn',
+    story: {
+      problem: 'Retention teams need to identify customers at risk of leaving before the contract ends.',
+      build: 'A classification workflow using demographic, service, billing, and contract data from 7,043 customers.',
+      outcome: 'Logistic Regression delivered an 84.26% ROC-AUC and clear churn-driving factors.',
+    },
+    role: 'Data Scientist',
+    image: '/customer-churn-preview.png',
+    alt: 'Customer churn prediction project preview',
+    tags: ['Python', 'Scikit-learn', 'Pandas', 'Logistic Regression', 'Random Forest'],
+    stats: [
+      { value: '7,043', label: 'Customers' },
+      { value: '84.26%', label: 'ROC-AUC' },
+      { value: 'Logistic Regression', label: 'Best model' },
+    ],
+    links: [
+      { label: 'View Repository', href: 'https://github.com/rayasesan/customer-churn-prediction', primary: true },
+      { label: 'Notebook', href: 'https://github.com/rayasesan/customer-churn-prediction/blob/main/customer_churn_prediction.ipynb' },
+    ],
   },
   {
-    title: 'Credit Risk', category: 'Predictive Modeling', image: null, alt: 'Credit risk project',
-    stat: '93.23% accuracy',
-    summary: 'A supervised learning comparison for borrower risk, with Random Forest selected as the strongest model.',
-    actions: [{ label: 'Main repository', href: 'https://github.com/rayasesan/credit-risk-prediction' }],
+    id: 'credit-risk',
+    category: 'Machine Learning',
+    title: 'Credit Risk Prediction',
+    shortTitle: 'Credit Risk',
+    story: {
+      problem: 'Credit decisions need a consistent way to estimate borrower default risk from mixed financial data.',
+      build: 'A classification pipeline using demographic, financial, and loan features with model comparison.',
+      outcome: 'Random Forest was selected at 93.23% accuracy and a 93.11% ROC-AUC.',
+    },
+    role: 'Machine Learning',
+    image: null,
+    alt: 'Credit risk prediction project',
+    tags: ['Python', 'Scikit-learn', 'Classification', 'Random Forest', 'Feature Engineering'],
+    stats: [
+      { value: '93.23%', label: 'Accuracy' },
+      { value: '93.11%', label: 'ROC-AUC' },
+      { value: 'Random Forest', label: 'Best model' },
+    ],
+    links: [
+      { label: 'View Repository', href: 'https://github.com/rayasesan/credit-risk-prediction', primary: true },
+      { label: 'Notebook', href: 'https://github.com/rayasesan/credit-risk-prediction/blob/main/credit_risk_prediction.ipynb' },
+    ],
   },
   {
-    title: 'Bank Marketing', category: 'Data Analysis / SQL', image: null, alt: 'Bank marketing SQL project',
-    stat: '45,211 records',
-    summary: 'SQL-based exploration of campaign response patterns across a large bank marketing dataset.',
-    actions: [{ label: 'Main repository', href: 'https://github.com/rayasesan/bank-marketing-sql-analysis' }],
+    id: 'bank-marketing',
+    category: 'Data Analysis / SQL',
+    title: 'Bank Marketing SQL Analytics',
+    shortTitle: 'SQL Analytics',
+    story: {
+      problem: 'Campaign data was too dense to quickly reveal which customer segments were most likely to convert.',
+      build: 'Six business-focused SQL analyses using CTEs, window functions, and customer segmentation.',
+      outcome: 'The analysis surfaced a 64.73% conversion rate among customers with previous campaign success.',
+    },
+    role: 'Data Analyst',
+    image: null,
+    alt: 'Bank marketing SQL analytics project',
+    tags: ['SQL', 'SQLite', 'CTE', 'Window Functions', 'Segmentation'],
+    stats: [
+      { value: '45,211', label: 'Records' },
+      { value: '6', label: 'Business questions' },
+      { value: '64.73%', label: 'Previous-success conversion' },
+    ],
+    links: [
+      { label: 'View Repository', href: 'https://github.com/rayasesan/bank-marketing-sql-analysis', primary: true },
+      { label: 'SQL File', href: 'https://github.com/rayasesan/bank-marketing-sql-analysis/blob/main/bank_marketing_analysis.sql' },
+    ],
   },
   {
-    title: 'Telco Dashboard', category: 'Power BI / Data Visualization', image: '/telco-dashboard-preview.jpg', alt: 'Telco Power BI dashboard preview',
-    stat: '3 KPIs / 4 visuals',
-    summary: 'A focused Power BI dashboard for retention, churn rate, and segment-level exploration.',
-    actions: [{ label: 'Main repository', href: 'https://github.com/rayasesan/telco-customer-churn-dashboard-powerbi' }],
+    id: 'telco-dashboard',
+    category: 'Business Intelligence',
+    title: 'Telco Churn Dashboard',
+    shortTitle: 'Telco Dashboard',
+    story: {
+      problem: 'Churn patterns across contracts, services, payments, and tenure were difficult to monitor in raw tables.',
+      build: 'A Power BI dashboard with focused KPIs, DAX measures, and decision-ready segment views.',
+      outcome: 'The final PBIX brings three core KPIs and four key visualizations into one clear monitoring view.',
+    },
+    role: 'BI Developer',
+    image: '/telco-dashboard-preview.jpg',
+    alt: 'Telco churn Power BI dashboard preview',
+    tags: ['Power BI', 'DAX', 'Data Visualization', 'Dashboard'],
+    stats: [
+      { value: '3', label: 'KPIs' },
+      { value: '4', label: 'Visualizations' },
+      { value: 'PBIX', label: 'Dashboard file' },
+    ],
+    links: [
+      { label: 'View Repository', href: 'https://github.com/rayasesan/telco-customer-churn-dashboard-powerbi', primary: true },
+    ],
   },
 ];
 
 export default function Projects() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [selectedProject, setSelectedProject] = useState(null);
-  const active = projects[activeIndex];
-  const closeProject = () => setSelectedProject(null);
+  const [selectedId, setSelectedId] = useState(projects[0].id);
+
+  const toggleProject = (projectId) => {
+    setSelectedId((currentId) => (currentId === projectId ? null : projectId));
+  };
 
   return (
-    <section id="projects" className="projects-section">
-      <div className="projects-stage">
-        <header className="projects-heading">
-          <p className="scene-kicker">04 / Selected work</p>
-          <h2>Work</h2>
-          <p>Selected student projects across data analysis, predictive modeling, AI applications, and visualization.</p>
+    <section id="projects" className="section-frame projects-cases-section">
+      <div className="projects-cases-wrap max-w-[1100px] mx-auto w-full py-20 lg:py-28">
+        <header className="projects-cases-intro reveal">
+          <p className="section-kicker">04 / Selected work</p>
+          <h2>Selected<br />cases</h2>
+          <p className="projects-cases-summary">
+            Five practical projects across AI engineering, machine learning, SQL,
+            and business intelligence. Select a case to see the work behind it.
+          </p>
+          <AnimatedLink
+            href="https://github.com/rayasesan"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View all on GitHub
+          </AnimatedLink>
         </header>
 
-        <div className="projects-showcase">
-          <div className="project-list" aria-label="Selected projects">
-            {projects.map((project, index) => (
-              <button
-                type="button"
-                key={project.title}
-                className={`project-row ${activeIndex === index ? 'is-active' : ''}`}
-                onMouseEnter={() => setActiveIndex(index)}
-                onFocus={() => setActiveIndex(index)}
-                onTouchStart={() => setActiveIndex(index)}
-                onClick={() => setSelectedProject(project)}
+        <div className="project-case-list reveal" role="list">
+          {projects.map((project, index) => {
+            const isSelected = selectedId === project.id;
+            const panelId = `project-panel-${project.id}`;
+
+            return (
+              <article
+                key={project.id}
+                className={`project-case ${isSelected ? 'is-open' : ''}`}
+                role="listitem"
               >
-                <span className="project-row__number">{String(index + 1).padStart(2, '0')}</span>
-                <strong>{project.title}</strong>
-                <span className="project-row__category">{project.category}</span>
-              </button>
-            ))}
-          </div>
+                <button
+                  type="button"
+                  className="project-case-trigger"
+                  aria-expanded={isSelected}
+                  aria-controls={panelId}
+                  onClick={() => toggleProject(project.id)}
+                >
+                  <span className="project-case-number">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="project-case-title">{project.shortTitle}</span>
+                  <span className="project-case-category">{project.category}</span>
+                  <span className="project-case-toggle" aria-hidden="true"></span>
+                </button>
 
-          <div className="project-visual">
-            <div className="project-frame" aria-live="polite">
-              {active.image ? (
-                <img src={active.image} alt={active.alt} />
-              ) : (
-                <div className="project-frame__fallback"><span>{String(activeIndex + 1).padStart(2, '0')}</span><i></i><i></i></div>
-              )}
-              <p>{active.stat}</p>
-            </div>
-            <p className="project-visual__caption"><span>{String(activeIndex + 1).padStart(2, '0')}</span>{active.title}</p>
-            <p className="project-visual__summary">{active.summary}</p>
-          </div>
+                <div
+                  id={panelId}
+                  className="project-case-panel"
+                  aria-hidden={!isSelected}
+                >
+                  <div className="project-case-panel-inner">
+                    <ProjectCaseDetails project={project} index={index} isSelected={isSelected} />
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
+      </div>
+    </section>
+  );
+}
 
-        <a className="projects-all" href="https://github.com/rayasesan" target="_blank" rel="noopener noreferrer">All repositories</a>
+function ProjectCaseDetails({ project, index, isSelected }) {
+  return (
+    <div className="project-case-content">
+      <div className="project-case-media">
+        {project.image ? (
+          <img src={project.image} alt={project.alt} loading="lazy" />
+        ) : (
+          <div className="project-case-fallback" aria-hidden="true">
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <p>Model study</p>
+          </div>
+        )}
       </div>
 
-      <PortfolioModal
-        open={Boolean(selectedProject)}
-        onClose={closeProject}
-        eyebrow="Selected work"
-        title={selectedProject?.title}
-        description={selectedProject?.summary}
-        image={selectedProject?.image}
-        imageAlt={selectedProject?.alt}
-        meta={selectedProject ? [
-          { label: 'Discipline', value: selectedProject.category },
-          { label: 'Result', value: selectedProject.stat },
-        ] : []}
-        actions={selectedProject?.actions ?? []}
-      />
-    </section>
+      <div className="project-case-copy">
+        <div className="project-case-copy-topline">
+          <p className="project-case-role">{project.role}</p>
+          <p className="project-case-count">
+            Case {String(index + 1).padStart(2, '0')} / 05
+          </p>
+        </div>
+        <h3>{project.title}</h3>
+
+        <dl className="project-case-story">
+          <div>
+            <dt>Problem</dt>
+            <dd>{project.story.problem}</dd>
+          </div>
+          <div>
+            <dt>Built</dt>
+            <dd>{project.story.build}</dd>
+          </div>
+          <div>
+            <dt>Outcome</dt>
+            <dd>{project.story.outcome}</dd>
+          </div>
+        </dl>
+
+        <p className="project-case-tech-label">Technology</p>
+        <div className="project-case-tags">
+          {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
+        </div>
+
+        <div className="project-case-stats">
+          {project.stats.map((stat) => (
+            <div key={`${stat.value}-${stat.label}`}>
+              <strong>{stat.value}</strong>
+              <span>{stat.label}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="project-case-links">
+          {project.links.map((link) => (
+            <AnimatedLink
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              compact
+              variant={link.primary ? 'red' : 'light'}
+              tabIndex={isSelected ? 0 : -1}
+            >
+              {link.label}
+            </AnimatedLink>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }

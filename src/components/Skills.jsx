@@ -1,58 +1,68 @@
-const capabilities = [
+const skillGroups = [
   {
-    title: 'Model & reason',
-    description: 'I prepare data, design experiments, compare models, and evaluate performance with clear assumptions and measurable results.',
-    tools: 'Python / TensorFlow / Scikit-learn / Feature Engineering / Model Evaluation',
+    title: 'Programming & Data',
+    icon: 'lucide:code-2',
+    skills: ['Python', 'SQL', 'Pandas', 'NumPy', 'Data Cleaning', 'Exploratory Data Analysis', 'Data Visualization'],
   },
   {
-    title: 'Build and deploy, together',
-    description: 'I turn trained models into usable APIs and product flows, keeping implementation decisions connected to the original problem.',
-    tools: 'FastAPI / REST API / Streamlit / Model Serving / Docker Fundamentals',
+    title: 'Machine Learning & AI',
+    icon: 'lucide:brain',
+    isPrimary: true,
+    skills: ['Scikit-learn', 'TensorFlow', 'Keras', 'Classification', 'Regression', 'Computer Vision', 'Natural Language Processing', 'Feature Engineering', 'Model Evaluation', 'Generative AI'],
   },
   {
-    title: 'Insight without the noise',
-    description: 'I translate raw data into practical findings through SQL, structured analysis, and decision-ready visual communication.',
-    tools: 'SQL / Pandas / NumPy / Power BI / Data Visualization',
+    title: 'Backend & Deployment',
+    icon: 'lucide:server',
+    skills: ['FastAPI', 'REST API', 'Streamlit', 'Model Serving', 'API Integration', 'Docker Fundamentals'],
+  },
+  {
+    title: 'Tools & Analytics',
+    icon: 'lucide:layout-dashboard',
+    skills: ['Git', 'GitHub', 'Jupyter Notebook', 'Google Colab', 'Power BI', 'TensorBoard'],
   },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="about-section">
-      <article className="about-intro">
-        <figure className="about-intro__portrait reveal">
-          <div className="about-intro__image">
-            <img src="/foto4.jpg" alt="Raya Sesan Firdaus" width="783" height="862" loading="lazy" />
+    <section id="skills" className="section-frame py-20 lg:py-24">
+      <div className="max-w-[1100px] mx-auto px-5">
+        <div className="section-heading grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-5 lg:gap-16 mb-14">
+          <div className="reveal">
+            <p className="section-kicker text-r-red">01 / Expertise</p>
+            <h2 className="text-white text-4xl lg:text-6xl leading-[0.95]">
+              Capabilities
+            </h2>
           </div>
-          <figcaption>
-            <span>Jakarta, Indonesia</span>
-            <strong>Open to opportunities</strong>
-          </figcaption>
-        </figure>
-
-        <div className="about-intro__copy reveal">
-          <p className="scene-kicker">01 / About</p>
-          <p className="about-intro__lead">Hey! I'm</p>
-          <h2>Raya Sesan</h2>
-          <p className="about-intro__bio">I'm an Informatics Engineering student focused on data science, machine learning, and AI application development. I learn by turning datasets and ideas into models, APIs, dashboards, and working prototypes.</p>
-          <p className="about-intro__statement">I turn data into experiments, models, and <span>useful products.</span></p>
-          <dl className="about-intro__details">
-            <div><dt>Focus</dt><dd>Data Science & Applied AI</dd></div>
-            <div><dt>Currently</dt><dd>Informatics Engineering Student</dd></div>
-          </dl>
+          <div className="reveal flex items-end">
+            <p className="text-r-light text-[15px] leading-[1.75] max-w-xl lg:ml-auto">
+              A focused toolkit for turning raw data into reliable models, useful products, and clear business insight.
+            </p>
+          </div>
         </div>
-      </article>
 
-      <section className="capability-panel">
-        <header className="reveal"><p className="scene-kicker">How can I help?</p></header>
-        {capabilities.map((capability) => (
-          <article className="capability-row reveal" key={capability.title}>
-            <h3>{capability.title}</h3>
-            <p>{capability.description}</p>
-            <span>{capability.tools}</span>
-          </article>
-        ))}
-      </section>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {skillGroups.map((group) => (
+            <article
+              key={group.title}
+              className="skill-card reveal bg-r-gray border border-r-steel card-lift p-6 lg:p-7 rounded relative"
+            >
+              <div className="flex items-center gap-3 mb-7">
+                <div className="skill-icon w-9 h-9 rounded bg-r-red/10 flex items-center justify-center">
+                  <span className="iconify text-r-red" data-icon={group.icon} data-width="15"></span>
+                </div>
+                <h3 className="text-white text-xl">{group.title}</h3>
+              </div>
+              <div className="skill-list flex flex-wrap gap-x-4 gap-y-2">
+                {group.skills.map((skill) => (
+                  <span key={skill} className="text-r-light text-[12px] font-medium">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
