@@ -124,6 +124,86 @@ const projects = [
   },
 ];
 
+// span = columns out of 6 on desktop; rows sum to 6.
+const repos = [
+  {
+    name: 'MarketLens Team 2',
+    year: '2026',
+    kind: 'Backend / API',
+    description: 'Intelligence engine and research relevance API for IDX stocks. It turns upstream asset data into deterministic analysis, structured evidence, and saved research profiles, with response caching and no LLM in the reasoning path.',
+    stack: ['Python', 'FastAPI', 'SQLite', 'Pytest'],
+    repo: 'https://github.com/rayasesan/marketlens-team2',
+    span: 4,
+    dark: true,
+  },
+  {
+    name: 'LLM Data Analysis Assistant',
+    year: '2026',
+    kind: 'AI App',
+    description: 'Upload a CSV, get an automated EDA summary and data-quality checks, then ask questions about the dataset in plain language.',
+    stack: ['Python', 'Streamlit', 'Plotly', 'Gemini API'],
+    repo: 'https://github.com/rayasesan/llm-data-analysis-assistant',
+    span: 2,
+  },
+  {
+    name: 'Bank Marketing Prediction',
+    year: '2026',
+    kind: 'Machine Learning',
+    description: 'Predicts which of 45,211 customers will subscribe to a term deposit so telemarketing can focus on high-potential leads. Random Forest reached 90.49% accuracy and 92.72% ROC-AUC.',
+    stack: ['Python', 'Scikit-learn', 'Pandas', 'Jupyter'],
+    repo: 'https://github.com/rayasesan/bank-marketing-prediction',
+    span: 3,
+  },
+  {
+    name: 'Retail Sales Forecasting',
+    year: '2026',
+    kind: 'Time Series',
+    description: 'Forecasts store sales from 3M+ records across 54 stores and 33 product families (2013 to 2017), including the effect of promotions on demand.',
+    stack: ['Python', 'Prophet', 'Pandas', 'Matplotlib'],
+    repo: 'https://github.com/rayasesan/retail-sales-forecasting',
+    span: 3,
+  },
+  {
+    name: 'MCP Excel Reader',
+    year: '2026',
+    kind: 'Developer Tool',
+    description: 'Free MCP server that lets Claude Desktop read .xlsx and .xls files: row and column counts, headers, and a quick preview.',
+    stack: ['TypeScript', 'Node.js', 'MCP'],
+    repo: 'https://github.com/rayasesan/mcp-excel-reader',
+    span: 2,
+  },
+  {
+    name: 'Expense Tracker',
+    year: '2025',
+    kind: 'Web App',
+    description: 'Personal finance app with sign-in, transaction CRUD, categories, chart-based reports, and CSV export.',
+    stack: ['React', 'Vite', 'Supabase', 'Chart.js'],
+    repo: 'https://github.com/rayasesan/expense-tracker',
+    demo: 'https://expense-tracker-rayasesan.vercel.app',
+    span: 4,
+  },
+  {
+    name: 'Student Management',
+    year: '2026',
+    kind: 'Web App',
+    description: 'Student CRUD app with validation, delete confirmation, and real-time sync, built for the Web Programming practical exam.',
+    stack: ['React', 'Vite', 'Tailwind CSS', 'Firebase'],
+    repo: 'https://github.com/rayasesan/student-management',
+    demo: 'https://student-management-alpha-three.vercel.app',
+    span: 4,
+  },
+  {
+    name: 'MLflow CI Pipeline',
+    year: '2025',
+    kind: 'MLOps',
+    description: 'Titanic preprocessing experiments plus an MLflow project retrained by GitHub Actions on every push.',
+    stack: ['Python', 'MLflow', 'GitHub Actions'],
+    repo: 'https://github.com/rayasesan/Workflow-CI-RayaSesan',
+    extra: { label: 'Experiments', href: 'https://github.com/rayasesan/Eksperimen_SML_RayaSesan' },
+    span: 2,
+  },
+];
+
 export default function Projects() {
   const [selectedId, setSelectedId] = useState(projects[0].id);
 
@@ -139,7 +219,8 @@ export default function Projects() {
           <h2>Selected<br />cases</h2>
           <p className="projects-cases-summary">
             Five practical projects across AI engineering, machine learning, SQL,
-            and business intelligence. Select a case to see the work behind it.
+            and business intelligence. Select a case to see the work behind it,
+            or scroll on for everything else on GitHub.
           </p>
           <AnimatedLink
             href="https://github.com/rayasesan"
@@ -186,6 +267,45 @@ export default function Projects() {
               </article>
             );
           })}
+        </div>
+      </div>
+
+      <div className="gh-archive max-w-[1100px] mx-auto w-full pb-20 lg:pb-28">
+        <header className="gh-archive-head reveal">
+          <h3>More from GitHub</h3>
+          <p>
+            Smaller builds, coursework, and experiments. Each one links straight
+            to its repository, and to a live demo where one is deployed.
+          </p>
+        </header>
+
+        <div className="gh-archive-grid reveal">
+          {repos.map((repo) => (
+            <article
+              key={repo.repo}
+              className={`gh-repo ${repo.dark ? 'gh-repo--dark' : ''}`}
+              style={{ '--span': repo.span }}
+            >
+              <p className="gh-repo-meta">
+                <span>{repo.kind}</span>
+                <span>{repo.year}</span>
+              </p>
+              <h4>{repo.name}</h4>
+              <p className="gh-repo-desc">{repo.description}</p>
+              <ul className="gh-repo-stack" aria-label="Tech stack">
+                {repo.stack.map((tech) => <li key={tech}>{tech}</li>)}
+              </ul>
+              <div className="gh-repo-links">
+                <a href={repo.repo} target="_blank" rel="noopener noreferrer">Repository ↗</a>
+                {repo.demo && (
+                  <a href={repo.demo} target="_blank" rel="noopener noreferrer">Live demo ↗</a>
+                )}
+                {repo.extra && (
+                  <a href={repo.extra.href} target="_blank" rel="noopener noreferrer">{repo.extra.label} ↗</a>
+                )}
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
