@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import AnimatedLink from './AnimatedLink';
+import { projectHref } from '../data/projectPages';
 
 const projects = [
   {
@@ -29,6 +30,7 @@ const projects = [
   },
   {
     id: 'customer-churn',
+    page: 'customer-churn',
     category: 'Machine Learning',
     title: 'Customer Churn Prediction',
     shortTitle: 'Customer Churn',
@@ -53,6 +55,7 @@ const projects = [
   },
   {
     id: 'credit-risk',
+    page: 'credit-risk',
     category: 'Machine Learning',
     title: 'Credit Risk Prediction',
     shortTitle: 'Credit Risk',
@@ -77,6 +80,7 @@ const projects = [
   },
   {
     id: 'bank-marketing',
+    page: 'bank-sql',
     category: 'Data Analysis / SQL',
     title: 'Bank Marketing SQL Analytics',
     shortTitle: 'SQL Analytics',
@@ -147,6 +151,7 @@ const repos = [
   },
   {
     name: 'Bank Marketing Prediction',
+    page: 'bank-marketing',
     year: '2026',
     kind: 'Machine Learning',
     description: 'Predicts which of 45,211 customers will subscribe to a term deposit so telemarketing can focus on high-potential leads. Random Forest reached 90.49% accuracy and 92.72% ROC-AUC.',
@@ -156,6 +161,7 @@ const repos = [
   },
   {
     name: 'Retail Sales Forecasting',
+    page: 'retail-forecasting',
     year: '2026',
     kind: 'Time Series',
     description: 'Forecasts store sales from 3M+ records across 54 stores and 33 product families (2013 to 2017), including the effect of promotions on demand.',
@@ -296,6 +302,7 @@ export default function Projects() {
                 {repo.stack.map((tech) => <li key={tech}>{tech}</li>)}
               </ul>
               <div className="gh-repo-links">
+                {repo.page && <a href={projectHref(repo.page)}>Project page →</a>}
                 <a href={repo.repo} target="_blank" rel="noopener noreferrer">Repository ↗</a>
                 {repo.demo && (
                   <a href={repo.demo} target="_blank" rel="noopener noreferrer">Live demo ↗</a>
@@ -311,6 +318,11 @@ export default function Projects() {
     </section>
   );
 }
+
+const caseLinks = (project) => (project.page
+  ? [{ label: 'Open project page', href: projectHref(project.page), primary: true, internal: true },
+    ...project.links.map((link) => ({ ...link, primary: false }))]
+  : project.links);
 
 function ProjectCaseDetails({ project, index, isSelected }) {
   return (
@@ -365,12 +377,12 @@ function ProjectCaseDetails({ project, index, isSelected }) {
         </div>
 
         <div className="project-case-links">
-          {project.links.map((link) => (
+          {caseLinks(project).map((link) => (
             <AnimatedLink
               key={link.href}
               href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              target={link.internal ? undefined : '_blank'}
+              rel={link.internal ? undefined : 'noopener noreferrer'}
               compact
               variant={link.primary ? 'red' : 'light'}
               tabIndex={isSelected ? 0 : -1}
